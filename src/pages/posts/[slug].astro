@@ -16,14 +16,16 @@ const formattedDate = post.data.date
   ? new Date(post.data.date).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' })
   : '';
 ---
-<BaseLayout title={`${post.data.title} | Aaron 的個人筆記`} description={post.data.description ?? post.data.title}>
+<BaseLayout title={`${post.data.title} | Aaron 的部落格`} description={post.data.description ?? post.data.title}>
   <article class="prose prose-lg">
     <p class="text-sm text-slate-300">{formattedDate}</p>
     <h1 class="text-3xl font-bold mt-2 mb-4">{post.data.title}</h1>
     {post.data.tags.length ? (
       <div class="flex flex-wrap gap-2 mb-6">
         {post.data.tags.map((tag) => (
-          <span class="tag-pill">#{tag}</span>
+          <a class="tag-pill no-underline" href={`/tags/${tag}/`} aria-label={`查看 #${tag} 標籤文章`}>
+            #{tag}
+          </a>
         ))}
       </div>
     ) : null}

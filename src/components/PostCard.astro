@@ -17,25 +17,34 @@ const summary =
     ?.replace(/[#*>`]/g, '')
     ?.slice(0, 160) ?? '';
 ---
-<article class="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20 backdrop-blur transition hover:border-sky-400/40 hover:-translate-y-0.5">
-  <div class="flex items-center justify-between text-xs text-slate-300">
+<article
+  class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20 backdrop-blur transition hover:border-sky-400/40 hover:-translate-y-0.5"
+>
+  <a
+    class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+    href={`/posts/${post.slug}/`}
+    aria-label={`閱讀「${post.data.title}」`}
+  ></a>
+  <div class="flex items-center justify-between text-xs text-slate-300 relative z-10">
     <span>{formattedDate}</span>
     {post.data.tags.length ? (
       <div class="flex flex-wrap gap-2">
         {post.data.tags.map((tag) => (
-          <span class="tag-pill">#{tag}</span>
+          <a class="tag-pill relative z-20 no-underline" href={`/tags/${tag}/`} aria-label={`查看 #${tag} 標籤文章`}>
+            #{tag}
+          </a>
         ))}
       </div>
     ) : null}
   </div>
-  <h2 class="mt-3 text-xl font-semibold text-white group-hover:text-sky-100">
-    <a href={`/posts/${post.slug}/`} class="no-underline">{post.data.title}</a>
-  </h2>
-  {summary && <p class="mt-3 text-sm text-slate-200 leading-relaxed">{summary}</p>}
-  <div class="mt-4 inline-flex items-center gap-2 text-sky-300 text-sm">
-    閱讀全文
-    <svg class="size-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-    </svg>
+  <div class="relative z-10">
+    <h2 class="mt-3 text-xl font-semibold text-white group-hover:text-sky-100">{post.data.title}</h2>
+    {summary && <p class="mt-3 text-sm text-slate-200 leading-relaxed">{summary}</p>}
+    <div class="mt-4 inline-flex items-center gap-2 text-sky-300 text-sm">
+      閱讀全文
+      <svg class="size-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+      </svg>
+    </div>
   </div>
 </article>
