@@ -6,7 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "build:css": "tailwindcss -c themes/modern-dark/tailwind.config.js -i themes/modern-dark/src/css/tailwind.css -o themes/modern-dark/source/css/tailwind.css"
   },
   "hexo": {
     "version": "8.1.1"
@@ -20,7 +21,12 @@
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^7.0.1",
     "hexo-renderer-stylus": "^3.0.1",
-    "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.1.0"
+    "hexo-server": "^3.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "@tailwindcss/typography": "^0.5.15",
+    "tailwindcss": "^3.4.11"
   }
 }

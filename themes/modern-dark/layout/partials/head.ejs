@@ -1,0 +1,8 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= page.title ? page.title + ' | ' + config.title : config.title %></title>
+<meta name="description" content="<%= page.description || config.description %>">
+<link rel="stylesheet" href="<%- url_for('/css/tailwind.css') %>">
+<link rel="alternate" type="application/atom+xml" href="<%- url_for('/atom.xml') %>" title="RSS">
+<%- css() %>
+<%- js() %>

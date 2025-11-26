@@ -1,0 +1,17 @@
+logo_text: "Works by Aaron"
+menu:
+  Home: /
+  Archives: /archives/
+  About: /about/
+  Tags: /tags/
+  Categories: /categories/
+social:
+  - name: GitHub
+    url: https://github.com/
+  - name: LinkedIn
+    url: https://www.linkedin.com/
+  - name: RSS
+    url: /atom.xml
+hero:
+  title: "探索設計與程式的交會"
+  subtitle: "以深色系的極簡設計呈現每一次創作與學習的軌跡"

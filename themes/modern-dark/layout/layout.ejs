@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'en' %>">
+<head>
+  <%- partial('partials/head') %>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+  <%- partial('partials/header') %>
+  <main class="flex-1">
+    <%- body %>
+  </main>
+  <%- partial('partials/footer') %>
+</body>
+</html>
