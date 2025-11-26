@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+a {
+  @apply text-sky-300 underline-offset-4 hover:text-sky-200 hover:underline;
+}
+
+.prose {
+  @apply prose-invert prose-slate max-w-none; 
+}
+
+.prose pre {
+  @apply bg-slate-900/80 border border-white/10 shadow-inner;
+}
+
+.prose code {
+  @apply text-sky-200;
+}
+
+.tag-pill {
+  @apply inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-sky-100 ring-1 ring-white/15;
+}
