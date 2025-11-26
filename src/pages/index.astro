@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a, b) => {
+  const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return bDate - aDate;
+});
+---
+<BaseLayout title="Aaron 的個人筆記" description="用 Astro 打造、部署到 Cloudflare Pages 的全新部落格">
+  <section class="grid gap-4">
+    <p class="text-slate-200 max-w-3xl">
+      這裡收錄了從 Hexo 遷移過來的文章，並以最新的 Astro + Tailwind CSS 重構。部署到 Cloudflare Pages，
+      並預先設定常用安全 Headers。
+    </p>
+    <div class="mt-6 grid grid-cols-1 gap-4">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
