@@ -28,10 +28,12 @@ hexo server --draft
 hexo deploy
 ```
 
-這會依照 `deploy` 區塊設定，將 `public/` 內容推送到指定平台。若要先檢查輸出後再部署，可使用：
+這會依照 `deploy` 區塊設定，將 `public/` 內容推送到指定平台。若要先檢查輸出後再部署，請先執行 `hexo generate`、確認 `public/` 或以 `hexo server` 預覽，完成檢查後再用以下指令發布：
 
 ```bash
-hexo generate --deploy
+hexo deploy
+# 或確認無誤後一次生成並部署
+hexo generate && hexo deploy
 ```
 
 在 Hexo 8 中仍可搭配 git、rsync 或自訂腳本部署；若使用 GitHub Actions，亦可使用官方推薦的 Node.js 18 以上執行環境。
