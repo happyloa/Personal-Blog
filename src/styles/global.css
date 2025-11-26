@@ -23,5 +23,5 @@ a {
 }
 
 .tag-pill {
-  @apply inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-sky-100 ring-1 ring-white/15;
+  @apply inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-sky-100 ring-1 ring-white/15 transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/70;
 }

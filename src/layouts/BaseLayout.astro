@@ -1,7 +1,10 @@
 ---
 import '../styles/global.css';
 
-const { title = 'Personal Blog', description = 'Thoughts, notes, and experiments.' } = Astro.props;
+const {
+  title = 'Aaron 的部落格',
+  description = '用 Astro 打造、部署到 Cloudflare Pages 的全新部落格',
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="zh-Hant" class="min-h-full">
@@ -10,6 +13,7 @@ const { title = 'Personal Blog', description = 'Thoughts, notes, and experiments
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
