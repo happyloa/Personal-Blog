@@ -11,7 +11,7 @@ a {
 }
 
 .prose {
-  @apply prose-invert prose-slate max-w-none; 
+  @apply prose-invert prose-slate max-w-none;
 }
 
 .prose pre {

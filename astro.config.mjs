@@ -7,4 +7,12 @@ export default defineConfig({
   integrations: [tailwind({
     applyBaseStyles: true,
   })],
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  compressHTML: true,
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
 });
