@@ -1,7 +1,7 @@
 ---
 title: 用 AI 開發全端天氣 App？六角 Vibe Coding 體驗營心得分享
 date: 2025-11-27 15:07:00
-tags: [vibe-coding, 六角學院, 全端開發, ai, nuxt, typescript, nodejs, express, 學習心得]
+tags: [vibe-coding, 六角學院, 學習心得]
 ---
 
 說到學程式，你可能會想到那些一行一行手打 code、查文件查到眼睛脫窗的日子。但如果我說，現在用 AI 可以大幅加速開發流程，甚至讓你在短時間內完成一個全端專案呢？
