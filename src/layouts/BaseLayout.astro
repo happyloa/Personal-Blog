@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import '@fontsource/noto-sans-tc/400.css';
+import '@fontsource/noto-sans-tc/500.css';
+import '@fontsource/noto-sans-tc/700.css';
 
 const {
   title = 'Aaron 的部落格',
@@ -14,14 +17,8 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
   </head>
-  <body class="min-h-screen bg-slate-950 text-slate-50 font-[Inter]">
+  <body class="min-h-screen bg-slate-950 text-slate-50">
     <div class="relative isolate overflow-hidden">
       <div
         class="absolute inset-0 -z-10 opacity-40"

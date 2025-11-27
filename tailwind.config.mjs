@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['Noto Sans TC', ...fontFamily.sans],
       },
     },
   },
