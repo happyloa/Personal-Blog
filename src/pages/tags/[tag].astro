@@ -1,10 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
   const tags = new Set<string>();
 
   posts.forEach((post) => {
@@ -17,30 +17,37 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
-const filteredPosts = (await getCollection('posts', ({ data }) => !data.draft))
-  .filter((post) => post.data.tags.includes(tag ?? ''))
+const filteredPosts = (await getCollection("posts", ({ data }) => !data.draft))
+  .filter((post) => post.data.tags.includes(tag ?? ""))
   .sort((a, b) => {
     const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
     const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
     return bDate - aDate;
   });
 ---
-<BaseLayout title={`#${tag} 標籤文章 | Aaron 的部落格`} description={`包含 #${tag} 標籤的文章彙整`}>
+
+<BaseLayout
+  title={`#${tag} 標籤文章 | Aaron 的部落格`}
+  description={`包含 #${tag} 標籤的文章彙整`}>
   <section class="grid gap-6">
     <div class="flex items-center gap-3">
-      <a href="/" class="text-sm text-sky-200 hover:text-sky-100">← 返回文章彙整</a>
+      <a href="/" class="text-sm text-sky-200 hover:text-sky-100"
+        >← 返回文章彙整</a
+      >
       <span class="tag-pill text-sm">#{tag}</span>
     </div>
     <div class="grid gap-4">
-      {filteredPosts.length === 0 ? (
-        <p class="text-slate-200">目前沒有包含這個標籤的文章。</p>
-      ) : (
-        <div class="grid grid-cols-1 gap-4">
-          {filteredPosts.map((post) => (
-            <PostCard post={post} />
-          ))}
-        </div>
-      )}
+      {
+        filteredPosts.length === 0 ? (
+          <p class="text-slate-200">目前沒有包含這個標籤的文章。</p>
+        ) : (
+          <div class="grid grid-cols-1 gap-4">
+            {filteredPosts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

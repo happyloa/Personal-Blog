@@ -1,38 +1,42 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 const {
-  title = 'Aaron 的部落格',
-  description = '用 Astro 打造、部署到 Cloudflare Pages 的全新部落格',
+  title = "Aaron 的部落格",
+  description = "用 Astro 打造、部署到 Cloudflare Pages 的全新部落格",
 } = Astro.props;
 ---
+
 <!doctype html>
-<html lang="zh-Hant" class="min-h-full">
+<html lang="zh-Hant">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Optimized Font Loading (Non-blocking) -->
-    <link 
-      rel="preload" 
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" 
-      as="style" 
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
-      <link 
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" 
-        rel="stylesheet" 
-        type="text/css" 
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet"
+        type="text/css"
       />
     </noscript>
-    
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f172a" />
@@ -43,16 +47,19 @@ const {
       <div
         class="absolute inset-0 -z-10 opacity-40"
         aria-hidden="true"
-        style="background: radial-gradient(circle at 20% 20%, #7c3aed22, transparent 35%), radial-gradient(circle at 80% 0%, #22d3ee22, transparent 30%), radial-gradient(circle at 70% 80%, #a855f722, transparent 35%);"
-      ></div>
+        style="background: radial-gradient(circle at 20% 20%, #7c3aed22, transparent 35%), radial-gradient(circle at 80% 0%, #22d3ee22, transparent 30%), radial-gradient(circle at 70% 80%, #a855f722, transparent 35%);">
+      </div>
       <header class="max-w-5xl mx-auto px-3 md:px-6 py-10 flex flex-col gap-6">
         <a href="/" class="inline-flex items-center gap-3 group">
-          <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
+          <div
+            class="h-11 w-11 rounded-2xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
             A
           </div>
           <div>
             <p class="text-lg font-semibold leading-tight">Aaron 的部落格</p>
-            <p class="text-sm text-slate-300">用 Astro + Tailwind 重啟的新基地</p>
+            <p class="text-sm text-slate-300">
+              用 Astro + Tailwind 重啟的新基地
+            </p>
           </div>
           <svg
             class="size-5 text-slate-400 transition-transform duration-200 group-hover:translate-x-1"
@@ -60,9 +67,11 @@ const {
             stroke="currentColor"
             stroke-width="1.6"
             viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            aria-hidden="true">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"></path>
           </svg>
         </a>
         <nav class="flex gap-4 text-sm text-slate-300">
@@ -72,8 +81,11 @@ const {
       <main class="max-w-5xl mx-auto px-3 md:px-6 pb-16">
         <slot />
       </main>
-      <footer class="max-w-5xl mx-auto px-3 md:px-6 pb-10 text-sm text-slate-400 border-t border-white/5 pt-6">
-        <p class="text-center">Powered by Astro & Tailwind CSS · 部署至 Cloudflare Pages</p>
+      <footer
+        class="max-w-5xl mx-auto px-3 md:px-6 pb-10 text-sm text-slate-400 border-t border-white/5 pt-6">
+        <p class="text-center">
+          Powered by Astro & Tailwind CSS · 部署至 Cloudflare Pages
+        </p>
       </footer>
     </div>
   </body>
