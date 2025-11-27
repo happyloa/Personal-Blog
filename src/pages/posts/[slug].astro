@@ -14,11 +14,16 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 const formattedDate = post.data.date
   ? new Date(post.data.date).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' })
-  : '';
+  : '未設定日期';
+const isoDate = post.data.date ? new Date(post.data.date).toISOString() : '';
 ---
 <BaseLayout title={`${post.data.title} | Aaron 的部落格`} description={post.data.description ?? post.data.title}>
   <article class="prose prose-lg">
-    <p class="text-sm text-slate-300">{formattedDate}</p>
+    {post.data.date ? (
+      <time datetime={isoDate} class="text-sm text-slate-300">{formattedDate}</time>
+    ) : (
+      <p class="text-sm text-slate-300">{formattedDate}</p>
+    )}
     <h1 class="text-3xl font-bold mt-2 mb-4">{post.data.title}</h1>
     {post.data.tags.length ? (
       <div class="flex flex-wrap gap-2 mb-6">

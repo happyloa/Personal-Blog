@@ -45,7 +45,7 @@ const {
         aria-hidden="true"
         style="background: radial-gradient(circle at 20% 20%, #7c3aed22, transparent 35%), radial-gradient(circle at 80% 0%, #22d3ee22, transparent 30%), radial-gradient(circle at 70% 80%, #a855f722, transparent 35%);"
       ></div>
-      <header class="max-w-5xl mx-auto px-6 py-10 flex flex-col gap-6">
+      <header class="max-w-5xl mx-auto px-3 md:px-6 py-10 flex flex-col gap-6">
         <a href="/" class="inline-flex items-center gap-3 group">
           <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
             A
@@ -69,12 +69,11 @@ const {
           <a href="/" class="hover:text-white transition">最新文章</a>
         </nav>
       </header>
-      <main class="max-w-5xl mx-auto px-6 pb-16">
+      <main class="max-w-5xl mx-auto px-3 md:px-6 pb-16">
         <slot />
       </main>
-      <footer class="max-w-5xl mx-auto px-6 pb-10 text-sm text-slate-400 flex items-center justify-between border-t border-white/5 pt-6">
-        <p>Powered by Astro & Tailwind CSS · 部署至 Cloudflare Pages</p>
-        <a class="hover:text-white transition" href="https://astro.build" target="_blank" rel="noreferrer"> astro.build </a>
+      <footer class="max-w-5xl mx-auto px-3 md:px-6 pb-10 text-sm text-slate-400 border-t border-white/5 pt-6">
+        <p class="text-center">Powered by Astro & Tailwind CSS · 部署至 Cloudflare Pages</p>
       </footer>
     </div>
   </body>
