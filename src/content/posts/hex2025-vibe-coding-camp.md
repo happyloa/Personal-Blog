@@ -6,11 +6,14 @@ tags: [vibe-coding, 六角學院, 學習心得]
 
 說到學程式，你可能會想到那些一行一行手打 code、查文件查到眼睛脫窗的日子。但如果我說，現在用 AI 可以大幅加速開發流程，甚至讓你在短時間內完成一個全端專案呢？
 
-最近參加了六角學院主辦的「**Vibe Coding 公益程式體驗營｜2025**」，透過這次課程，我不僅學到了如何善用 AI 工具來快速打造 MVP（最小可行產品），更在與同學們的交流互動中，找到了許多新的解題思路和靈感。今天就來跟大家分享一下這次的體驗！
+最近參加了六角學院主辦的「[**Vibe Coding 公益程式體驗營**](https://www.hexschool.com/2025/10/03/2025-10-03-vide-coding-camp/)」，透過這次課程，我不僅學到了如何善用 AI 工具來快速打造 MVP（最小可行產品），更在與同學們的交流互動中，找到了許多新的解題思路和靈感。今天就來跟大家分享一下這次的體驗！
 
 ## 專案簡介：台灣天氣預報全端系統
 
 這次體驗營的主線任務四是開發一個**個人天氣 App 全端系統**，需要串接中央氣象署（CWA）的開放資料平台，提供台灣六都的 36 小時天氣預報。
+
+- [氣象資料開放平臺](https://opendata.cwa.gov.tw/)
+- [API 文件](https://opendata.cwa.gov.tw/dist/opendata-swagger.html)
 
 ### 🌐 專案成果
 
@@ -57,7 +60,7 @@ tags: [vibe-coding, 六角學院, 學習心得]
 
 1. **快速理解框架**：Nuxt 4 對我來說算是比較新的框架，透過 AI 可以快速了解專案結構、Composables 的用法、以及如何使用 TypeScript 定義型別
 2. **程式碼重構**：想要調整某個功能時，AI 可以快速幫我找到相關的程式碼片段，並提供重構建議
-3. **除錯協助**：遇到奇怪的錯誤訊息時，AI 可以快速分析問題所在，省下大量 Google 的時間
+3. **除錯協助**：遇到奇怪的錯誤訊息時，AI 可以快速分析問題所在，省下大量自己 Google 的時間
 4. **UI/UX 優化**：透過 prompt 描述想要的視覺效果，AI 可以提供對應的 Tailwind CSS class 組合
 
 ## 與同學交流：教學相長的美好
@@ -91,8 +94,7 @@ tags: [vibe-coding, 六角學院, 學習心得]
 雖然原始範例叫做「森森天氣」，但我選擇直接使用「台灣六都天氣預報」這個更直白的名稱，讓使用者一眼就知道這個服務的功能。
 
 在視覺風格上，我採用了：
-- **藍色系配色**：符合天氣主題的冷色調
-- **漸層背景**：營造天空的視覺效果
+- **黑白色系配色**：支援深淺色切換，讓使用者在不同環境下都能有良好的閱讀體驗
 - **卡片式設計**：清楚區分不同時段的天氣資訊
 - **圖示化呈現**：透過天氣圖示讓資訊更直觀
 
@@ -133,6 +135,8 @@ tags: [vibe-coding, 六角學院, 學習心得]
 
 ## 相關連結
 
+- ☁️ 氣象資料開放平臺：[https://opendata.cwa.gov.tw/](https://opendata.cwa.gov.tw/)
+- 📚 API 文件：[https://opendata.cwa.gov.tw/dist/opendata-swagger.html](https://opendata.cwa.gov.tw/dist/opendata-swagger.html)
 - 🌐 前端部署網站：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
 - 🔌 後端 API：[https://hex2025-vibe-coding-week4.zeabur.app/](https://hex2025-vibe-coding-week4.zeabur.app/)
 - 💻 前端原始碼：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
