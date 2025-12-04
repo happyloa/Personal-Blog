@@ -17,10 +17,10 @@ tags: [vibe-coding, 六角學院, 學習心得]
 
 ### 🌐 專案成果
 
-- **前端網站**：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
+- **前端部署網站**：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
 - **後端 API**：[https://hex2025-vibe-coding-week4.zeabur.app/](https://hex2025-vibe-coding-week4.zeabur.app/)
-- **前端 GitHub**：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
-- **後端 GitHub**：[https://github.com/happyloa/weather-backend](https://github.com/happyloa/weather-backend)
+- **前端原始碼**：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
+- **後端原始碼**：[https://github.com/happyloa/weather-backend](https://github.com/happyloa/weather-backend)
 
 ### 🎯 功能亮點
 
