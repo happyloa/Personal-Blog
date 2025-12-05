@@ -20,7 +20,7 @@ tags: [html, css, display, visibility]
 }
 ```
 
-單看字面上的意思，就是：看不見。
+從字面來看，就是：看不見。
 
 被指定這個 CSS [declaration](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/CSS_Declaration)  的元素，會在視覺上消失，但是這個元素所佔據的空間還是依然存在。如果該元素有包含子元素，且子元素的  `visibility`  設定為  `visible`  的話，那麼子元素就會被看見。
 
@@ -46,7 +46,7 @@ tags: [html, css, display, visibility]
 }
 ```
 
-顧名思義：不顯示。
+字面意思很直接：不顯示。
 
 被套用這個  [declaration](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/CSS_Declaration)  的元素，就好像不存在於網頁中一樣，既不會佔據任何空間，也不會被顯示出來。
 

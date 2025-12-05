@@ -4,7 +4,7 @@ date: 2025-09-21
 tags: [網頁切版, 六角學院, 學習心得]
 ---
 
-想學前端卻不知道從何開始？或是學了很多理論，卻始終做不出完整作品？最近參加了六角學院的「[**2025 網頁切版直播班**](https://www.hexschool.com/courses/web-layout-training-1st.html)」，從電商網站、職涯媒合平台到旅遊訂購系統，一口氣完成三個不同主題的專案，讓我對前端開發有了更全面的認識。今天就來跟大家分享這段充實的學習之旅！
+最近上完了六角學院的「[**2025 網頁切版直播班**](https://www.hexschool.com/courses/web-layout-training-1st.html)」，總共做了三個專案——電商網站、職涯媒合平台、旅遊訂購系統。趁記憶還熱著，把這幾週的學習過程記錄下來。
 
 ## 課程簡介：紮實的切版訓練
 
@@ -12,41 +12,46 @@ tags: [網頁切版, 六角學院, 學習心得]
 
 ### 🚀 技術選擇：挑戰自己的學習之路
 
-不過，為了給自己更多挑戰，同時也想學習更符合目前業界主流的開發方式，我決定在完成作業時採用 **Nuxt 3/4 + Tailwind CSS** 的技術組合。
+不過我自己作業是用 **Nuxt 3/4 + Tailwind CSS** 來寫，算是給自己找點麻煩（？）。
 
-這個選擇帶來了額外的學習曲線——從理解 Nuxt 的檔案結構、學習 Vue 的 Composition API，到熟悉 Tailwind 的 Utility-First 設計理念，每一步都需要花時間研究和踩坑。但也正因為這些挑戰，讓我在課程期間不只是完成切版，更深入了解了現代前端框架的運作方式。
+這選擇讓我多踩了不少坑——Nuxt 的檔案結構、Vue 的 Composition API、Tailwind 的 utility class，每個都要花時間搞懂。但換個角度想，踩坑就是學習嘛。
 
-值得一提的是，雖然我選擇了不同的技術棧，但課程教授的核心觀念——**像是元件化思維、響應式設計、以及如何從設計稿轉化為程式碼**——這些依然是共通且受用的。技術只是工具，重要的是解決問題的思維方式。
+雖然技術棧不一樣，但課程教的核心觀念——**元件化思維、響應式設計、怎麼把設計稿變成程式碼**——這些不管用什麼框架都用得到。
 
 ### 📚 我的學習成果
 
 在這次課程中，我總共完成了三個專案：
 
 **第一個專案：鞋子電商網站**
+
 - **作品展示**：[https://hex2025-f2e-live-week3and4.pages.dev/](https://hex2025-f2e-live-week3and4.pages.dev/)
 - **GitHub**：[https://github.com/happyloa/Hex2025-f2e-live-week3and4](https://github.com/happyloa/Hex2025-f2e-live-week3and4)
 
 **第二個專案：職旅 WorkWay 職涯諮詢媒合**
+
 - **作品展示**：[https://hex2025-f2e-live-week5and6.pages.dev/](https://hex2025-f2e-live-week5and6.pages.dev/)
 - **GitHub**：[https://github.com/happyloa/Hex2025-f2e-live-week5and6](https://github.com/happyloa/Hex2025-f2e-live-week5and6)
 
 **第三個專案：ZOBAA! 旅遊網站**
+
 - **作品展示**：[https://hex2025-f2e-live-week7and8.pages.dev/](https://hex2025-f2e-live-week7and8.pages.dev/)
 - **GitHub**：[https://github.com/happyloa/Hex2025-f2e-live-week7and8](https://github.com/happyloa/Hex2025-f2e-live-week7and8)
 
 ## 專案一：鞋子電商網站 — 打好切版基礎
 
-第一個專案是經典的電商網站，從首頁、商品列表、商品詳情到會員系統，該有的頁面一個不缺。這個專案最大的價值，就是讓我對 **Nuxt 3** 的整體架構有了清楚的認識。
+第一個專案是電商網站，首頁、商品列表、商品詳情、會員系統都有。做這個專案的過程中，我總算搞懂 **Nuxt 3** 的整體架構了。
 
 ### 🎯 主要功能與技術
 
 這個專案包含了完整的電商網站結構：
+
 - 首頁（Landing Page）
 - 商品列表頁與商品詳情頁
 - 會員註冊/登入頁面
 - 品牌故事與收藏頁面
 
 在技術選型上，使用了：
+
 - **Nuxt 3** 作為開發框架
 - **Tailwind CSS** 處理樣式
 - **Nuxt Swiper** 實作輪播效果
@@ -59,21 +64,23 @@ tags: [網頁切版, 六角學院, 學習心得]
 3. **響應式設計**：實作在不同裝置上都能完美呈現的介面
 4. **圖片優化**：使用 TinyPNG 壓縮圖片，並採用 WebP 格式提升載入速度
 
-這個專案讓我紮實地打好了切版基礎，也建立起對 Nuxt 專案結構的理解。
+做完這個專案，對 Nuxt 的專案結構總算有點概念了。
 
 ## 專案二：職旅 WorkWay — 進階表單與驗證
 
-第二個專案是職涯諮詢媒合平台，相比第一個專案，這次加入了更多互動功能，尤其是**表單驗證**這塊，讓我學到了很多實用技巧。
+第二個專案是職涯諮詢媒合平台，跟第一個比起來多了不少互動功能，尤其是**表單驗證**這塊我之前沒碰過，這次算是補上了。
 
 ### 🎯 主要功能與技術
 
 這個專案的核心功能包括：
+
 - 首頁與服務方案介紹
 - 關於我們與聯絡表單
 - 會員頁面（含預約紀錄與方案管理）
 - 登入/註冊系統
 
 在技術上，除了延續第一個專案的技術棧，還新增了：
+
 - **VeeValidate** + **Yup**：處理表單驗證
 - **Nuxt AOS**：實作滾動動畫效果
 - **sessionStorage**：模擬登入狀態
@@ -87,15 +94,16 @@ tags: [網頁切版, 六角學院, 學習心得]
 3. **使用者體驗優化**：加入了 Loading Spinner 和 AOS 滾動動畫，讓整個網站更有互動感
 4. **元件複用**：學會如何設計可重複使用的元件，像是 Modal、Card 等
 
-特別值得一提的是，這次我開始思考「**元件如何設計才能更好地重複使用**」，這對接下來的專案開發幫助很大。
+這次開始會想「**這個元件之後還會用到嗎？要怎麼設計才方便重複使用？**」，感覺思維有慢慢在轉變。
 
 ## 專案三：ZOBAA! 旅遊網站 — 升級 Nuxt 4 與進階應用
 
-到了第三個專案，難度又提升了！這次使用的是剛出爐不久的 **Nuxt 4.2**，並且加入了更多進階功能，像是 Composables、Plugins 和 Utils 的應用。
+第三個專案的難度又上去了。這次用的是 **Nuxt 4.2**，還加了 Composables、Plugins、Utils 這些進階的東西。
 
 ### 🎯 主要功能與技術
 
 這個旅遊網站包含了：
+
 - 首頁與景點展示
 - 商品介紹頁與購物車
 - 會員頁面與收藏功能
@@ -103,6 +111,7 @@ tags: [網頁切版, 六角學院, 學習心得]
 - 登入/註冊系統
 
 技術上的一大亮點是專案結構更加完整：
+
 - **Nuxt 4.2**：體驗最新版本的框架特性
 - **Composables**：抽離可重複使用的邏輯（如 `useAuth.ts`）
 - **Plugins**：實作客戶端外掛（如 `auth.client.ts`）
@@ -119,11 +128,11 @@ tags: [網頁切版, 六角學院, 學習心得]
 4. **狀態管理進階**：結合 sessionStorage 與 URL 參數（如 `?hasItems`）來控制不同的頁面狀態
 5. **Nuxt 4 的新特性**：體驗到框架升級後帶來的效能提升與開發體驗改善
 
-這個專案的複雜度明顯比前兩個高，但也正因如此，完成時的成就感特別強！
+這個專案比前兩個都複雜，不過也學到比較多東西。
 
 ## 技術棧總整理：從基礎到進階
 
-回顧這三個專案，每一個都有不同的技術重點，讓我對前端開發的技術棧有了更全面的掌握：
+回顧一下這三個專案用到的技術：
 
 ### 🛠️ 核心技術
 
@@ -155,7 +164,7 @@ tags: [網頁切版, 六角學院, 學習心得]
 
 ## 學習心得：三個專案帶來的成長
 
-參加完這次直播班，最大的感受就是「**理論結合實作**」真的很重要。很多觀念在看文件時似懂非懂，但實際做專案時，那些卡關的瞬間反而讓我印象最深刻。
+上完這次直播班，我覺得「**動手做**」還是最有效的學習方式。很多東西看文件的時候覺得懂了，實際寫才發現一堆問題——但卡關的地方反而記得最清楚。
 
 ### ✅ 技能上的進步
 
@@ -183,6 +192,7 @@ tags: [網頁切版, 六角學院, 學習心得]
 - **除錯能力**：遇到問題時，學會善用瀏覽器開發者工具和錯誤訊息來定位問題
 
 這些挑戰反而讓我更清楚接下來該往哪個方向精進。目前我的下一步計畫是：
+
 - 深入學習 Nuxt 的 Server-Side Rendering 和 Static Site Generation
 - 練習 Pinia 狀態管理
 - 嘗試串接真實的後端 API
@@ -194,7 +204,7 @@ tags: [網頁切版, 六角學院, 學習心得]
 
 ![六角學院 2025 網頁切版直播班結業證書](/images/posts/hex2025-f2e-live/certificate.webp)
 
-## 結語：實戰是最好的老師
+## 結語
 
 參加六角學院的網頁切版直播班，真的是一個很棒的決定。透過三個不同主題的專案，不僅累積了紮實的切版能力，更重要的是建立起「**從零到有完成一個專案**」的自信心。
 
@@ -209,17 +219,21 @@ tags: [網頁切版, 六角學院, 學習心得]
 ## 相關連結
 
 ### 課程資訊
+
 - 🎓 六角學院 2025 網頁切版直播班：[https://www.hexschool.com/courses/web-layout-training-1st.html](https://www.hexschool.com/courses/web-layout-training-1st.html)
 
 ### 專案一：鞋子電商網站
+
 - 🌐 線上展示：[https://hex2025-f2e-live-week3and4.pages.dev/](https://hex2025-f2e-live-week3and4.pages.dev/)
 - 💻 GitHub 原始碼：[https://github.com/happyloa/Hex2025-f2e-live-week3and4](https://github.com/happyloa/Hex2025-f2e-live-week3and4)
 
 ### 專案二：職旅 WorkWay 職涯諮詢媒合
+
 - 🌐 線上展示：[https://hex2025-f2e-live-week5and6.pages.dev/](https://hex2025-f2e-live-week5and6.pages.dev/)
 - 💻 GitHub 原始碼：[https://github.com/happyloa/Hex2025-f2e-live-week5and6](https://github.com/happyloa/Hex2025-f2e-live-week5and6)
 
 ### 專案三：ZOBAA! 旅遊網站
+
 - 🌐 線上展示：[https://hex2025-f2e-live-week7and8.pages.dev/](https://hex2025-f2e-live-week7and8.pages.dev/)
 - 💻 GitHub 原始碼：[https://github.com/happyloa/Hex2025-f2e-live-week7and8](https://github.com/happyloa/Hex2025-f2e-live-week7and8)
 
