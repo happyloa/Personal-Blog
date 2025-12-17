@@ -1,6 +1,6 @@
 # 個人部落格（Astro + Tailwind）
 
-以 Astro 5 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 進行樣式客製化。以下說明如何在本地端啟動，以及撰寫新文章時的建議流程。
+以 Astro 5 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 進行樣式客製化。採用本地端字型（`@fontsource/noto-sans-tc`）避免額外外部載入，並加入「跳到主要內容」捷徑與標籤索引頁，讓操作與可及性更友善。以下說明如何在本地端啟動，以及撰寫新文章時的建議流程。
 
 ## 環境需求
 - Node.js 18.17 以上（建議使用 LTS 版本）
@@ -24,6 +24,10 @@
    ```bash
    npm run check
    ```
+
+### 其他介面與操作提示
+- 頁面提供「跳到主要內容」的隱藏捷徑鍵（鍵盤焦點在頁面頂部時會顯示）。
+- `/tags` 頁面列出所有標籤及對應的文章數量，可快速瀏覽分類。
 
 ## 新增文章指南
 - 文章位於 `src/content/posts`，每個 Markdown 檔案對應一篇文章，檔名會成為文章的 slug（網址的一部分）。
