@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Noto Sans TC', ...fontFamily.sans],
+        sans: ['"Noto Sans TC Variable"', 'Noto Sans TC', ...fontFamily.sans],
       },
     },
   },
