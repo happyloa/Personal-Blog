@@ -31,7 +31,7 @@ const tags = Array.from(tagMap.entries()).sort((a, b) => b[1] - a[1]);
           tags.map(([tag, count]) => (
             <a
               href={`/tags/${tag}/`}
-              class="group relative isolate overflow-hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-sky-400/40 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+              class="group relative isolate overflow-hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-sky-400/40 hover:-translate-y-0.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400"
               aria-label={`查看 #${tag} 標籤的 ${count} 篇文章`}>
               <div class="flex items-center justify-between gap-3">
                 <span class="tag-pill text-sm">#{tag}</span>
