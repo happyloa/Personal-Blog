@@ -12,6 +12,11 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// Calculate simple reading time if not provided by remark plugin
+const wordCount = post.body.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200);
+
 const formattedDate = post.data.date
   ? new Date(post.data.date).toLocaleDateString("zh-TW", {
       year: "numeric",
@@ -24,32 +29,68 @@ const isoDate = post.data.date ? new Date(post.data.date).toISOString() : "";
 
 <BaseLayout
   title={`${post.data.title} | Aaron 的部落格`}
-  description={post.data.description ?? post.data.title}>
+  description={post.data.description ?? post.data.title}
+  image={post.data.cover?.src}>
+  <nav
+    class="mb-8 flex items-center gap-2 text-sm text-slate-400"
+    aria-label="麵包屑">
+    <a href="/" class="hover:text-sky-300 transition">首頁</a>
+    <svg
+      class="size-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+      ></path>
+    </svg>
+    <span class="text-slate-200 truncate">{post.data.title}</span>
+  </nav>
+
   <article class="prose prose-lg">
-    {
-      post.data.date ? (
-        <time datetime={isoDate} class="text-sm text-slate-300">
-          {formattedDate}
-        </time>
-      ) : (
-        <p class="text-sm text-slate-300">{formattedDate}</p>
-      )
-    }
-    <h1 class="text-3xl font-bold mt-2 mb-4">{post.data.title}</h1>
-    {
-      post.data.tags.length ? (
-        <div class="flex flex-wrap gap-2 mb-6">
-          {post.data.tags.map((tag) => (
-            <a
-              class="tag-pill no-underline"
-              href={`/tags/${tag}/`}
-              aria-label={`查看 #${tag} 標籤文章`}>
-              #{tag}
-            </a>
-          ))}
-        </div>
-      ) : null
-    }
+    <header class="mb-8">
+      <div
+        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400 mb-3">
+        {
+          post.data.date ? (
+            <time datetime={isoDate}>{formattedDate}</time>
+          ) : (
+            <span>{formattedDate}</span>
+          )
+        }
+        <span class="flex items-center gap-1">
+          <svg
+            class="size-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          約 {readingTime} 分鐘閱讀
+        </span>
+      </div>
+      <h1 class="text-3xl font-bold md:text-4xl text-white mb-6 leading-tight">
+        {post.data.title}
+      </h1>
+      {
+        post.data.tags.length ? (
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <a
+                class="tag-pill no-underline"
+                href={`/tags/${tag}/`}
+                aria-label={`查看 #${tag} 標籤文章`}>
+                #{tag}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+    </header>
     <div class="prose">
       <Content />
     </div>
