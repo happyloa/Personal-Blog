@@ -1,10 +1,13 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import "@fontsource-variable/noto-sans-tc";
 
 const {
   title = "Aaron 的部落格",
   description = "用 Astro 打造、部署到 Cloudflare Pages 的全新部落格",
+  image = "/favicon.svg",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 ---
 
@@ -21,6 +24,23 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f172a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-slate-950 text-slate-50">
     <a class="skip-link" href="#main-content">跳到主要內容</a>
@@ -33,11 +53,13 @@ const {
       <header class="max-w-5xl mx-auto px-3 md:px-6 py-10 flex flex-col gap-6">
         <a href="/" class="inline-flex items-center gap-3 group">
           <div
-            class="h-11 w-11 rounded-2xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
+            class="h-11 w-11 rounded-2xl bg-linear-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
             A
           </div>
           <div>
-            <p class="text-lg font-semibold leading-tight">Aaron 的部落格</p>
+            <p class="text-lg font-semibold leading-tight text-white">
+              Aaron 的部落格
+            </p>
             <p class="text-sm text-slate-300">
               用 Astro + Tailwind 重啟的新基地
             </p>
@@ -55,12 +77,17 @@ const {
               d="M9 5l7 7-7 7"></path>
           </svg>
         </a>
-        <nav class="flex gap-4 text-sm text-slate-300" aria-label="主要導覽">
-          <a href="/" class="hover:text-white transition">最新文章</a>
-          <a href="/tags/" class="hover:text-white transition">標籤索引</a>
+        <nav class="flex items-center justify-between" aria-label="主要導覽">
+          <div class="flex gap-4 text-sm text-slate-300">
+            <a href="/" class="hover:text-white transition">最新文章</a>
+            <a href="/tags/" class="hover:text-white transition">標籤索引</a>
+          </div>
         </nav>
       </header>
-      <main id="main-content" class="max-w-5xl mx-auto px-3 md:px-6 pb-16" tabindex="-1">
+      <main
+        id="main-content"
+        class="max-w-5xl mx-auto px-3 md:px-6 pb-16"
+        tabindex="-1">
         <slot />
       </main>
       <footer
