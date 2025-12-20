@@ -1,11 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
-import { getCollection } from "astro:content";
 import { slugifyTag } from "../../utils/tags";
+import { getPublishedPostsSorted } from "../../utils/posts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const posts = await getPublishedPostsSorted();
   const slugs = new Set<string>();
 
   posts.forEach((post) => {
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { tag: slug } = Astro.params;
-const posts = await getCollection("posts", ({ data }) => !data.draft);
+const posts = await getPublishedPostsSorted();
 const slugToTag = new Map<string, string>();
 
 posts.forEach((post) => {
@@ -31,13 +31,9 @@ posts.forEach((post) => {
 });
 
 const displayTag = slug ? slugToTag.get(slug) ?? slug : "";
-const filteredPosts = posts
-  .filter((post) => post.data.tags.some((tag) => slugifyTag(tag) === slug))
-  .sort((a, b) => {
-    const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
-    const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
-    return bDate - aDate;
-  });
+const filteredPosts = await getPublishedPostsSorted({
+  filter: (post) => post.data.tags.some((tag) => slugifyTag(tag) === slug),
+});
 ---
 
 <BaseLayout
