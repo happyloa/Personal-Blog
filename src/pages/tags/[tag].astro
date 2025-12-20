@@ -2,23 +2,37 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
 import { getCollection } from "astro:content";
+import { slugifyTag } from "../../utils/tags";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
-  const tags = new Set<string>();
+  const slugs = new Set<string>();
 
   posts.forEach((post) => {
-    post.data.tags.forEach((tag) => tags.add(tag));
+    post.data.tags.forEach((tag) => slugs.add(slugifyTag(tag)));
   });
 
-  return Array.from(tags).map((tag) => ({
-    params: { tag },
+  return Array.from(slugs).map((slug) => ({
+    params: { tag: slug },
   }));
 }
 
-const { tag } = Astro.params;
-const filteredPosts = (await getCollection("posts", ({ data }) => !data.draft))
-  .filter((post) => post.data.tags.includes(tag ?? ""))
+const { tag: slug } = Astro.params;
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const slugToTag = new Map<string, string>();
+
+posts.forEach((post) => {
+  post.data.tags.forEach((tag) => {
+    const tagSlug = slugifyTag(tag);
+    if (!slugToTag.has(tagSlug)) {
+      slugToTag.set(tagSlug, tag);
+    }
+  });
+});
+
+const displayTag = slug ? slugToTag.get(slug) ?? slug : "";
+const filteredPosts = posts
+  .filter((post) => post.data.tags.some((tag) => slugifyTag(tag) === slug))
   .sort((a, b) => {
     const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
     const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
@@ -27,14 +41,14 @@ const filteredPosts = (await getCollection("posts", ({ data }) => !data.draft))
 ---
 
 <BaseLayout
-  title={`#${tag} 標籤文章 | Aaron 的部落格`}
-  description={`包含 #${tag} 標籤的文章彙整`}>
+  title={`#${displayTag} 標籤文章 | Aaron 的部落格`}
+  description={`包含 #${displayTag} 標籤的文章彙整`}>
   <section class="grid gap-6">
     <div class="flex items-center gap-3">
       <a href="/" class="text-sm text-sky-200 hover:text-sky-100"
         >← 返回文章彙整</a
       >
-      <span class="tag-pill text-sm">#{tag}</span>
+      <span class="tag-pill text-sm">#{displayTag}</span>
     </div>
     <div class="grid gap-4">
       {

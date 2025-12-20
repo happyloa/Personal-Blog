@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { slugifyTag } from "../utils/tags";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -48,7 +49,7 @@ const summary =
             {post.data.tags.map((tag) => (
               <a
                 class="tag-pill relative z-20 no-underline pointer-events-auto"
-                href={`/tags/${tag}/`}
+                href={`/tags/${slugifyTag(tag)}/`}
                 aria-label={`查看 #${tag} 標籤文章`}>
                 #{tag}
               </a>
