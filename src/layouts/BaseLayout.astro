@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
-import "@fontsource-variable/noto-sans-tc";
+import fontsHref from "../styles/fonts.css?url";
 
 const {
   title = "Aaron 的部落格",
@@ -39,6 +39,14 @@ const {
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+    <link rel="preload" as="style" href={fontsHref} />
+    <link
+      rel="stylesheet"
+      href={fontsHref}
+      media="print"
+      onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
 
     <ClientRouter />
   </head>
