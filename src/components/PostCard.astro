@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { toPlainTextExcerpt } from "../utils/summary";
 import { slugifyTag } from "../utils/tags";
 
 interface Props {
@@ -13,14 +14,11 @@ const formattedDate = new Date(post.data.date).toLocaleDateString("zh-TW", {
   day: "numeric",
 });
 const isoDate = new Date(post.data.date).toISOString();
-const summary =
+const summarySource =
   post.data.description ??
-  post.body
-    .split("\n")
-    .find((line) => line.trim())
-    ?.replace(/[#*>`]/g, "")
-    ?.slice(0, 160) ??
+  post.body.split("\n").find((line) => line.trim()) ??
   "";
+const summary = toPlainTextExcerpt(summarySource);
 ---
 
 <article
