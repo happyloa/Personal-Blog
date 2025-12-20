@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { slugifyTag } from "../../utils/tags";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -74,7 +75,7 @@ const isoDate = new Date(post.data.date).toISOString();
             {post.data.tags.map((tag) => (
               <a
                 class="tag-pill no-underline"
-                href={`/tags/${tag}/`}
+                href={`/tags/${slugifyTag(tag)}/`}
                 aria-label={`查看 #${tag} 標籤文章`}>
                 #{tag}
               </a>
