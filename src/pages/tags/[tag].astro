@@ -31,6 +31,7 @@ posts.forEach((post) => {
   });
 });
 
+// 用現有文章還原 slug 對應的原始標籤，確保顯示維持作者寫法而非機械化 slug。
 const displayTag = normalizedSlug
   ? slugToTag.get(normalizedSlug) ?? normalizedSlug
   : "";

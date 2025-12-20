@@ -4,6 +4,7 @@ export const toPlainTextExcerpt = (
 ): string => {
   if (!text) return "";
 
+  // 先去除連結語法再壓成純文字與固定長度，避免摘要帶有 Markdown 雜訊影響可讀性。
   const stripMarkdownLinks = (value: string): string =>
     value.replace(/\[(.*?)\]\((.*?)\)/g, "$1");
 

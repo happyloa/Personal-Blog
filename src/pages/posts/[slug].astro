@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-// Calculate simple reading time if not provided by remark plugin
+// 用 200 WPM 估算閱讀時間，提供一致的閱讀門檻提示即使沒有外掛資料也可用。
 const wordCount = post.body.split(/\s+/).length;
 const readingTime = Math.ceil(wordCount / 200);
 
