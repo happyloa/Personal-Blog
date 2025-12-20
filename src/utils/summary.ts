@@ -8,7 +8,8 @@ export const toPlainTextExcerpt = (
   if (!text) return "";
 
   return stripMarkdownLinks(text)
-    .replace(/[#*>`]/g, "")
+    .replace(/[#>*-]/g, "")
+    .replace(/\s+/g, " ")
     .trim()
     .slice(0, maxLength);
 };
