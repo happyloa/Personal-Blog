@@ -18,6 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { tag: slug } = Astro.params;
+const normalizedSlug = slug ? slugifyTag(decodeURIComponent(slug)) : "";
 const posts = await getPublishedPostsSorted();
 const slugToTag = new Map<string, string>();
 
@@ -30,9 +31,12 @@ posts.forEach((post) => {
   });
 });
 
-const displayTag = slug ? slugToTag.get(slug) ?? slug : "";
+const displayTag = normalizedSlug
+  ? slugToTag.get(normalizedSlug) ?? normalizedSlug
+  : "";
 const filteredPosts = await getPublishedPostsSorted({
-  filter: (post) => post.data.tags.some((tag) => slugifyTag(tag) === slug),
+  filter: (post) =>
+    post.data.tags.some((tag) => slugifyTag(tag) === normalizedSlug),
 });
 ---
 
