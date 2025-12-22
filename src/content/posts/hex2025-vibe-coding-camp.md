@@ -109,6 +109,12 @@ tags: [vibe-coding, 六角學院, 學習心得]
 3. **載入狀態**：實作了 Loading Skeleton，提升使用者體驗
 4. **錯誤處理**：當 API 呼叫失敗時，會顯示友善的錯誤訊息
 
+## 完課證書
+
+經過這次體驗營的學習，我也拿到了完課證書，證書數量 +1😎
+
+![六角學院 Vibe Coding 體驗營完課證書](/images/posts/hex2025-vibe-coding-camp/certificate.webp)
+
 ## 學習心得：擁抱 AI 時代的開發方式
 
 參加這次體驗營，學到最多的是「**AI 協作**」的工作模式。
