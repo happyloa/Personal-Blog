@@ -3,42 +3,38 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
 import { slugifyTag } from "../../utils/tags";
 import { getPublishedPostsSorted } from "../../utils/posts";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  displayTag: string;
+  posts: CollectionEntry<"posts">[];
+}
 
 export async function getStaticPaths() {
-  const posts = await getPublishedPostsSorted();
-  const slugs = new Set<string>();
+  // 只查詢一次，然後將資料傳遞給每個標籤頁面
+  const allPosts = await getPublishedPostsSorted();
+  const tagData = new Map<
+    string,
+    { display: string; posts: typeof allPosts }
+  >();
 
-  posts.forEach((post) => {
-    post.data.tags.forEach((tag) => slugs.add(slugifyTag(tag)));
+  allPosts.forEach((post) => {
+    post.data.tags.forEach((tag) => {
+      const slug = slugifyTag(tag);
+      if (!tagData.has(slug)) {
+        tagData.set(slug, { display: tag, posts: [] });
+      }
+      tagData.get(slug)!.posts.push(post);
+    });
   });
 
-  return Array.from(slugs).map((slug) => ({
+  return Array.from(tagData.entries()).map(([slug, data]) => ({
     params: { tag: slug },
+    props: { displayTag: data.display, posts: data.posts },
   }));
 }
 
-const { tag: slug } = Astro.params;
-const normalizedSlug = slug ? slugifyTag(decodeURIComponent(slug)) : "";
-const posts = await getPublishedPostsSorted();
-const slugToTag = new Map<string, string>();
-
-posts.forEach((post) => {
-  post.data.tags.forEach((tag) => {
-    const tagSlug = slugifyTag(tag);
-    if (!slugToTag.has(tagSlug)) {
-      slugToTag.set(tagSlug, tag);
-    }
-  });
-});
-
-// 用現有文章還原 slug 對應的原始標籤，確保顯示維持作者寫法而非機械化 slug。
-const displayTag = normalizedSlug
-  ? slugToTag.get(normalizedSlug) ?? normalizedSlug
-  : "";
-const filteredPosts = await getPublishedPostsSorted({
-  filter: (post) =>
-    post.data.tags.some((tag) => slugifyTag(tag) === normalizedSlug),
-});
+const { displayTag, posts } = Astro.props;
 ---
 
 <BaseLayout
@@ -53,11 +49,11 @@ const filteredPosts = await getPublishedPostsSorted({
     </div>
     <div class="grid gap-4">
       {
-        filteredPosts.length === 0 ? (
+        posts.length === 0 ? (
           <p class="text-slate-200">目前沒有包含這個標籤的文章。</p>
         ) : (
           <div class="grid grid-cols-1 gap-4">
-            {filteredPosts.map((post) => (
+            {posts.map((post) => (
               <PostCard post={post} />
             ))}
           </div>
