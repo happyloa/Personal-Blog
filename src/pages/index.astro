@@ -2,14 +2,58 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import { getPublishedPostsSorted } from "../utils/posts";
+import { slugifyTag } from "../utils/tags";
 
 const posts = await getPublishedPostsSorted();
+
+// 計算各標籤的文章數量
+const tagMap = new Map<
+  string,
+  { count: number; display: string; slug: string }
+>();
+posts.forEach((post) => {
+  post.data.tags.forEach((tag) => {
+    const slug = slugifyTag(tag);
+    const current = tagMap.get(slug) ?? { count: 0, display: tag, slug };
+    tagMap.set(slug, { ...current, count: current.count + 1 });
+  });
+});
+
+// 取前 5 個熱門標籤
+const topTags = Array.from(tagMap.values())
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 5);
 ---
 
 <BaseLayout
   title="Aaron 的部落格"
   description="用 Astro 打造、部署到 Cloudflare Pages 的全新部落格">
+  <!-- 熱門標籤區塊 -->
+  <section class="mb-8">
+    <h2 class="text-lg font-semibold text-slate-200 mb-3">熱門標籤</h2>
+    <div class="flex flex-wrap gap-2">
+      {
+        topTags.map((tag) => (
+          <a
+            href={`/tags/${tag.slug}/`}
+            class="tag-pill"
+            aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
+            #{tag.display}
+            <span class="text-slate-400 text-xs">({tag.count})</span>
+          </a>
+        ))
+      }
+      <a
+        href="/tags/"
+        class="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-sky-300 transition-colors">
+        查看全部 →
+      </a>
+    </div>
+  </section>
+
+  <!-- 文章列表 -->
   <section class="grid gap-4">
+    <h2 class="text-lg font-semibold text-slate-200">最新文章</h2>
     {posts.map((post) => <PostCard post={post} />)}
   </section>
 </BaseLayout>
