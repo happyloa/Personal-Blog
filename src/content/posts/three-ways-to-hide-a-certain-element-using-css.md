@@ -1,7 +1,7 @@
 ---
 title: 用 CSS 隱藏網頁元素的三種方法
 date: 2024-04-20 13:43:26
-tags: [html, css, display, visibility]
+tags: [CSS, 前端]
 ---
 
 想要隱藏頁面上的元素，可以透過這三種常見的方法：

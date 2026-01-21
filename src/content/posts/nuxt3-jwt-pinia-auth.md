@@ -1,7 +1,7 @@
 ---
 title: Nuxt 3 JWT 身份驗證實作筆記 — 搭配 Pinia 與 Cookie 管理登入狀態
 date: 2025-03-05
-tags: [Nuxt 3, JWT, Pinia, 身份驗證, 前端]
+tags: [Nuxt, 前端]
 ---
 
 最近幾個專案都有碰到會員系統的需求，JWT 驗證機制用了好幾次，這篇來整理一下在 Nuxt 3 專案中實作 JWT 驗證的心得。

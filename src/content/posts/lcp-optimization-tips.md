@@ -1,7 +1,7 @@
 ---
 title: 網站 LCP 優化實戰 — 提升 25% 載入速度的經驗分享
 date: 2025-02-10
-tags: [效能優化, LCP, Web Vitals, Lighthouse, 前端]
+tags: [效能優化, 前端]
 ---
 
 最近在工作上花了不少時間在網站效能優化，其中 LCP（Largest Contentful Paint）是最常被拿來當作指標的項目之一。這篇來分享一下實際優化 LCP 的經驗，以及一些常見的改善手法。
