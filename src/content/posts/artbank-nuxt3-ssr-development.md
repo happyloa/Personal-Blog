@@ -34,7 +34,23 @@ Tailwind CSS 用過之後才發現，原來切版也可以這麼順。以前寫�
 
 實作的時候我用 **Pinia** 來管理 JWT 的狀態。把 token 和使用者資訊都放在 store 裡面，這樣全站任何地方需要用到登入狀態，直接從 store 拿就可以了。Pinia 搭配 Nuxt 3 用起來很順，而且支援 SSR，不用額外處理 hydration 的問題。
 
-登入狀態的維持也要處理好，使用者重新整理頁面的時候，要能夠自動帶入之前的登入狀態。這邊用 `useCookie` 搭配 Pinia 的 store 來處理，讓 SSR 和 CSR 的狀態可以同步。
+登入狀態的維持也要處理好，使用者重新整理頁面的時候，要能夠自動帶入之前的登入狀態。這邊用 `useCookie` 搭配 Pinia 的 store 來處理，讓 SSR 和 CSR 的狀態可以同步：
+
+```typescript
+// stores/auth.ts
+export const useAuthStore = defineStore("auth", () => {
+  const tokenCookie = useCookie("auth_token", {
+    maxAge: 60 * 60 * 24 * 7, // 7 天
+  });
+
+  const user = ref<User | null>(null);
+  const isLoggedIn = computed(() => !!tokenCookie.value);
+
+  return { token: tokenCookie, user, isLoggedIn };
+});
+```
+
+這樣 `useCookie` 在 SSR 時會從 request header 讀 cookie，在 CSR 時從 document.cookie 讀，不用自己處理差異。
 
 ### VeeValidate 表單驗證
 
@@ -42,9 +58,32 @@ Tailwind CSS 用過之後才發現，原來切版也可以這麼順。以前寫�
 
 舉例來說，選擇企業戶的時候，統一編號就是必填欄位，而且要驗證格式；選擇個人戶的時候，這個欄位就不需要了。這種動態驗證規則的切換，一開始踩了不少坑。
 
-後來的做法是用 Yup 的 `when` 方法來做條件驗證，根據使用者選擇的身份類型，動態套用不同的驗證 schema。這樣寫法比較乾淨，也比較好維護。
+後來的做法是用 Yup 的 `when` 方法來做條件驗證，根據使用者選擇的身份類型，動態套用不同的驗證 schema：
 
-另外，錯誤訊息的顯示也花了一些心思。不只是要顯示「這個欄位必填」，而是要給出有意義的提示，讓使用者知道該怎麼修正。像是統編格式錯誤的時候，就要明確說「請輸入 8 位數字的統一編號」。
+```typescript
+import * as yup from "yup";
+
+const schema = yup.object({
+  memberType: yup.string().required(),
+  taxId: yup.string().when("memberType", {
+    is: "corporate", // 企業戶時才驗證
+    then: (schema) =>
+      schema
+        .required("請輸入統一編號")
+        .matches(/^\d{8}$/, "請輸入 8 位數字的統一編號"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  companyName: yup.string().when("memberType", {
+    is: "corporate",
+    then: (schema) => schema.required("請輸入公司名稱"),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+});
+```
+
+這樣寫法比較乾淨，也比較好維護。
+
+另外，錯誤訊息的顯示也花了一些心思。不只是要顯示「這個欄位必填」，而是要給出有意義的提示，讓使用者知道該怎麼修正。像是統編格式錯誤的時候，就要明確說「請輸入 8 位數字的統一編號」（因為統編一定是 8 位數字）。
 
 ## 收藏功能實作
 
@@ -58,7 +97,25 @@ Tailwind CSS 用過之後才發現，原來切版也可以這麼順。以前寫�
 
 這個專案讓我對 Nuxt 3 有更深入的理解。以前用 Nuxt 2 的時候，Options API 寫久了會覺得沒什麼，但 Nuxt 3 搭配 Composition API 和 TypeScript，整個開發體驗提升很多。
 
-這邊要特別提一個 `useFetch` 的坑。預設情況下，`useFetch` 會 watch 傳入的參數，只要參數有變化就會自動重新打 API。這聽起來很方便，但在表單的情境下就會出問題——使用者每改一個欄位的值，就會觸發一次 API 請求，這完全不是我們要的行為。解法是把 `watch` 選項設成 `false`，這樣就只會在手動呼叫的時候才打 API。
+這邊要特別提一個 `useFetch` 的坑。預設情況下，`useFetch` 會 watch 傳入的參數，只要參數有變化就會自動重新打 API。這聽起來很方便，但在表單的情境下就會出問題——使用者每改一個欄位的值，就會觸發一次 API 請求，這完全不是我們要的行為。解法是把 `watch` 選項設成 `false`：
+
+```typescript
+const formData = ref({ name: "", email: "" });
+
+const { data, execute } = await useFetch("/api/submit", {
+  method: "POST",
+  body: formData,
+  watch: false, // 關閉自動 watch，避免每次改值都打 API
+  immediate: false, // 也不要立即執行
+});
+
+// 表單送出時才手動呼叫
+const handleSubmit = async () => {
+  await execute();
+};
+```
+
+這樣就只會在手動呼叫 `execute()` 的時候才打 API。
 
 還有一個常遇到的問題是 hydration mismatch。因為 SSR 和 CSR 的環境不同，有些東西在 server 端和 client 端會產生不一致。像是用到 `window` 或 `document` 的地方，就要用 `process.client` 來判斷，或是用 `ClientOnly` 元件包起來。
 
