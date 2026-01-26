@@ -178,7 +178,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
       <script>
         function initTOC() {
           const tocDesktop = document.getElementById("toc-desktop");
-          const tocNav = document.getElementById("toc-nav");
+
           const tocMobile = document.getElementById("toc-mobile");
           const tocOverlay = document.getElementById("toc-overlay");
           const tocFab = document.getElementById("toc-fab");
@@ -211,6 +211,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
           // 捲動時 TOC 變更透明
           function handleScroll() {
+            if (!tocDesktop) return;
             tocDesktop.classList.add("is-scrolling");
 
             if (scrollTimeout) {
