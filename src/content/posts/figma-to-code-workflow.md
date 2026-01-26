@@ -1,7 +1,7 @@
 ---
 title: Figma to Code 工作流程分享 — 從 Design System 到 Vue + TypeScript + Tailwind 元件
 date: 2023-06-20
-tags: [Figma, 前端, 職涯]
+tags: [UI/UX, 前端, 職涯]
 ---
 
 做前端的人一定會遇到切版這件事——把設計師的設計稿變成真正可以跑的網頁。這篇來分享一下我從 Figma 到程式碼的工作流程，包含 Design System 的建立、User Flow 的規劃，以及如何用 Vue + TypeScript + Tailwind 來實作，確保設計與開發的一致性。
