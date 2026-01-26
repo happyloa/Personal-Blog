@@ -1,60 +1,93 @@
-# 個人部落格（Astro + Tailwind）
+# 個人部落格（Astro 5 + Tailwind 4）
 
-以 Astro 5 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 進行樣式客製化。採用本地端字型（`@fontsource/noto-sans-tc`）避免額外外部載入，並加入「跳到主要內容」捷徑與標籤索引頁，讓操作與可及性更友善。以下說明如何在本地端啟動，以及撰寫新文章時的建議流程。
+以 Astro 5 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 4（透過 Vite plugin）進行樣式客製化。採用本地端字型（`@fontsource-variable/noto-sans-tc`）優化載入效能，並整合了目錄（TOC）、RSS、Sitemap 等功能，打造高效能且 SEO 友善的個人網站。
+
+## 主要特色
+
+- **核心架構**：Astro 5 + Tailwind CSS 4 + TypeScript
+- **內容管理**：使用 Content Collections 管理 Markdown 文章，具備嚴格的型別檢查
+- **效能優化**：靜態生成（SSG）、圖片優化、字型預載
+- **閱讀體驗**：
+  - 自動生成目錄（TOC），支援桌面版懸浮與行動版彈出選單
+  - 閱讀時間估算與文章摘要自動生成
+  - 深色模式設計，長時間閱讀不刺眼
+- **SEO 與分享**：
+  - 完整的 Open Graph 與 Twitter Card 設定
+  - 自動生成 `sitemap-index.xml` 與 `rss.xml`
 
 ## 環境需求
+
 - Node.js 18.17 以上（建議使用 LTS 版本）
-- npm 10 以上（Node.js 內建）
+- npm 10 以上
 
 ## 本地開發流程
-1. 安裝相依套件
+
+1. **安裝相依套件**
+
    ```bash
    npm install
    ```
-2. 啟動開發伺服器（預設埠號為 4321，並支援熱重新整理）
+
+2. **啟動開發伺服器**
+
    ```bash
    npm run dev
    ```
-3. 建置與預覽（選擇性）
+
+   預設埠號為 `4321`，支援熱重新整理（HMR）。
+
+3. **建置與預覽**
+
    ```bash
-   npm run build   # 產生靜態輸出
-   npm run preview # 以本地伺服器預覽 build 結果
-   ```
-4. 型別與設定檢查（選擇性）
-   ```bash
-   npm run check
+   npm run build   # 產生靜態檔案至 dist 目錄
+   npm run preview # 預覽 build 後的結果
    ```
 
-### 其他介面與操作提示
-- 頁面提供「跳到主要內容」的隱藏捷徑鍵（鍵盤焦點在頁面頂部時會顯示）。
-- `/tags` 頁面列出所有標籤及對應的文章數量，可快速瀏覽分類。
+## 專案結構
+
+```bash
+src/
+├── components/   # UI 元件 (PostCard, TableOfContents...)
+├── content/      # 文章內容 (Content Collections)
+│   └── posts/    # Markdown 檔案
+├── layouts/      # 頁面佈局 (BaseLayout)
+├── pages/        # 頁面路由 (首頁, 文章內頁, 標籤頁)
+├── scripts/      # 客戶端腳本 (例如 TOC 邏輯)
+├── styles/       # 全域樣式與字型設定
+└── utils/        # 工具函式 (日期, 標籤, 摘要計算)
+```
 
 ## 新增文章指南
-- 文章位於 `src/content/posts`，每個 Markdown 檔案對應一篇文章，檔名會成為文章的 slug（網址的一部分）。
-- Frontmatter 必填與常用欄位如下，可依範例建立新檔案：
-  ```markdown
-  ---
-  title: 我的新文章標題
-  description: （選填）列表摘要，未填則會擷取正文第一個非空行
-  date: 2024-12-01 10:00:00   # 必填，用於排序與顯示，需可被 Date 解析
-  tags: [astro, tailwind]     # （選填）標籤陣列，預設為空陣列
-  cover: ../assets/cover.png  # （選填）封面圖片，放置於專案可匯入的路徑
-  draft: false                # （選填）草稿狀態，預設為 false
-  ---
-  
-  這裡開始撰寫正文內容，可使用 Markdown 語法。
-  ```
 
-### 標籤（tags）注意事項
-- `tags` 是字串陣列，頁面會以 slug 化後的字串生成 `/tags/<slug>/` URL（會轉為小寫、空白轉連字號、移除非英數字元）。
-- 若要新增全新標籤，只需在 Frontmatter 加入對應字串；系統會於建置時自動建立標籤彙整頁面，無需額外設定。
+文章位於 `src/content/posts`，每個 Markdown 檔案對應一篇文章。
 
-### 草稿與發布
-- `draft: true` 的文章不會出現在首頁、標籤列表或文章頁的靜態路由中。準備發布時，將 `draft` 改為 `false` 並確認 `date` 已設定，以確保排序與顯示正常。
+### Frontmatter 格式
 
-### 其他撰寫建議
-- 文章摘要：列表會優先使用 `description`，未填時會擷取正文第一個非空行文字並截斷至約 160 字元。
-- 日期排序：首頁與標籤頁會依 `date` 由新到舊排序，請務必填寫日期以確保排序與顯示正常。
-- 連結與資源：若使用圖片或附件，請將檔案放於可被 Astro 匯入的路徑（例如 `src/assets`），並以相對路徑引用。
+```markdown
+---
+title: 我的新文章標題
+description: （選填）未填則自動擷取內文第一段
+date: 2025-01-27
+tags: [Astro, 前端]
+cover: ../assets/cover.png # （選填）封面圖片
+draft: false # （選填）設為 true 則不會發布
+---
 
-完成以上設定後提交 Markdown 檔案即可，建置時會自動生成對應的文章頁與標籤頁。
+這裡開始撰寫正文內容...
+```
+
+### 撰寫建議
+
+- **圖片**：建議將圖片放於 `src/assets` 並以相對路徑引用，Astro 會自動優化。
+- **標籤**：系統會自動將標籤轉為小寫並移除特殊符號（Slugify），自動生成對應的 `/tags/[tag]/` 頁面。
+- **目錄**：文章內頁會自動解析 `h2` 與 `h3` 標題生成目錄。
+
+## 部署
+
+本專案設定為 `output: "static"`，可部署至任何靜態主機（如 Cloudflare Pages, Vercel, Netlify）。
+
+```bash
+npm run build
+```
+
+建置完成後，將 `dist` 資料夾內容上傳即可。
