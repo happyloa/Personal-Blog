@@ -12,7 +12,7 @@ tags: [六角學院, 學習心得, 前端]
 
 ### 🚀 技術選擇：挑戰自己的學習之路
 
-不過我自己作業是用 **Nuxt 3/4 + Tailwind CSS** 來寫，算是給自己找點麻煩（？）。
+不過我自己作業是用 **Nuxt 3/4 + Tailwind CSS** 來寫，算是給自己找點麻煩（？
 
 這選擇讓我多踩了不少坑——Nuxt 的檔案結構、Vue 的 Composition API、Tailwind 的 utility class，每個都要花時間搞懂。但換個角度想，踩坑就是學習嘛。
 
