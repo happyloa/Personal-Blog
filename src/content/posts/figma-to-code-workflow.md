@@ -53,7 +53,7 @@ Design System 是確保設計一致性的關鍵。在 Figma 裡面，通常會�
 
 ### Spacing 和 Grid
 
-間距規則用 8px 為基底的倍數系統比較好管理：4px、8px、16px、24px、32px...
+間距規則用 4px 為基底的倍數系統比較好管理：4px、8px、16px、24px、32px...
 
 Grid 系統定義好欄數和 gutter，方便對齊。
 
