@@ -4,6 +4,8 @@ import TableOfContents from "../../components/TableOfContents.astro";
 import MDXImage from "../../components/MDXImage.astro";
 import { getCollection } from "astro:content";
 import { slugifyTag } from "../../utils/tags";
+import { formatDate, toISODate } from "../../utils/date";
+import { calculateReadingTime } from "../../utils/posts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -18,15 +20,10 @@ const { Content, headings } = await post.render();
 const components = { img: MDXImage };
 
 // 用 200 WPM 估算閱讀時間，提供一致的閱讀門檻提示即使沒有外掛資料也可用。
-const wordCount = post.body.split(/\s+/).length;
-const readingTime = Math.ceil(wordCount / 200);
+const readingTime = calculateReadingTime(post.body);
 
-const formattedDate = new Date(post.data.date).toLocaleDateString("zh-TW", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
-const isoDate = new Date(post.data.date).toISOString();
+const formattedDate = formatDate(post.data.date);
+const isoDate = toISODate(post.data.date);
 ---
 
 <BaseLayout

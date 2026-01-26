@@ -16,7 +16,7 @@ const defaultSort = (a: PostEntry, b: PostEntry) => {
 };
 
 export async function getPublishedPostsSorted(
-  options: GetPublishedPostsOptions = {}
+  options: GetPublishedPostsOptions = {},
 ) {
   const { filter, sort } = options;
   const posts = await getCollection("posts", (post) => {
@@ -27,4 +27,27 @@ export async function getPublishedPostsSorted(
   });
 
   return posts.sort(sort ?? defaultSort);
+}
+
+/**
+ * 計算文章閱讀時間 (以每分鐘 200 字估算)
+ * @param body 文章內容
+ * @returns 預估閱讀分鐘數
+ */
+export function calculateReadingTime(body: string): number {
+  const wordCount = body.split(/\s+/).length;
+  return Math.ceil(wordCount / 200);
+}
+
+/**
+ * 取得文章描述 (優先使用 frontmatter description，若無則抓取內文第一段)
+ * @param post 文章物件
+ * @returns 文章描述字串
+ */
+export function getPostDescription(post: PostEntry): string {
+  if (post.data.description) {
+    return post.data.description;
+  }
+  // 取內文首個非空行
+  return post.body.split("\n").find((line) => line.trim()) ?? "";
 }

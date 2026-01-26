@@ -1,25 +1,20 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { toPlainTextExcerpt } from "../utils/summary";
+import { getPostDescription } from "../utils/posts";
 import { slugifyTag } from "../utils/tags";
+import { formatDate, toISODate } from "../utils/date";
 
 interface Props {
   post: CollectionEntry<"posts">;
 }
 
 const { post } = Astro.props;
-const formattedDate = new Date(post.data.date).toLocaleDateString("zh-TW", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
-const isoDate = new Date(post.data.date).toISOString();
-// 為了確保摘要穩定且有語意，優先用 description，其次取內文首個非空行再轉成純文字摘要。
-const summarySource =
-  post.data.description ??
-  post.body.split("\n").find((line) => line.trim()) ??
-  "";
-const summary = toPlainTextExcerpt(summarySource);
+const formattedDate = formatDate(post.data.date);
+const isoDate = toISODate(post.data.date);
+
+// 為了確保摘要穩定且有語意，使用統一的 getPostDescription 抓取邏輯，再轉成純文字摘要。
+const summary = toPlainTextExcerpt(getPostDescription(post));
 ---
 
 <article
