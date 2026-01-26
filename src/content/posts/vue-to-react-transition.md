@@ -10,7 +10,7 @@ tags: [React, Vue, 前端]
 
 老實說，Vue 用得很順手的時候，一開始對學 React 沒有太大的動力。但後來發現幾個現實的考量：
 
-1. **工作機會**：看職缺的時候，React 的需求量確實比 Vue 多
+1. **工作機會**：看職缺的時候，React 的需求量確實比 Vue 多，而且很多外商缺也都是用 React
 2. **生態系**：React 的社群資源和第三方套件非常豐富
 3. **技術視野**：多學一個框架可以用不同角度思考問題
 
@@ -18,7 +18,7 @@ tags: [React, Vue, 前端]
 
 ## 最明顯的差異：模板 vs JSX
 
-Vue 用的是 template 語法，長這樣：
+Vue 用的是 template 語法，長這樣，其實就是 HTML 加上 Vue 的指令（directives）：
 
 ```vue
 <template>
