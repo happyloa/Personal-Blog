@@ -100,8 +100,6 @@ Google 是以行動版作為索引的主要版本，所以網站一定要對行�
 - 文字大小要易讀
 - 不要用 Flash
 
-可以用 Google 的[行動裝置相容性測試](https://search.google.com/test/mobile-friendly)來檢查。
-
 ## Sitemap 和 Robots.txt
 
 ### Sitemap
