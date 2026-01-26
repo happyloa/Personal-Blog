@@ -30,9 +30,9 @@ Cursor 是一個內建 AI 功能的 IDE，基於 VS Code 改造。它可以直�
 
 ### Google Antigravity IDE
 
-Google 推出的 AI 開發環境，整合了 Gemini 模型。它的特色是可以理解整個專案的 context，給出的建議會比較符合專案的風格和結構。
+這是 Google 推出的 AI 開發環境，原本主打 Gemini 模型，但現在也支援其他模型（像是 Claude Opus 4.5）。
 
-在做比較複雜的專案時，這個工具蠻有幫助的。它可以看到整個專案的檔案結構，給的建議會考慮到現有的程式碼風格。
+它的特色是可以理解整個專案的 context，給出的建議會比較符合專案的風格和結構。在做比較複雜的專案時，這個工具蠻有幫助的。而且因為可以切換模型，我通常會用 Gemini 做 Code Generation（速度快），用 Claude 做架構設計或 Refactoring（邏輯強），截長補短。
 
 ## 實際專案中的應用
 

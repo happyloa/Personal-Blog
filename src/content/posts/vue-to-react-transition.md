@@ -99,6 +99,51 @@ Vue 和 React 的生命週期可以這樣對應：
 
 React 把所有副作用都用 `useEffect` 來處理，一開始會覺得有點不直覺。但習慣之後，其實邏輯蠻清楚的——dependency array 決定什麼時候要重新執行。
 
+### 詳細的生命週期對照與陷阱
+
+很多從 Vue 轉過來的人（包含我）最容易在 `useEffect` 踩坑，因為我們習慣了 `onMounted` 這種「時間點」的思考模式，但 React 的 Hooks 是「狀態同步」的思考模式。
+
+| Vue (時間點思維) | React (同步思維)            | 常見心智模型落差                                                    |
+| ---------------- | --------------------------- | ------------------------------------------------------------------- |
+| `onMounted`      | `useEffect(..., [])`        | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）  |
+| `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；UseEffect 在 render 完一定會至少跑一次 |
+| `onUnmounted`    | `useEffect` return function | 容易忘記 cleanup，導致 event listener 重複綁定                      |
+
+**最大的陷阱：Stale Closure**
+
+在 Vue 裡面，你在任何地方讀 `count.value` 拿到的都是最新的值。但在 React 的 `useEffect` 或 `useCallback` 裡，如果你沒把變數放進 dependency array，你讀到的會是「舊的」變數。
+
+```javascript
+// React 陷阱題
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log(count); // 這裡的 count 永遠是初始值 0！
+  }, 1000);
+  return () => clearInterval(timer);
+}, []); // 因為 dependency 是空的
+```
+
+這真的要花點時間適應，Vue 的響應式系統太聰明了，幫我們處理掉很多這種底層問題。
+
+## 心智模型的轉變：Mutable vs Immutable
+
+這應該是兩個框架最核心的差異。
+
+**Vue 的世界觀：你可以修改我，我會通知大家。**
+Vue 的 data 是 mutable 的。你想改標題？`title.value = 'New'`。Vue 的 Reactivity system 會攔截這個 setter，然後去更新畫面。這很直覺，跟我們寫傳統 JS 物件導向一樣。
+
+**React 的世界觀：你不能修改我，你要創造一個新的我。**
+React 的 state 是 immutable 的。你想改標題？你不能改舊的 `title`，你要呼叫 `setTitle('New')`，這會告訴 React：「嘿，用這個新值重新畫一次 component」。
+
+這個差異導致了寫 code 習慣的不同：
+
+- **Vue**: `arr.push(item)` (開心！)
+- **React**: `setArr([...arr, item])` (麻煩但安全)
+- **Vue**: `obj.prop = 1`
+- **React**: `setObj({ ...obj, prop: 1 })`
+
+習慣 React 的 Immutable 模式後，你會發現 data flow 變得很容易預測。因為資料不會莫名其妙被改掉，一定是有某個 `setXXX` 被呼叫了。這在大型專案除錯時非常有幫助。
+
 ## Next.js vs Nuxt
 
 如果要做 SSR，Vue 有 Nuxt，React 有 Next.js。兩個框架的概念很類似：
