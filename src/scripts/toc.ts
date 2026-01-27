@@ -159,7 +159,7 @@ export function initTOC() {
   }
 
   // 點擊 TOC 連結時立即設定 active
-  document.querySelectorAll(".toc-link, .toc-link-mobile").forEach((link) => {
+  tocLinks.forEach((link) => {
     link.addEventListener("click", () => {
       const slug = link.getAttribute("data-slug");
       if (slug) setActiveLink(slug);
