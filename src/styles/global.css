@@ -1,3 +1,4 @@
+@import "@fontsource-variable/noto-sans-tc/wght.css";
 @import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
