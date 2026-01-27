@@ -94,10 +94,43 @@ export function initTOC() {
     }
   }
 
-  tocFab?.addEventListener("click", toggleMobileTOC);
+  // 行動版：hover 觸發開啟/關閉（僅限非觸控設備）
+  let hoverCloseTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  // 檢測是否為觸控設備
+  const isTouchDevice = () =>
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  function openMobileTOC() {
+    if (hoverCloseTimeout) {
+      clearTimeout(hoverCloseTimeout);
+      hoverCloseTimeout = null;
+    }
+    if (!isMobileOpen) toggleMobileTOC();
+  }
+
+  function closeMobileTOCWithDelay() {
+    // 延遲關閉，避免滑鼠在 FAB 和 TOC 之間移動時閃爍
+    hoverCloseTimeout = setTimeout(() => {
+      if (isMobileOpen) toggleMobileTOC();
+    }, 150);
+  }
+
+  // 只在非觸控設備上啟用 hover 功能
+  if (!isTouchDevice()) {
+    tocFab?.addEventListener("mouseenter", openMobileTOC);
+    tocFab?.addEventListener("mouseleave", closeMobileTOCWithDelay);
+    tocMobile?.addEventListener("mouseenter", openMobileTOC);
+    tocMobile?.addEventListener("mouseleave", closeMobileTOCWithDelay);
+  }
+
+  // 點擊遮罩時關閉
   tocOverlay?.addEventListener("click", () => {
     if (isMobileOpen) toggleMobileTOC();
   });
+
+  // 點擊 FAB 切換（觸控設備主要使用此方式）
+  tocFab?.addEventListener("click", toggleMobileTOC);
 
   // 點擊行動版目錄連結後，自動關閉選單
   document.querySelectorAll(".toc-link-mobile").forEach((link) => {

@@ -21,7 +21,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
       {/* 桌面版：固定在右側，捲動時半透明，hover 時恢復 */}
       <aside
         id="toc-desktop"
-        class="hidden lg:block fixed top-24 right-4 xl:right-8 w-56 xl:w-64 max-h-[calc(100vh-8rem)] overflow-y-auto opacity-0 translate-x-4 transition-all duration-300 z-40"
+        class="hidden 2xl:block fixed top-24 right-4 2xl:right-8 w-56 2xl:w-64 max-h-[calc(100vh-8rem)] overflow-y-auto opacity-0 translate-x-4 transition-all duration-300 z-40"
         aria-label="文章目錄"
       >
         <nav
@@ -62,7 +62,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
       </aside>
 
       {/* 行動版：浮動按鈕 + 彈出選單 */}
-      <div class="lg:hidden">
+      <div class="2xl:hidden" id="toc-mobile-container">
         {/* 半透明背景遮罩 */}
         <div
           id="toc-overlay"
