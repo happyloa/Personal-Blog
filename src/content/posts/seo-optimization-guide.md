@@ -1,179 +1,110 @@
 ---
-title: 網站 SEO 優化攻略 — 從技術面提升搜尋排名的實戰經驗
-date: 2023-01-10
+title: 網站 SEO 優化攻略 — 從技術面提升搜尋排名的實戰經驗（2026 更新版）
+date: 2026-01-30
 tags: [SEO, 前端]
 ---
 
-之前在啟程教育學院工作的時候，有一段時間專注在網站的 SEO 優化。當時成功讓 5 組商業關鍵字在 4 週內攻佔搜尋排名前 3，網站的自然流量也成長了 120%。這篇來分享一下從技術面做 SEO 優化的經驗。
+之前在啟程教育學院工作的時候，有一段時間專注在網站的 SEO 優化。當時成功讓 5 組商業關鍵字在 4 週內攻佔搜尋排名前 3，網站的自然流量也成長了 120%。這篇來分享一下從技術面做 SEO 優化的經驗，並加入 2025-2026 年的最新趨勢。
 
-## SEO 是什麼
+## 2026 年 SEO 的重大變化
 
-SEO（Search Engine Optimization）就是讓網站在搜尋引擎上更容易被找到。當使用者搜尋某個關鍵字，你的網站能排在越前面，就越容易被點進來。
+### AI Overviews 改變搜尋生態
 
-SEO 可以分成幾個面向：
+Google AI Overviews 已達每月 15 億用戶，會直接在搜尋結果顯示 AI 生成的答案，導致「零點擊搜尋」增加。
 
-- **技術 SEO**：網站結構、速度、爬蟲友善度
-- **內容 SEO**：關鍵字、文章品質、使用者意圖
-- **外部 SEO**：反向連結、社群訊號
+**新策略**：從「爭取排名第一」轉變為「讓內容被 AI 引用」。
 
-這篇主要聚焦在技術面，因為這是前端工程師比較能掌控的部分。
+### E-E-A-T 更加重要
 
-## 基本的 HTML 結構
+Google 和 AI 都優先引用具備 **E-E-A-T** 的來源：
+
+- **Experience（經驗）**：第一手經驗
+- **Expertise（專業）**：專業知識
+- **Authoritativeness（權威）**：領域權威
+- **Trustworthiness（可信度）**：值得信賴
+
+### 從關鍵字到實體（Entity-Based SEO）
+
+搜尋引擎理解「實體」（人、事、物）的關係，而非只匹配關鍵字。需要使用結構化資料，建立完整的主題權威。
+
+## 基本 HTML 結構
 
 ### Title 和 Meta Description
 
-每個頁面都要有獨特的 title 和 description：
-
 ```html
 <title>公司名稱 | 服務項目 - 簡短描述</title>
-<meta
-  name="description"
-  content="這裡寫 150-160 字的頁面描述，要包含目標關鍵字" />
+<meta name="description" content="150-160 字的頁面描述" />
 ```
-
-Title 建議控制在 60 個字元以內，Description 控制在 160 個字元以內，超過會被截斷。
 
 ### Heading 結構
 
-一個頁面只能有一個 `<h1>`，通常是頁面的主標題。接下來用 `<h2>`、`<h3>` 來建立層級結構：
-
-```html
-<h1>主標題（包含主要關鍵字）</h1>
-<h2>次標題</h2>
-<h3>子標題</h3>
-<h2>次標題</h2>
-```
-
-不要跳過層級，不要為了字體大小而用錯層級的 heading。
+一個頁面只能有一個 `<h1>`，用 `<h2>`、`<h3>` 建立層級，不要跳過層級。
 
 ### 語意化標籤
 
-用正確的 HTML5 語意標籤，讓搜尋引擎更容易理解網頁結構：
+使用 `<header>`、`<nav>`、`<main>`、`<article>`、`<footer>` 等 HTML5 語意標籤。
 
-```html
-<header>網站標頭</header>
-<nav>導覽列</nav>
-<main>主要內容</main>
-<article>文章內容</article>
-<aside>側邊欄</aside>
-<footer>頁尾</footer>
-```
+## 讓內容被 AI 引用
 
-## 網站速度優化
+- **結構清晰**：使用標題層級、條列、表格、FAQ 格式
+- **直接回答**：內容開頭就回答問題，再詳細解釋
+- **提供 AI 無法複製的內容**：原創研究、第一手經驗、案例分析
+- **使用結構化資料**：特別是 `FAQPage` 和 `HowTo` 類型
 
-Google 已經明確表示網站速度是排名因素之一。速度慢不只影響使用者體驗，也會影響 SEO。
+## Core Web Vitals（2025-2026 更新）
 
-主要的優化方向：
+<div class="table-wrapper">
 
-- 圖片壓縮和正確的格式（WebP）
-- CSS 和 JavaScript 壓縮
-- 使用 CDN
-- 開啟 Gzip/Brotli 壓縮
-- 減少第三方腳本
+| 指標    | 衡量內容     | 2024 標準  | 2025-2026 建議 |
+| ------- | ------------ | ---------- | -------------- |
+| **LCP** | 最大內容繪製 | ≤ 2.5 秒   | **≤ 2.0 秒**   |
+| **INP** | 互動回應速度 | ≤ 200 毫秒 | ≤ 200 毫秒     |
+| **CLS** | 版面位移     | ≤ 0.1      | ≤ 0.1          |
 
-這些在之前的 LCP 優化文章有詳細說明。
+</div>
 
-## 結構化資料
+**注意**：INP 已取代 FID，LCP 標準更嚴格。
 
-結構化資料（Schema.org）可以讓搜尋引擎更了解網頁內容，也可能讓搜尋結果顯示更豐富的資訊：
+### 改善 INP
 
-```html
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "公司名稱",
-    "url": "https://example.com",
-    "logo": "https://example.com/logo.png"
-  }
-</script>
-```
+1. 減少 JavaScript 執行時間
+2. 分割長任務（用 `setTimeout` 讓出主執行緒）
+3. 減少 DOM 操作
+4. 使用 Web Worker 處理耗時計算
 
-常見的類型有 Organization、Article、Product、FAQ 等，根據頁面內容選擇適合的 schema。
+## 多平台可見度
 
-## 行動裝置友善
+2026 年的 SEO 不只是 Google，要在 YouTube、社群媒體、Reddit、AI 聊天機器人（ChatGPT、Gemini）都能被找到。**品牌提及**也成為重要排名訊號。
 
-Google 是以行動版作為索引的主要版本，所以網站一定要對行動裝置友善：
+## 必備工具設定
 
-- RWD 響應式設計
-- 點擊目標要夠大（至少 48px）
-- 文字大小要易讀
-- 不要用 Flash
-
-## Sitemap 和 Robots.txt
-
-### Sitemap
-
-Sitemap 告訴搜尋引擎網站有哪些頁面：
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://example.com/</loc>
-    <lastmod>2025-01-01</lastmod>
-  </url>
-</urlset>
-```
-
-大部分的 CMS 和框架都有自動產生 sitemap 的功能。
-
-### Robots.txt
-
-Robots.txt 告訴爬蟲哪些頁面可以爬、哪些不行：
-
-```
-User-agent: *
-Allow: /
-Disallow: /admin/
-Sitemap: https://example.com/sitemap.xml
-```
-
-## Google Search Console 設定
-
-[Google Search Console](https://search.google.com/search-console)（GSC）是必備的工具，可以：
+### Google Search Console
 
 - 提交 sitemap
-- 查看網站的搜尋表現
-- 看到 Google 爬蟲遇到的問題
-- 檢查特定網址的索引狀態
+- 查看搜尋表現和 Core Web Vitals 報告
+- 監控爬蟲問題
 
-設定完成後，記得定期檢查有沒有錯誤需要處理。
+### Google Analytics 4
 
-## Google Analytics 追蹤
-
-[Google Analytics 4](https://analytics.google.com/)（GA4）可以追蹤網站流量和使用者行為：
-
-- 哪些頁面最多人看
-- 使用者從哪裡來
-- 跳出率和停留時間
-- 轉換目標追蹤
-
-這些數據可以幫助你了解 SEO 成效，也可以找出需要改善的地方。
-
-## 持續監控和調整
-
-SEO 不是做一次就好，需要持續監控和調整：
-
-1. **定期檢查 GSC**：看看有沒有新的問題出現
-2. **追蹤關鍵字排名**：可以用工具或手動搜尋來確認
-3. **分析競爭對手**：看看排名前面的網站做了什麼
-4. **更新內容**：舊的內容要定期更新，保持新鮮度
+- 追蹤流量來源
+- 監控轉換目標
+- 分析使用者行為
 
 ## 實務經驗
 
-做過幾個 SEO 專案後，有些經驗可以分享：
-
-1. **技術 SEO 是基礎**：技術面沒做好，內容再好也很難排上去
-
-2. **內容還是最重要**：技術只是讓內容更容易被找到，最終還是要有好的內容
-
-3. **不要只看排名**：排名只是過程，真正重要的是有沒有帶來實際的轉換
-
-4. **SEO 需要時間**：不是今天做了明天就會有效果，通常要幾週到幾個月才會看到成效
-
-5. **避免黑帽手法**：刷排名、隱藏文字這些黑帽手法可能短期有效，但一旦被 Google 發現就會被懲罰
+1. **技術 SEO 是基礎**：技術面沒做好，內容再好也難排上去
+2. **內容還是最重要**：技術只是讓內容更容易被找到
+3. **SEO 需要時間**：通常要幾週到幾個月才會看到成效
+4. **擁抱 AI 時代**：思考如何讓內容被 AI 引用
+5. **建立品牌權威**：長期來看是最穩固的 SEO 資產
 
 ## 結語
 
-SEO 是一個持續的過程，不是做一次就結束。把基本的技術面做好，持續產出優質內容，定期監控和調整，長期下來一定會看到效果。
+SEO 正在經歷巨大變革，但核心原則沒變：**提供有價值的內容，給需要的人**。
+
+2026 年 SEO 策略重點：
+
+1. 做好技術基礎（Core Web Vitals、結構化資料）
+2. 創造有深度的原創內容
+3. 讓內容易於被 AI 引用
+4. 建立多平台品牌可見度
