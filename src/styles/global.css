@@ -1,5 +1,6 @@
 @import "@fontsource-variable/noto-sans-tc/wght.css";
 @import "tailwindcss";
+@import "./scrollbar.css";
 
 @plugin '@tailwindcss/typography';
 
@@ -59,43 +60,43 @@ a {
   @apply text-sky-200;
 }
 
+/* 表格樣式 */
+.prose table {
+  @apply my-0;
+}
+
+.prose thead {
+  @apply bg-slate-800/50;
+}
+
+.prose th {
+  @apply px-4 py-3 text-left font-semibold text-slate-200;
+}
+
+.prose td {
+  @apply px-4 py-3;
+}
+
+.prose tbody tr {
+  @apply border-b border-slate-700/50 transition-colors hover:bg-slate-800/30;
+}
+
+/* 手機表格 RWD */
+@media (max-width: 768px) {
+  .prose .table-wrapper {
+    @apply overflow-x-auto rounded-lg;
+  }
+
+  .prose th,
+  .prose td {
+    @apply whitespace-nowrap px-3 py-2;
+  }
+}
+
 .tag-pill {
   @apply inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-sky-100 ring-1 ring-white/15 transition-colors hover:bg-white/15 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400/70;
 }
 
 .skip-link {
   @apply sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-sky-900 focus:text-white focus:shadow-lg;
-}
-
-/* Custom Scrollbar Styles */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(71 85 105 / 0.6) transparent; /* slate-600/60 */
-}
-
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: rgb(71 85 105 / 0.6); /* slate-600/60 */
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background 0.2s ease;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: rgb(125 211 252 / 0.7); /* sky-300/70 */
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-*::-webkit-scrollbar-corner {
-  background: transparent;
 }
