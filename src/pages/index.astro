@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import { getPublishedPostsSorted } from "../utils/posts";
 import { slugifyTag } from "../utils/tags";
+import { categories } from "../utils/categories";
 
 const posts = await getPublishedPostsSorted();
 
@@ -23,11 +24,47 @@ posts.forEach((post) => {
 const topTags = Array.from(tagMap.values())
   .sort((a, b) => b.count - a.count)
   .slice(0, 5);
+
+// 計算每個分類的文章數
+const categoryCounts = new Map<string, number>();
+posts.forEach((post) => {
+  const cat = post.data.category;
+  categoryCounts.set(cat, (categoryCounts.get(cat) || 0) + 1);
+});
 ---
 
 <BaseLayout
   title="Aaron 的部落格"
   description="用 Astro 打造、部署到 Cloudflare Pages 的全新部落格">
+  <!-- 專欄導航 -->
+  <section class="mb-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold text-slate-200">專欄導航</h2>
+      <a
+        href="/categories/"
+        class="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-sky-300 transition-colors">
+        查看全部 →
+      </a>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {
+        categories.map((category) => (
+          <a
+            href={`/categories/${category.slug}/`}
+            class="group block p-4 rounded-lg bg-slate-800/50 border border-slate-700/50 hover:border-sky-500/50 hover:bg-slate-800 transition-all">
+            <div class="text-2xl mb-2">{category.icon}</div>
+            <h3 class="text-sm font-medium text-slate-100 group-hover:text-sky-300 transition-colors">
+              {category.name}
+            </h3>
+            <p class="text-xs text-slate-500 mt-1">
+              {categoryCounts.get(category.slug) || 0} 篇
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
   <!-- 熱門標籤區塊 -->
   <section class="mb-8">
     <h2 class="text-lg font-semibold text-slate-200 mb-3">熱門標籤</h2>

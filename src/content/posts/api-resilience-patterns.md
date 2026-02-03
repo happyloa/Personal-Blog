@@ -2,6 +2,7 @@
 title: API 請求卡住怎麼辦？聊聊 Timeout、Retry 與 Circuit Breaker
 date: 2026-02-03
 tags: [API, 後端, 系統設計]
+category: tech-deep-dive
 ---
 
 最近在研究一個問題：**當 API 請求卡住、遲遲沒有回應的時候，我們該怎麼處理？**

@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getPublishedPostsSorted } from "../../utils/posts";
+import { categories, getCategoryBySlug } from "../../utils/categories";
+import type { CategorySlug } from "../../utils/categories";
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category: category.slug },
+  }));
+}
+
+const { category: categorySlug } = Astro.params;
+const categoryInfo = getCategoryBySlug(categorySlug as CategorySlug);
+
+if (!categoryInfo) {
+  return Astro.redirect("/404");
+}
+
+const allPosts = await getPublishedPostsSorted();
+const posts = allPosts.filter((post) => post.data.category === categorySlug);
+---
+
+<BaseLayout
+  title={`${categoryInfo.icon} ${categoryInfo.name} — Aaron 的部落格`}
+  description={categoryInfo.description}>
+  <div class="mb-8">
+    <a
+      href="/"
+      class="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-sky-300 transition-colors mb-4">
+      ← 返回首頁
+    </a>
+    <h1 class="text-2xl font-bold text-slate-100 mb-2">
+      {categoryInfo.icon}
+      {categoryInfo.name}
+    </h1>
+    <p class="text-slate-400">{categoryInfo.description}</p>
+    <p class="text-sm text-slate-500 mt-2">共 {posts.length} 篇文章</p>
+  </div>
+
+  <section class="grid gap-4">
+    {
+      posts.length > 0 ? (
+        posts.map((post) => <PostCard post={post} />)
+      ) : (
+        <p class="text-slate-400">這個分類目前還沒有文章。</p>
+      )
+    }
+  </section>
+</BaseLayout>

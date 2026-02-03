@@ -2,6 +2,7 @@
 title: 從 Vue 跳到 React 的開發心得 — 兩個框架的差異與轉換經驗
 date: 2024-08-20
 tags: [React, Vue, 前端]
+category: learning
 ---
 
 做前端這幾年，Vue 和 React 都有碰過。一開始是從 Vue 入門，後來工作上也接觸了 React 專案。這篇來分享一下在兩個框架之間轉換的心得，以及實際開發時感受到的差異。
