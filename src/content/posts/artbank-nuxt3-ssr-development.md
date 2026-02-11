@@ -31,27 +31,9 @@ Tailwind CSS 用過之後才發現，原來切版也可以這麼順。以前寫�
 
 ### JWT 驗證機制
 
-驗證這塊選用 JWT，後端會在登入成功後回傳 token，前端存到 cookie 裡面。之後每次打 API 都會帶上這個 token，後端就能知道這個請求是誰發的。
+驗證這塊選用 JWT，搭配 **Pinia** 來管理登入狀態，用 `useCookie` 讓 SSR 和 CSR 的 token 可以同步。這個架構的好處是全站任何地方都能方便地存取登入狀態，而且重新整理頁面時也能自動恢復。
 
-實作的時候我用 **Pinia** 來管理 JWT 的狀態。把 token 和使用者資訊都放在 store 裡面，這樣全站任何地方需要用到登入狀態，直接從 store 拿就可以了。Pinia 搭配 Nuxt 3 用起來很順，而且支援 SSR，不用額外處理 hydration 的問題。
-
-登入狀態的維持也要處理好，使用者重新整理頁面的時候，要能夠自動帶入之前的登入狀態。這邊用 `useCookie` 搭配 Pinia 的 store 來處理，讓 SSR 和 CSR 的狀態可以同步：
-
-```typescript
-// stores/auth.ts
-export const useAuthStore = defineStore("auth", () => {
-  const tokenCookie = useCookie("auth_token", {
-    maxAge: 60 * 60 * 24 * 7, // 7 天
-  });
-
-  const user = ref<User | null>(null);
-  const isLoggedIn = computed(() => !!tokenCookie.value);
-
-  return { token: tokenCookie, user, isLoggedIn };
-});
-```
-
-這樣 `useCookie` 在 SSR 時會從 request header 讀 cookie，在 CSR 時從 document.cookie 讀，不用自己處理差異。
+關於 JWT + Pinia + Cookie 的完整實作細節（包含自動帶 token、權限控制、初始化登入狀態等），我在另一篇文章有更詳細的說明：[Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)。
 
 ### VeeValidate 表單驗證
 
