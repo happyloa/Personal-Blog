@@ -1,5 +1,6 @@
 ---
 title: 從零到有！六角學院網頁切版直播班心得 — 用 Nuxt 實戰三大專案
+description: 六角學院 2025 網頁切版直播班學習全紀錄。使用 Nuxt 3 + Tailwind CSS 實戰電商、職涯媒合與旅遊訂購三大專案的心得。
 date: 2025-09-21
 tags: [六角學院, 學習心得, 前端]
 category: learning

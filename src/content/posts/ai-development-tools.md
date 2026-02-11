@@ -1,5 +1,6 @@
 ---
 title: AI 輔助開發工具使用心得 — Claude Code、Cursor、Antigravity IDE 實戰分享
+description: 分享 Claude、Cursor 等 AI 輔助開發工具的實戰心得。探討如何善用 AI 加速重複性工作，讓工程師專注於更有價值的核心邏輯。
 date: 2025-07-08
 tags: [AI, 前端, 職涯]
 category: career
@@ -142,3 +143,10 @@ AI 輔助開發已經是現在進行式了，不是未來的事。學會善用�
 但也不要過度依賴，基本功還是要紮實。AI 是工具，會用工具的人還是比較吃香。
 
 最後，保持開放的心態持續學習。AI 工具還在快速發展，現在的使用方式可能過一年就不一樣了。跟上這個趨勢，才能在競爭中保持優勢。
+
+---
+
+站內相關文章：
+
+- [用 AI 開發 WordPress 安全外掛](/posts/site-addon-watchdog-ai-development)
+- [Vibe Coding 體驗營心得](/posts/hex2025-vibe-coding-camp)

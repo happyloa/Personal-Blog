@@ -1,5 +1,6 @@
 ---
 title: 從 Vue 跳到 React 的開發心得 — 兩個框架的差異與轉換經驗
+description: 從 Vue 轉戰 React 的心路歷程。本文深入比較兩大框架在思維與語法上的核心差異，幫助你在轉換過程中少走彎路。
 date: 2024-08-20
 tags: [React, Vue, 前端]
 category: learning
@@ -279,3 +280,11 @@ if (isLoggedIn) {
 Vue 和 React 都是很棒的框架，沒有誰比較好的問題。多學一個框架可以拓展視野，也能增加求職的競爭力。
 
 如果你跟我一樣是 Vue 起家的，不用怕學 React。核心概念很類似，主要是語法和一些設計理念的差異。適應期過了之後，就能兩邊都寫了。
+
+---
+
+站內相關文章：
+
+- [Vue i18n 多語系開發](/posts/vue-i18n-multilingual)
+- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow)
+- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide)

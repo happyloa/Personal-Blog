@@ -1,5 +1,6 @@
 ---
 title: 前端測試實戰 — 為什麼你需要寫測試？(以 Vitest 為例)
+description: 為什麼前端需要寫測試？本文分享導入 Vitest 的實戰經驗與測試金字塔觀念，助你寫出更穩健、好維護的程式碼。
 date: 2025-09-20
 tags: [Testing, Vue, 前端]
 category: learning
@@ -124,3 +125,10 @@ describe("Counter", () => {
 導入測試一開始會有陣痛期，覺得開發變慢了。但把時間軸拉長來看，它省下的是無數次「手動回測」和「線上救火」的時間。
 
 如果你還沒開始寫測試，建議從最簡單的 Utility function 開始。先求有，再求好。你會發現，看著終端機亮起一整排綠色的 Pass，真的是一件很療癒的事情😌
+
+---
+
+站內相關文章：
+
+- [API 請求卡住怎麼辦？Timeout、Retry 與 Circuit Breaker](/posts/api-resilience-patterns)
+- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)

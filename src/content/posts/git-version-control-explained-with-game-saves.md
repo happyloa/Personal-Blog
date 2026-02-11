@@ -1,5 +1,6 @@
 ---
 title: Git 版本控制入門 — 用遊戲存檔來理解版本管理
+description: Git 就像遊戲存檔一樣，幫你記錄程式碼的每一個進度。本文用 RPG 遊戲的比喻介紹 Commit、Branch、Merge 等核心概念。
 date: 2026-02-08
 tags: [Git, 工具, 新手入門]
 category: web-basics
@@ -239,8 +240,10 @@ Git 是工程師每天都在用的基本工具。學會它之後，你就再也�
 
 ---
 
-延伸閱讀：
-
-- [Git 官方文件](https://git-scm.com/doc)
-- [GitHub Desktop — 入門教學](https://docs.github.com/en/desktop)
 - [為你自己學 Git](https://gitbook.tw/)
+
+---
+
+站內相關文章：
+
+- [前端與後端到底在做什麼？](/posts/frontend-backend-explained-with-restaurant)

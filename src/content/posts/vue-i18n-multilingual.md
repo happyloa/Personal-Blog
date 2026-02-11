@@ -1,5 +1,6 @@
 ---
 title: Vue i18n 多語系網站開發實作 — 從設定到維護的經驗分享
+description: 完整教學：使用 Vue i18n 開發多語系網站。從基礎設定、動態內容翻譯到 SEO 考量，分享實務上的開發經驗與避坑指南。
 date: 2022-02-15
 tags: [Vue, 前端]
 category: learning
@@ -223,3 +224,10 @@ HTML 標籤要加上正確的語言屬性：
 ## 結語
 
 多語系開發看起來只是把文字抽出來翻譯，但實際做起來會發現很多細節要注意。提早規劃、統一規範、善用工具，可以省下很多後續維護的麻煩。
+
+---
+
+站內相關文章：
+
+- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition)
+- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development)

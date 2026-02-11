@@ -1,5 +1,6 @@
 ---
 title: API 請求卡住怎麼辦？聊聊 Timeout、Retry 與 Circuit Breaker
+description: 當 API 請求卡住時該怎麼辦？本文深入探討 Timeout、Retry 與 Circuit Breaker 三種提升系統韌性的關鍵模式。
 date: 2026-02-03
 tags: [API, 後端, 系統設計]
 category: tech-deep-dive
@@ -226,3 +227,10 @@ flowchart LR
 這三個模式——Timeout、Retry with Backoff、Circuit Breaker——是建構穩健系統的基本功。雖然一開始實作可能覺得麻煩，但當你的服務在某個第三方 API 掛掉時還能正常運作（至少是優雅降級），你會很慶幸有做這些防護的 😌
 
 希望這篇對你有幫助，下次遇到 API 不穩定的情況，就知道該怎麼處理了！
+
+---
+
+站內相關文章：
+
+- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide)
+- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)

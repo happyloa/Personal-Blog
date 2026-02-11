@@ -1,5 +1,6 @@
 ---
 title: 德恩生命禮儀官網開發心得 — 資訊架構與易用性設計
+description: 分享殯葬服務官網開發經驗。如何透過資訊架構優化與易用性設計，幫助使用者在急需時快速找到關鍵服務資訊。
 date: 2023-02-20
 tags: [WordPress, UI/UX, 專案開發]
 category: project
@@ -91,3 +92,9 @@ Elementor 的好處是可以直接在後台寫 CSS，不需要另外開發佈主
 ---
 
 專案連結：[https://www.200911.com.tw/](https://www.200911.com.tw/)
+
+---
+
+站內相關文章：
+
+- [SEO 優化攻略](/posts/seo-optimization-guide)

@@ -1,5 +1,6 @@
 ---
 title: Figma to Code 工作流程分享 — 從 Design System 到 Vue + TypeScript + Tailwind 元件
+description: 解析從 Figma 設計稿轉化為 Vue + Tailwind 程式碼的高效工作流程，建立 Design System 以確保設計與開發的一致性。
 date: 2023-06-20
 tags: [UI/UX, 前端, 職涯]
 category: career
@@ -265,3 +266,10 @@ Icon 通常用 SVG，照片用 WebP 或 JPG。如果需要響應式圖片，可�
 有了完整的 Design System，搭配 TypeScript 的型別檢查和 Tailwind 的 utility class，可以確保設計和開發的一致性，也讓後續維護更輕鬆。
 
 多跟設計師溝通、熟悉 Figma 的操作、建立好的工作流程，設計到開發的銜接就會越來越順暢。
+
+---
+
+站內相關文章：
+
+- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development)
+- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition)
