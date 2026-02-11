@@ -129,6 +129,19 @@ Content-Type: text/html
 
 這就是**渲染（Rendering）**的過程，也就是「拆箱組裝」。
 
+整個渲染流程可以用這張圖來理解：
+
+```mermaid
+flowchart LR
+    A["HTML"] --> B["DOM 樹"]
+    C["CSS"] --> D["CSSOM"]
+    B --> E["渲染樹\nRender Tree"]
+    D --> E
+    E --> F["計算佈局\nLayout"]
+    F --> G["繪製\nPaint"]
+    G --> H["🖥️ 畫面出現"]
+```
+
 ### 瀏覽器的組裝流程
 
 #### 1. 解析 HTML → 建立 DOM 樹

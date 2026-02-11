@@ -203,10 +203,14 @@ async function processPayment(data) {
 
 在真實世界的應用中，這三個機制通常會一起使用，形成層層防護：
 
-```
-請求 → Timeout（單次請求不會無限等待）
-     → Retry with Backoff（暫時性失敗可以自動恢復）
-     → Circuit Breaker（持續性故障時快速失敗，保護系統）
+```mermaid
+flowchart LR
+    A["發出請求"] --> B["Timeout\n單次請求不會無限等待"]
+    B -->|"超時"| C["Retry with Backoff\n暫時性失敗自動恢復"]
+    C -->|"連續失敗"| D["Circuit Breaker\n持續故障時快速失敗"]
+    B -->|"成功"| E["✅ 回傳結果"]
+    C -->|"重試成功"| E
+    D -->|"熔斷開啟"| F["⚡ 快速失敗\n保護系統"]
 ```
 
 如果你用的是 Node.js，可以考慮使用現成的套件：

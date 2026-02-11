@@ -85,6 +85,26 @@ DNS 的全名是 **Domain Name System**（域名系統）。它做的事情很�
 
 最後，答案一路傳回來給你的瀏覽器。整個過程通常在**幾十毫秒**內就完成了，你完全感覺不到。
 
+用圖來看整個流程：
+
+```mermaid
+sequenceDiagram
+    participant 你的瀏覽器
+    participant 遞迴DNS伺服器
+    participant 根域名伺服器
+    participant 頂級域名伺服器
+    participant 權威域名伺服器
+
+    你的瀏覽器->>遞迴DNS伺服器: www.google.com 的 IP 是什麼？
+    遞迴DNS伺服器->>根域名伺服器: .com 要去哪查？
+    根域名伺服器-->>遞迴DNS伺服器: 去問 .com 頂級域名伺服器
+    遞迴DNS伺服器->>頂級域名伺服器: google.com 要去哪查？
+    頂級域名伺服器-->>遞迴DNS伺服器: 去問 google.com 的權威伺服器
+    遞迴DNS伺服器->>權威域名伺服器: www.google.com 的 IP？
+    權威域名伺服器-->>遞迴DNS伺服器: 142.250.185.78
+    遞迴DNS伺服器-->>你的瀏覽器: 142.250.185.78
+```
+
 ## 常見的 DNS 記錄類型
 
 DNS 不只能翻譯 IP 位址，它其實像一本功能很多的通訊錄：

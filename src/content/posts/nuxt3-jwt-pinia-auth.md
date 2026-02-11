@@ -19,6 +19,21 @@ JWT（JSON Web Token）是一種用來驗證使用者身份的機制。流程大
 
 JWT 的好處是後端不用維護 session，每個請求都是獨立的，比較好做水平擴展。
 
+```mermaid
+sequenceDiagram
+    participant 使用者
+    participant 前端Pinia
+    participant 後端API
+
+    使用者->>前端Pinia: 輸入帳號密碼
+    前端Pinia->>後端API: POST /api/auth/login
+    後端API-->>前端Pinia: 回傳 JWT Token
+    前端Pinia->>前端Pinia: 存入 Cookie + Store
+    使用者->>前端Pinia: 瀏覽需要登入的頁面
+    前端Pinia->>後端API: GET /api/data（帶上 Token）
+    後端API-->>前端Pinia: 回傳資料
+```
+
 ## 前端需要處理什麼
 
 前端在 JWT 驗證流程中要處理的事情：
