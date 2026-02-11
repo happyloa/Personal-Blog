@@ -1,6 +1,6 @@
 ---
 title: DNS 是什麼？— 用門牌號碼來理解網路世界的地址系統
-date: 2026-02-10
+date: 2026-02-07
 tags: [DNS, 網路, 新手入門]
 category: web-basics
 ---

@@ -1,6 +1,6 @@
 ---
 title: Git 版本控制入門 — 用遊戲存檔來理解版本管理
-date: 2026-02-07
+date: 2026-02-08
 tags: [Git, 工具, 新手入門]
 category: web-basics
 ---
