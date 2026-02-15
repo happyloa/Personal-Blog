@@ -2,7 +2,7 @@
 title: HTTP 方法與狀態碼 — 讓 API 說人話
 description: 除了 GET 和 POST，你還知道 PUT、PATCH、DELETE 嗎？200 OK、404 Not Found 以外的狀態碼又代表什麼？這篇一次搞懂。
 date: 2026-02-13
-tags: [敺垢, 後端, RESTful]
+tags: [後端, RESTful]
 category: web-basics
 ---
 
@@ -99,5 +99,3 @@ category: web-basics
 
 - [DNS 深度解析](/posts/dns-deep-dive)
 - [RESTful API 設計指南](/posts/restful-api-design)
-
-
