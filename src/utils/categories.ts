@@ -37,6 +37,12 @@ export const categories: Category[] = [
     description: "用生活化比喻，帶你輕鬆搞懂網頁與網路的核心觀念",
     icon: "🌐",
   },
+  {
+    slug: "frontend",
+    name: "前端開發",
+    description: "現代前端技術、框架應用、CSS 技巧",
+    icon: "🎨",
+  },
 ];
 
 export const categoryMap = new Map(categories.map((c) => [c.slug, c]));
@@ -50,4 +56,5 @@ export type CategorySlug =
   | "tech-deep-dive"
   | "career"
   | "project"
-  | "web-basics";
+  | "web-basics"
+  | "frontend";
