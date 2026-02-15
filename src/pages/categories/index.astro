@@ -16,7 +16,7 @@ posts.forEach((post) => {
 <BaseLayout
   title="文章分類 — Aaron 的部落格"
   description="依照主題分類瀏覽所有文章">
-  <div class="mb-8">
+  <section class="mb-8">
     <a
       href="/"
       class="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-sky-300 transition-colors mb-4">
@@ -24,9 +24,9 @@ posts.forEach((post) => {
     </a>
     <h1 class="text-2xl font-bold text-slate-100 mb-2">文章分類</h1>
     <p class="text-slate-400">選擇你有興趣的主題開始閱讀</p>
-  </div>
+  </section>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     {
       categories.map((category) => (
         <a
@@ -43,5 +43,5 @@ posts.forEach((post) => {
         </a>
       ))
     }
-  </div>
+  </section>
 </BaseLayout>
