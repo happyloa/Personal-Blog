@@ -3,7 +3,7 @@ title: 前端測試實戰 — 為什麼你需要寫測試？(以 Vitest 為例)
 description: 為什麼前端需要寫測試？本文分享導入 Vitest 的實戰經驗與測試金字塔觀念，助你寫出更穩健、好維護的程式碼。
 date: 2025-09-20
 tags: [Testing, Vue, 前端]
-category: learning
+category: frontend
 ---
 
 以前在接案或是趕專案的時候，常常覺得「寫測試」是一件很奢侈的事。功能都寫不完了，哪有時間寫測試？

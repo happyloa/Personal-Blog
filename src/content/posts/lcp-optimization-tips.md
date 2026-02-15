@@ -3,7 +3,7 @@ title: 網站 LCP 優化實戰 — 提升 25% 載入速度的經驗分享
 description: 深入解析 LCP 優化的實戰技巧。分享如何診斷效能瓶頸、優化圖片載入與伺服器回應，成功提升 25% 網站載入速度的經驗。
 date: 2025-02-10
 tags: [效能優化, 前端]
-category: tech-deep-dive
+category: frontend
 ---
 
 最近在工作上花了不少時間在網站效能優化，其中 LCP（Largest Contentful Paint）是最常被拿來當作指標的項目之一。這篇來分享一下實際優化 LCP 的經驗，以及一些常見的改善手法。

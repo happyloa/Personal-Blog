@@ -3,7 +3,7 @@ title: 瀏覽器是怎麼顯示網頁的？— 從輸入網址到看見畫面的
 description: 當你按下 Enter 後的那一秒鐘發生了什麼事？從 DNS 查詢、建立連線到 DOM 渲染，帶你走一遍網頁顯示的完整旅程。
 date: 2026-02-10
 tags: [瀏覽器, 網路, 新手入門]
-category: web-basics
+category: frontend
 ---
 
 每天你打開瀏覽器、輸入網址、按下 Enter，不到一秒鐘畫面就出現了。但你有沒有想過，這短短一秒鐘裡面到底發生了什麼事？
