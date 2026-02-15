@@ -4,6 +4,11 @@ description: 完整教學：如何在 Nuxt 3 專案中實作 JWT 身份驗證，
 date: 2025-03-05
 tags: [Nuxt, Vue]
 category: learning
+---
+
+最近幾個專案都有碰到會員系統的需求，JWT 驗證機制用了好幾次，這篇來整理一下在 Nuxt 3 專案中實作 JWT 驗證的心得。
+
+## JWT 是什麼
 
 JWT（JSON Web Token）是一種用來驗證使用者身份的機制。流程大概是這樣：
 
