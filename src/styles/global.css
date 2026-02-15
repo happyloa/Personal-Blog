@@ -1,12 +1,22 @@
-@import "@fontsource-variable/noto-sans-tc/wght.css";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 @import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --font-sans:
-    "Noto Sans TC Variable", Noto Sans TC, ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Outfit Variable", Outfit, ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, monospace;
+
+  --color-obsidian: #0b0c15;
+  --color-obsidian-light: #151725;
+  --color-primary-glow: #7c3aed;
+  --color-secondary-glow: #22d3ee;
 }
 
 /*
@@ -32,52 +42,108 @@
 }
 
 body {
-  font-family:
-    "Noto Sans TC Variable",
-    "Noto Sans TC",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  @apply bg-slate-950 text-slate-50 antialiased;
+  font-family: var(--font-sans);
+  background-color: var(--color-obsidian);
+  background-image:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(124, 58, 237, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(34, 211, 238, 0.08),
+      transparent 25%
+    );
+  @apply text-slate-200 antialiased selection:bg-violet-500/30 selection:text-white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  @apply font-bold tracking-tight text-white;
 }
 
 a {
-  @apply text-sky-300 underline-offset-4 hover:text-sky-200 hover:underline;
+  @apply text-sky-400 decoration-sky-400/30 underline-offset-4 transition-all duration-300 hover:text-sky-300 hover:decoration-sky-300;
 }
 
+/* Glassmorphism Utilities */
+.glass-panel {
+  @apply bg-white/[0.03] backdrop-blur-md border border-white/[0.05] shadow-xl;
+}
+
+.glass-panel-hover {
+  @apply hover:bg-white/[0.06] hover:border-white/[0.1] hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-300;
+}
+
+/* Typography Overrides for Premium Feel */
 .prose {
   @apply prose-invert prose-slate max-w-none;
+  /* Increase base readability */
+  --tw-prose-body: #94a3b8;
+  --tw-prose-headings: #f8fafc;
+  --tw-prose-links: #38bdf8;
+  --tw-prose-code: #e2e8f0;
+  --tw-prose-quotes: #cbd5e1;
 }
 
-.prose pre {
-  @apply bg-slate-900/80 border border-white/10 shadow-inner;
+.prose p {
+  @apply leading-8 text-lg/8 text-slate-300 font-light tracking-wide;
+}
+
+.prose h2 {
+  @apply mt-16 mb-6 text-3xl;
+}
+
+.prose h3 {
+  @apply mt-12 mb-4 text-2xl;
 }
 
 .prose code {
-  @apply text-sky-200;
+  font-family: var(--font-mono);
+  @apply bg-slate-800/50 px-1.5 py-0.5 rounded-md text-[0.9em] font-medium border border-white/5;
 }
 
-/* 表格樣式 */
+.prose pre {
+  @apply bg-[#0D1117] border border-white/10 shadow-2xl rounded-xl my-8;
+}
+
+.prose pre code {
+  @apply bg-transparent border-none p-0;
+}
+
+/* Custom Table Styles */
+.table-wrapper {
+  @apply my-8 overflow-hidden rounded-xl border border-white/10 shadow-lg bg-white/[0.02];
+}
+
 .prose table {
-  @apply my-0;
+  @apply my-0 w-full;
 }
 
 .prose thead {
-  @apply bg-slate-800/50;
+  @apply bg-white/[0.04] border-b border-white/10;
 }
 
 .prose th {
-  @apply px-4 py-3 text-left font-semibold text-slate-200;
+  @apply px-6 py-4 text-left text-sm font-semibold text-white tracking-wider uppercase;
 }
 
 .prose td {
-  @apply px-4 py-3;
+  @apply px-6 py-4 text-sm text-slate-300 border-b border-white/5;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
 }
 
 .prose tbody tr {
-  @apply border-b border-slate-700/50 transition-colors hover:bg-slate-800/30;
+  @apply transition-colors hover:bg-white/[0.02];
 }
 
 /* 手機表格 RWD */
@@ -92,16 +158,35 @@ a {
   }
 }
 
+/* Tags */
 .tag-pill {
-  @apply inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-sky-100 ring-1 ring-white/15 transition-colors hover:bg-white/15 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400/70;
+  font-family: var(--font-mono);
+  @apply inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3.5 py-1 text-xs text-slate-300 ring-1 ring-white/10 transition-all duration-300 hover:bg-white/10 hover:text-white hover:ring-sky-400/50 hover:shadow-[0_0_15px_-3px_rgba(56,189,248,0.3)];
 }
 
 .skip-link {
-  @apply sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-sky-900 focus:text-white focus:shadow-lg;
+  @apply sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-6 focus:left-6 focus:px-6 focus:py-3 focus:rounded-xl focus:bg-violet-600 focus:text-white focus:shadow-2xl focus:font-bold;
 }
 
-/* 自訂捲軸 */
+/* Scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(71 85 105 / 0.6) transparent; /* slate-600/60 */
+  scrollbar-color: rgba(148, 163, 184, 0.2) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.4);
 }

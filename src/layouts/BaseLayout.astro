@@ -13,7 +13,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -23,7 +23,7 @@ const currentYear = new Date().getFullYear();
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#0B0C15" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <link
@@ -49,52 +49,57 @@ const currentYear = new Date().getFullYear();
 
     <ClientRouter />
   </head>
-  <body class="min-h-screen bg-slate-950 text-slate-50">
+  <body
+    class="min-h-screen flex flex-col relative overflow-x-hidden selection:bg-violet-500/30">
     <a class="skip-link" href="#main-content">跳到主要內容</a>
-    <div class="relative isolate overflow-hidden">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 -z-10 pointer-events-none">
       <div
-        class="absolute inset-0 -z-10 opacity-40"
-        aria-hidden="true"
-        style="background: radial-gradient(circle at 20% 20%, #7c3aed22, transparent 35%), radial-gradient(circle at 80% 0%, #22d3ee22, transparent 30%), radial-gradient(circle at 70% 80%, #a855f722, transparent 35%);">
+        class="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-[128px] mix-blend-screen opacity-50 animate-pulse">
       </div>
-      <header class="max-w-5xl mx-auto px-3 md:px-6 py-10 flex flex-col gap-6">
-        <a href="/" class="inline-flex items-center gap-3 group">
+      <div
+        class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/20 rounded-full blur-[128px] mix-blend-screen opacity-50 animate-pulse delay-1000">
+      </div>
+    </div>
+
+    <header
+      class="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 md:px-6 mb-12">
+      <div
+        class="glass-panel rounded-2xl px-6 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
           <div
-            class="h-11 w-11 rounded-2xl bg-linear-to-br from-sky-400 to-violet-500 flex items-center justify-center text-xl font-bold shadow-lg shadow-violet-500/30">
-            A
+            class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/20 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-violet-500/40">
+            <span class="font-display font-bold text-xl">A</span>
+            <div class="absolute inset-0 rounded-xl ring-1 ring-white/20"></div>
           </div>
-          <div>
-            <p class="text-lg font-semibold leading-tight text-white">
-              Aaron 的部落格
-            </p>
-            <p class="text-sm text-slate-300">
-              用 Astro + Tailwind 重啟的新基地
-            </p>
+          <div class="hidden sm:block">
+            <h1
+              class="font-display text-lg font-bold text-white leading-none tracking-tight group-hover:text-violet-200 transition-colors">
+              Aaron's Blog
+            </h1>
           </div>
-          <svg
-            class="size-5 text-slate-400 transition-transform duration-200 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.6"
-            viewBox="0 0 24 24"
-            aria-hidden="true">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 5l7 7-7 7"></path>
-          </svg>
         </a>
-        <nav class="flex items-center justify-between" aria-label="主要導覽">
-          <div class="flex gap-4 text-sm text-slate-300">
-            <a href="/" class="hover:text-white transition">最新文章</a>
-            <a href="/tags/" class="hover:text-white transition">標籤索引</a>
+
+        <nav class="flex items-center gap-6" aria-label="主要導覽">
+          <div class="hidden md:flex gap-6 text-sm font-medium text-slate-400">
+            <a href="/" class="hover:text-white transition-colors">最新文章</a>
+            <a href="/categories/" class="hover:text-white transition-colors"
+              >分類專欄</a
+            >
+            <a href="/tags/" class="hover:text-white transition-colors"
+              >標籤索引</a
+            >
           </div>
-          <div class="flex items-center gap-3">
+
+          <div class="h-5 w-px bg-white/10 hidden md:block"></div>
+
+          <div class="flex items-center gap-4">
             <a
               href="https://github.com/happyloa"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-slate-400 hover:text-white transition"
+              class="text-slate-400 hover:text-white transition-colors p-1"
               aria-label="GitHub">
               <svg
                 class="size-5"
@@ -107,12 +112,11 @@ const currentYear = new Date().getFullYear();
                   clip-rule="evenodd"></path>
               </svg>
             </a>
-
             <a
               href="https://www.cake.me/aaron-yumin"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-slate-400 hover:text-white transition"
+              class="text-slate-400 hover:text-white transition-colors p-1"
               aria-label="CakeResume">
               <svg
                 class="size-5"
@@ -126,8 +130,8 @@ const currentYear = new Date().getFullYear();
             </a>
             <a
               href="/rss.xml"
-              class="text-slate-400 hover:text-white transition"
-              aria-label="RSS 訂閱">
+              class="text-slate-400 hover:text-white transition-colors p-1"
+              aria-label="RSS">
               <svg
                 class="size-5"
                 fill="currentColor"
@@ -140,71 +144,114 @@ const currentYear = new Date().getFullYear();
             </a>
           </div>
         </nav>
-      </header>
-      <main
-        id="main-content"
-        class="max-w-5xl mx-auto px-3 md:px-6 pb-16"
-        tabindex="-1">
-        <slot />
-      </main>
-      <footer
-        class="max-w-5xl mx-auto px-3 md:px-6 pb-10 text-sm text-slate-400 border-t border-white/5 pt-8">
-        <div class="grid gap-8 sm:grid-cols-3 mb-8">
-          <nav>
-            <h3 class="font-semibold text-white mb-3">網站導覽</h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="/" class="hover:text-sky-300 transition">首頁</a>
-              </li>
-              <li>
-                <a href="/tags/" class="hover:text-sky-300 transition"
-                  >標籤索引</a
-                >
-              </li>
-              <li>
-                <a href="/rss.xml" class="hover:text-sky-300 transition"
-                  >RSS 訂閱</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <nav>
-            <h3 class="font-semibold text-white mb-3">社群連結</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="https://github.com/happyloa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hover:text-sky-300 transition">GitHub</a
-                >
-              </li>
+      </div>
+    </header>
 
-              <li>
-                <a
-                  href="https://www.cake.me/aaron-yumin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hover:text-sky-300 transition">CakeResume</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <div>
-            <h3 class="font-semibold text-white mb-3">關於我</h3>
-            <p class="text-slate-400 leading-relaxed">
-              謝宗佑 — 具4年經驗前端工程師，專精 Vue (Nuxt) / React (Next.js)
-              現代化架構與 Node.js 後端整合，擁有 Design-to-Code 跨域協作與
-              DevOps (Docker/CI/CD) 部署實戰經驗。曾主導 50+ 專案交付，具備
-              TOEIC 895 英語跨國協作能力。
+    <main
+      id="main-content"
+      class="flex-1 w-full max-w-5xl mx-auto px-3 md:px-6 pb-20"
+      tabindex="-1">
+      <slot />
+    </main>
+
+    <footer
+      class="mt-auto border-t border-white/5 bg-slate-950/50 backdrop-blur-sm">
+      <div class="max-w-5xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <!-- Brand -->
+          <div class="md:col-span-4 space-y-4">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                A
+              </div>
+              <span class="font-display text-lg font-bold text-white"
+                >Aaron's Blog</span
+              >
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              專注於現代前端技術、系統架構與開發心得分享。
+              <br />
+              Powered by Astro & Tailwind CSS.
             </p>
           </div>
+
+          <!-- Links -->
+          <div
+            class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+            <div>
+              <h3 class="font-semibold text-white mb-4">網站導覽</h3>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="/"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >最新文章</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/categories/"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >分類專欄</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/tags/"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >標籤索引</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-4">聯絡我</h3>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="https://github.com/happyloa"
+                    target="_blank"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >GitHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.cake.me/aaron-yumin"
+                    target="_blank"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >CakeResume</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/rss.xml"
+                    class="text-slate-400 hover:text-sky-300 transition-colors"
+                    >RSS 訂閱</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-3">關於我</h3>
+              <p class="text-slate-400 leading-relaxed">
+                謝宗佑 — 具4年經驗前端工程師，專精 Vue (Nuxt) / React (Next.js)
+                現代化架構與 Node.js 後端整合，擁有 Design-to-Code 跨域協作與
+                DevOps (Docker/CI/CD) 部署實戰經驗。曾主導 50+ 專案交付，具備
+                TOEIC 895 英語跨國協作能力。
+              </p>
+            </div>
+          </div>
         </div>
-        <p class="pt-6 border-t border-white/5 text-center">
-          © {currentYear} Aaron 的部落格. Powered by Astro & Tailwind CSS
-        </p>
-      </footer>
-    </div>
+
+        <div
+          class="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <p>© {currentYear} Aaron's Blog. All rights reserved.</p>
+          <p>Designed with ❤️ in Taiwan</p>
+        </div>
+      </div>
+    </footer>
 
     <script is:inline type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
