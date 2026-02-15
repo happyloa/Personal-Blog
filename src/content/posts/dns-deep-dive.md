@@ -103,4 +103,4 @@ DNS 是網路世界的隱形功臣。理解它的運作原理，不僅能幫助�
 站內相關文章：
 
 - [網路是怎麼運作的？](/posts/how-the-internet-works)
-- [HTTP 方法與狀態碼](/posts/http-methods-status-codes)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
