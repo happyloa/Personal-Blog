@@ -1,4 +1,4 @@
----
+﻿---
 title: 前端與後端到底在做什麼？— 用餐廳來比喻網站架構
 description: 前端是餐廳外場，後端是廚房，API 是點菜單。用最生動的餐廳比喻，帶你秒懂網站的前後端架構與分工。
 date: 2026-02-09
@@ -204,3 +204,5 @@ category: web-basics
 
 - [網路是怎麼運作的？](/posts/how-the-internet-works)
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+
+

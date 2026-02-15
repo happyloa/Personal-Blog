@@ -1,4 +1,4 @@
----
+﻿---
 title: 網路是怎麼運作的？— 從海底電纜到你的螢幕
 description: 全球 95% 的網路流量靠海底電纜傳輸！深入淺出介紹 ISP、伺服器、Request/Response 等網路基礎設施運作原理。
 date: 2026-02-11
@@ -267,3 +267,5 @@ Content-Type: text/html
 - [Submarine Cable Map — 全球海底電纜地圖](https://www.submarinecablemap.com/)
 - [How Does the Internet Work? — MDN](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work)
 - [Cloudflare — 什麼是 HTTPS？](https://www.cloudflare.com/zh-tw/learning/ssl/what-is-https/)
+
+

@@ -1,9 +1,9 @@
----
+﻿---
 title: HTML 與 CSS 入門 — 用 Word 文件來比喻網頁的結構與樣式
 description: 用最直覺的 Microsoft Word 比喻，帶你一次搞懂 HTML 的結構與 CSS 的樣式設計，新手入門網頁開發的最佳指南。
 date: 2026-02-06
 tags: [HTML, CSS, 新手入門]
-category: frontend
+category: web-basics
 ---
 
 你有沒有用過 Microsoft Word？打開 Word，你可以打字、設定標題、調整字體大小和顏色、插入圖片、排版文件。
@@ -252,3 +252,5 @@ CSS 的基礎其實不難，就是「選擇器 + 屬性 + 值」的組合。建�
 
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
 - [用 CSS 隱藏網頁元素的六種方法](/posts/three-ways-to-hide-a-certain-element-using-css)
+
+

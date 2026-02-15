@@ -1,9 +1,9 @@
----
+﻿---
 title: 用 AI 開發全端天氣 App？六角 Vibe Coding 體驗營心得分享
 description: 參加六角 Vibe Coding 體驗營心得：運用 AI 工具加速開發，串接中央氣象署 API 打造全端天氣預報 App 的實戰經驗。
 date: 2025-11-27 15:07:00
-tags: [六角學院, 學習心得, 前端]
-category: frontend
+tags: [六角學院, 學習心得]
+category: project
 ---
 
 最近很多人在討論用 AI 加速開發流程，我也跟風參加了六角學院的「[**Vibe Coding 公益程式體驗營**](https://www.hexschool.com/2025/10/03/2025-10-03-vide-coding-camp/)」。這次課程讓我學到如何用 AI 工具快速打造 MVP，同時跟同學們交流也獲得不少靈感。來記錄一下這次的體驗。

@@ -1,14 +1,9 @@
----
+﻿---
 title: 你可能還不知道的現代 CSS 功能 — :has(), @container 與 Nesting
 description: CSS 進化得太快了！這篇文章介紹三個改變遊戲規則的新功能，讓你的 CSS 寫法更強大、更簡潔。
 date: 2026-02-18
-tags: [CSS, 前端, 新技術]
-category: frontend
----
-
-CSS 在這幾年彷彿開了外掛，推出了許多大家敲碗已久的功能。如果你還停留在 SASS/SCSS 的時代，是時候來看看原生 CSS 現在有多強大了。
-
-## 1. 原生巢狀 (Nesting)
+tags: [CSS, 新技術]
+category: learning
 
 以前我們一定要用 SCSS 才能這樣寫：
 

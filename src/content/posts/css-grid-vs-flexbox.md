@@ -1,14 +1,9 @@
----
+﻿---
 title: CSS Grid vs Flexbox — 到底該用哪一個？
 description: 還分不清楚什麼時候該用 Grid，什麼時候該用 Flexbox 嗎？這篇文章用最直觀的圖解和案例，幫你釐清兩者的最佳使用時機。
 date: 2026-02-17
-tags: [CSS, 前端, 排版]
-category: frontend
----
-
-「這個版面要用 Grid 還是 Flexbox？」這恐怕是每個前端新手（甚至老手）都曾經糾結過的問題。
-
-兩者都能做排版，很多時候也能互換。但它們的設計初衷其實是不同的。
+tags: [CSS, 排版]
+category: learning
 
 ## 根本差異：一維 vs 二維
 

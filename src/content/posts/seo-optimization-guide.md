@@ -1,9 +1,9 @@
----
+﻿---
 title: 網站 SEO 優化攻略 — 從技術面提升搜尋排名的實戰經驗（2026 更新版）
 description: 2026 年最新 SEO 攻略：探討 AI Overviews 帶來的搜尋生態劇變，以及如何透過技術優化與 E-E-A-T 策略提升排名。
 date: 2026-01-30
 tags: [SEO, 前端]
-category: frontend
+category: tech-deep-dive
 ---
 
 之前在啟程教育學院工作的時候，有一段時間專注在網站的 SEO 優化。當時成功讓 5 組商業關鍵字在 4 週內攻佔搜尋排名前 3，網站的自然流量也成長了 120%。這篇來分享一下從技術面做 SEO 優化的經驗，並加入 2025-2026 年的最新趨勢。
@@ -117,3 +117,5 @@ SEO 正在經歷巨大變革，但核心原則沒變：**提供有價值的內�
 
 - [LCP 優化實戰](/posts/lcp-optimization-tips)
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+
+

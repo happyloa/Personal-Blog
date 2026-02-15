@@ -1,9 +1,9 @@
----
+﻿---
 title: Tailwind CSS v4 來了！速度更快、體積更小、寫法更自由
 description: Tailwind v4 正式發布，帶來了效能的飛躍與更靈活的配置。不用再煩惱 tailwind.config.js，直接在 CSS 變數裡定義你的 Design System。
 date: 2026-02-19
-tags: [CSS, Tailwind, 前端]
-category: frontend
+tags: [CSS, Tailwind]
+category: learning
 ---
 
 Tailwind CSS v4 是近年來最大的版本更新。它不再只是「好用的 Utility-First CSS」，而是一個經過重新設計的 CSS 引擎。

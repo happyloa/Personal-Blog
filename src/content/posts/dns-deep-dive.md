@@ -1,4 +1,4 @@
----
+﻿---
 title: DNS 深度解析 — 網路世界的地址簿與導航系統
 description: 深入探討 DNS 運作原理，從遞迴查詢到各類紀錄 (A, CNAME, MX)，以及當 DNS 故障時該如何排查。
 date: 2026-02-12
@@ -104,3 +104,5 @@ DNS 是網路世界的隱形功臣。理解它的運作原理，不僅能幫助�
 
 - [網路是怎麼運作的？](/posts/how-the-internet-works)
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+
+
