@@ -14,7 +14,6 @@ const posts = defineCollection({
         "career",
         "project",
         "web-basics",
-        "frontend",
       ]),
       cover: image().optional(),
       draft: z.boolean().default(false),
