@@ -105,11 +105,23 @@ React 把所有副作用都用 `useEffect` 來處理，一開始會覺得有點�
 
 很多從 Vue 轉過來的人（包含我）最容易在 `useEffect` 踩坑，因為我們習慣了 `onMounted` 這種「時間點」的思考模式，但 React 的 Hooks 是「狀態同步」的思考模式。
 
-| Vue (時間點思維) | React (同步思維)            | 常見心智模型落差                                                    |
-| ---------------- | --------------------------- | ------------------------------------------------------------------- |
-| `onMounted`      | `useEffect(..., [])`        | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）  |
-| `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；UseEffect 在 render 完一定會至少跑一次 |
-| `onUnmounted`    | `useEffect` return function | 容易忘記 cleanup，導致 event listener 重複綁定                      |
+**1. 初始化 (Mounting)**
+
+- **Vue**: `onMounted`
+- **React**: `useEffect(..., [])`
+- **心智模型落差**: Vue 只跑一次；但 React 在 StrictMode 開發環境下會故意跑兩次（這是正常的！）。
+
+**2. 監聽 (Watching)**
+
+- **Vue**: `watch(xx)`
+- **React**: `useEffect(..., [xx])`
+- **心智模型落差**: Vue 的 watch 預設是 lazy 的（資料變才跑）；UseEffect 在 render 完一定會至少跑一次。
+
+**3. 銷毀 (Unmounting)**
+
+- **Vue**: `onUnmounted`
+- **React**: `useEffect` 的 return function
+- **心智模型落差**: 在 React 容易忘記寫 cleanup function，導致 event listener 重複綁定。
 
 **最大的陷阱：Stale Closure**
 
