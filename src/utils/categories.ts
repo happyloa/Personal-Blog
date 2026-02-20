@@ -37,6 +37,12 @@ export const categories: Category[] = [
     description: "用生活化比喻，帶你輕鬆搞懂網頁與網路的核心觀念",
     icon: "🌐",
   },
+  {
+    slug: "mindset",
+    name: "心理",
+    description: "心理調適、軟實力與個人成長",
+    icon: "🫶",
+  },
 ];
 
 export const categoryMap = new Map(categories.map((c) => [c.slug, c]));
@@ -50,4 +56,5 @@ export type CategorySlug =
   | "tech-deep-dive"
   | "career"
   | "project"
-  | "web-basics";
+  | "web-basics"
+  | "mindset";
