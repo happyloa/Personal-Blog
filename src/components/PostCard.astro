@@ -2,7 +2,6 @@
 import type { CollectionEntry } from "astro:content";
 import { toPlainTextExcerpt } from "../utils/summary";
 import { getPostDescription } from "../utils/posts";
-import { slugifyTag } from "../utils/tags";
 import { formatDate, toISODate } from "../utils/date";
 
 interface Props {
@@ -18,22 +17,37 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
 ---
 
 <article
-  class="group relative flex flex-col justify-between glass-panel glass-panel-hover rounded-2xl p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
+  class="group relative flex flex-col justify-between glass-panel glass-panel-hover rounded-2xl p-6 md:p-8 transition-all duration-500 overflow-hidden">
+  <!-- Subtle gradient border overlay -->
   <div
-    class="absolute inset-0 z-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-2xl pointer-events-none">
+    class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 group-hover:ring-primary/40 transition-all duration-500 pointer-events-none">
+  </div>
+
+  <!-- Animated hover glow background -->
+  <div
+    class="absolute inset-0 z-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl pointer-events-none">
+  </div>
+
+  <!-- Premium inner light reflection -->
+  <div
+    class="absolute inset-0 z-0 bg-gradient-to-b from-white/[0.03] to-transparent h-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-t-2xl">
   </div>
 
   <div class="relative z-10">
-    <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 mb-4">
-      <time datetime={isoDate} class="font-mono">
+    <div class="flex flex-wrap items-center gap-3 mb-5">
+      <time
+        datetime={isoDate}
+        class="font-mono text-[11px] font-medium tracking-widest uppercase px-3 py-1 rounded-full bg-white/5 border border-white/5 text-slate-400 group-hover:text-primary-glow group-hover:border-primary/20 transition-colors">
         {formattedDate}
       </time>
-      <div class="h-1 w-1 rounded-full bg-slate-600"></div>
+      <div class="h-1 w-1 rounded-full bg-white/20"></div>
       {
         post.data.tags.length > 0 && (
           <div class="flex flex-wrap gap-2">
             {post.data.tags.slice(0, 3).map((tag) => (
-              <span class="text-violet-300">#{tag}</span>
+              <span class="text-[13px] font-medium text-secondary-glow/80 group-hover:text-secondary-glow transition-colors">
+                #{tag}
+              </span>
             ))}
           </div>
         )
@@ -41,10 +55,8 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
     </div>
 
     <h2
-      class="font-display text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-violet-200 transition-colors">
-      <a
-        href={`/posts/${post.slug}/`}
-        class="focus:outline-none focus:underline underline-offset-4 decoration-violet-500/50">
+      class="font-display text-2xl md:text-[1.75rem] font-bold text-slate-100 mb-4 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary-glow transition-all duration-300 leading-snug">
+      <a href={`/posts/${post.slug}/`} class="focus:outline-none">
         <span class="absolute inset-0" aria-hidden="true"></span>
         {post.data.title}
       </a>
@@ -52,7 +64,7 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
 
     {
       summary && (
-        <p class="text-slate-400 text-sm leading-7 line-clamp-3 mb-4">
+        <p class="text-slate-400 text-[15px] leading-relaxed line-clamp-2 md:line-clamp-3 mb-6 relative z-10 font-light mix-blend-plus-lighter">
           {summary}
         </p>
       )
@@ -60,18 +72,23 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
   </div>
 
   <div
-    class="relative z-10 mt-4 flex items-center text-sm font-medium text-violet-300 transition-colors group-hover:text-violet-200">
-    閱讀文章
+    class="relative z-10 mt-auto pt-4 flex items-center text-sm font-semibold text-slate-400 transition-colors group-hover:text-primary-glow border-t border-white/5 border-dashed">
+    <span class="relative">
+      Read article
+      <span
+        class="absolute -bottom-1 left-0 w-0 h-px bg-primary-glow transition-all duration-300 group-hover:w-full"
+      ></span>
+    </span>
     <svg
-      class="ml-2 size-4 transition-transform group-hover:translate-x-1"
+      class="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1.5"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      stroke-width="2">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M5 12h14"></path>
+      <path d="M12 5l7 7-7 7"></path>
     </svg>
   </div>
 </article>

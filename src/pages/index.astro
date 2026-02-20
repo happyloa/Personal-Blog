@@ -36,33 +36,49 @@ posts.forEach((post) => {
 <BaseLayout
   title="Aaron 的部落格"
   description="用 Astro 打造、部署到 Cloudflare Pages 的全新部落格">
-  <div class="space-y-16">
-    <!-- Intro / Bio (Mini) -->
-    <section>
+  <div class="space-y-24">
+    <!-- Hero Section -->
+    <section class="relative pt-10 pb-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary-glow text-xs font-mono mb-8 backdrop-blur-sm shadow-[0_0_15px_rgba(139,92,246,0.15)] animate-pulse-slow cursor-default">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        Welcome to the Next Generation
+      </div>
+      
       <h1
-        class="font-display text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        class="font-display text-5xl md:text-7xl font-extrabold text-white mb-8 leading-[1.1] tracking-tight relative z-10">
         探索 <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400"
+          class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary relative shrink-0"
           >前端技術</span
-        > 與 <br class="hidden sm:block" />
-        <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400"
-          >現代化網站架構</span
-        > 的旅程
+        > <br class="hidden sm:block" />與
+        <span class="relative inline-block mt-2">
+          <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-secondary to-fuchsia-500">現代化網站架構</span>
+          <!-- Title Glow -->
+          <span class="absolute inset-x-0 bottom-0 h-[40%] bg-fuchsia-500/20 blur-[20px] -z-10"></span>
+        </span>
+        的旅程
       </h1>
-      <p class="text-lg text-slate-400 max-w-2xl leading-relaxed">
+      <p class="text-xl text-slate-400 max-w-2xl leading-relaxed font-light">
         這裡是我記錄技術筆記的地方。從 Vue / React 框架實戰，到 Design System
         建立與效能優化，分享那些在開發路上踩過的坑與學到的事。
       </p>
     </section>
 
     <!-- 專欄導航 -->
-    <section>
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="font-display text-2xl font-bold text-white">專欄導航</h2>
+    <section class="relative z-10">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+            <span class="w-1.5 h-6 bg-primary rounded-full shadow-[0_0_10px_theme(colors.primary)]"></span>
+            專欄導航
+          </h2>
+          <p class="text-slate-500 mt-2 ml-4">探索不同領域的技術文章</p>
+        </div>
         <a
           href="/categories/"
-          class="group inline-flex items-center gap-1 text-sm font-medium text-slate-400 hover:text-violet-300 transition-colors">
+          class="group inline-flex items-center gap-1.5 text-sm font-medium text-slate-400 hover:text-primary-glow transition-colors px-4 py-2 rounded-full bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.05] hover:border-primary/30">
           查看全部
           <svg
             class="size-4 transition-transform group-hover:translate-x-1"
@@ -77,21 +93,27 @@ posts.forEach((post) => {
           </svg>
         </a>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5">
         {
           categories.map((category) => (
             <a
               href={`/categories/${category.slug}/`}
-              class="group relative flex flex-col items-center justify-center p-6 rounded-2xl glass-panel glass-panel-hover transition-transform hover:-translate-y-1">
-              <div class="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(124,58,237,0.3)]">
+              class="group relative flex flex-col items-center justify-center p-6 lg:p-8 rounded-[1.5rem] glass-panel transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.4)] overflow-hidden">
+              <!-- Animated Hover Gradient -->
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div class="relative z-10 text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_20px_theme(colors.primary)]">
                 {category.icon}
               </div>
-              <h3 class="font-display text-sm font-bold text-slate-200 group-hover:text-white transition-colors">
+              <h3 class="relative z-10 font-display text-base font-bold text-slate-200 group-hover:text-white transition-colors tracking-wide">
                 {category.name}
               </h3>
-              <p class="text-xs text-slate-500 mt-1 font-mono">
-                {categoryCounts.get(category.slug) || 0}
+              <p class="relative z-10 text-xs text-slate-500 mt-2 font-mono group-hover:text-primary-glow/70 transition-colors">
+                {categoryCounts.get(category.slug) || 0} Articles
               </p>
+              
+              <!-- Subtle Border Glow on Hover -->
+              <div class="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-transparent group-hover:ring-primary/30 transition-all duration-500"></div>
             </a>
           ))
         }
@@ -100,43 +122,52 @@ posts.forEach((post) => {
 
     <!-- 熱門標籤區塊 -->
     <section>
-      <div class="flex items-center gap-3 mb-6">
-        <h2 class="font-display text-2xl font-bold text-white">熱門標籤</h2>
-        <div class="h-px flex-1 bg-white/10"></div>
+      <div class="flex items-center gap-4 mb-8">
+        <h2 class="font-display text-2xl font-bold text-white flex items-center gap-3">
+          <span class="w-1.5 h-5 bg-secondary rounded-full shadow-[0_0_10px_theme(colors.secondary)]"></span>
+          熱門標籤
+        </h2>
+        <div class="h-px flex-1 bg-gradient-to-r from-white/[0.08] to-transparent"></div>
       </div>
       <div class="flex flex-wrap gap-3">
         {
           topTags.map((tag) => (
             <a
               href={`/tags/${tag.slug}/`}
-              class="tag-pill px-4 py-2 text-sm"
+              class="tag-pill px-5 py-2.5 text-[13px]"
               aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
-              #{tag.display}
-              <span class="ml-1 opacity-60">({tag.count})</span>
+              <span class="text-secondary-glow/70 group-hover:text-secondary-glow">#</span> {tag.display}
+              <span class="ml-1.5 opacity-60 font-mono text-[10px] bg-white/5 px-2 py-0.5 rounded-full">{tag.count}</span>
             </a>
           ))
         }
         <a
           href="/tags/"
-          class="inline-flex items-center gap-1 px-4 py-2 text-sm text-slate-500 hover:text-violet-300 transition-colors">
-          更多標籤 →
+          class="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-medium text-slate-400 hover:text-primary-glow transition-colors rounded-full border border-dashed border-white/20 hover:border-primary/50 hover:bg-primary/5">
+          探索更多 →
         </a>
       </div>
     </section>
 
     <!-- 文章列表 -->
     <section>
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="font-display text-2xl font-bold text-white">最新文章</h2>
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+            <span class="w-1.5 h-6 bg-fuchsia-500 rounded-full shadow-[0_0_10px_theme(colors.fuchsia.500)]"></span>
+            最新文章
+          </h2>
+        </div>
         <a
           href="/rss.xml"
-          class="text-slate-500 hover:text-orange-400 transition-colors"
+          class="flex items-center gap-2 text-sm text-slate-500 hover:text-orange-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-orange-400/10"
           aria-label="RSS 訂閱">
-          <svg class="size-5" fill="currentColor" viewBox="0 0 24 24"
+          <svg class="size-4" fill="currentColor" viewBox="0 0 24 24"
             ><path
               d="M6.18 15.64a2.18 2.18 0 01-2.18 2.18 2.18 2.18 0 01-2.18-2.18A2.18 2.18 0 014 13.46c1.2 0 2.18.98 2.18 2.18zM4 4.44v3.39c7.03 0 12.73 5.7 12.73 12.73h3.38C20.11 11.36 12.64 4.44 4 4.44zm0 6.78v3.39c3.53 0 6.4 2.86 6.4 6.39h3.38c0-5.4-4.38-9.78-9.78-9.78z"
             ></path></svg
           >
+          <span class="hidden sm:inline">訂閱 RSS</span>
         </a>
       </div>
 
