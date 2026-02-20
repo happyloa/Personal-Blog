@@ -75,7 +75,7 @@ npx @tailwindcss/upgrade@next
 
 ## 結語
 
-Tailwind v4 把 CSS 開發體驗推向了另一個層次。它更接近原生 CSS (Native CSS)，同時保留了 Utility Class 的便利性。如果你還在觀望，現在絕對是入坑的好時機。
+說真的，Tailwind v4 這次大改版真的超有感！寫起來有種直接寫原生 CSS 的痛快感，但又保留了套 class 的爽度。如果你之前一直猶豫要不要學 Tailwind，別等了，現在絕對是上車的最佳時機！
 
 ---
 
