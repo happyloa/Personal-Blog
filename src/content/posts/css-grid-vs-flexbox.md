@@ -121,5 +121,5 @@ Grid 處理的是**平面**上的排列。它同時關心**行 (Row)** 和 **列
 
 站內相關文章：
 
-- [三種用 CSS 隱藏元素的方法](/posts/three-ways-to-hide-a-certain-element-using-css)
+- [六種用 CSS 隱藏元素的方法](/posts/three-ways-to-hide-a-certain-element-using-css)
 - [HTML/CSS 基礎觀念](/posts/html-css-basics-explained-with-word)
