@@ -98,4 +98,3 @@ category: web-basics
 站內相關文章：
 
 - [DNS 深度解析](/posts/dns-deep-dive)
-- [RESTful API 設計指南](/posts/restful-api-design)
