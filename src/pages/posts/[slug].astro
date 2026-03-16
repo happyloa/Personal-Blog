@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 import MDXImage from "../../components/MDXImage.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { slugifyTag } from "../../utils/tags";
 import { formatDate, toISODate } from "../../utils/date";
 import { calculateReadingTime } from "../../utils/posts";
@@ -10,17 +10,17 @@ import { calculateReadingTime } from "../../utils/posts";
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 const components = { img: MDXImage };
 
 // 用 200 WPM 估算閱讀時間，提供一致的閱讀門檻提示即使沒有外掛資料也可用。
-const readingTime = calculateReadingTime(post.body);
+const readingTime = calculateReadingTime(post.body ?? "");
 
 const formattedDate = formatDate(post.data.date);
 const isoDate = toISODate(post.data.date);

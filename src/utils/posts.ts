@@ -49,5 +49,5 @@ export function getPostDescription(post: PostEntry): string {
     return post.data.description;
   }
   // 取內文首個非空行
-  return post.body.split("\n").find((line) => line.trim()) ?? "";
+  return (post.body ?? "").split("\n").find((line) => line.trim()) ?? "";
 }
