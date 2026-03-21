@@ -17,9 +17,9 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/noto-sans-tc": "^5.2.10",
     "@fontsource-variable/outfit": "^5.2.8",
-    "@tailwindcss/vite": "^4.2.1",
-    "astro": "^6.0.5",
-    "tailwindcss": "^4.2.1"
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.0.8",
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
@@ -27,6 +27,7 @@
     "typescript": "^5.9.3"
   },
   "overrides": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "fast-xml-parser": "^5.5.8"
   }
 }
