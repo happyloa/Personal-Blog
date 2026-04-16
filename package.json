@@ -18,7 +18,7 @@
     "@fontsource-variable/noto-sans-tc": "^5.2.10",
     "@fontsource-variable/outfit": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.1.4",
+    "astro": "^6.1.7",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
