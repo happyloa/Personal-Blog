@@ -1,22 +1,15 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-type PostEntry = CollectionEntry<"posts">;
+const defaultFilter = (post) => !post.data.draft;
 
-type GetPublishedPostsOptions = {
-  filter?: (post: PostEntry) => boolean;
-  sort?: (a: PostEntry, b: PostEntry) => number;
-};
-
-const defaultFilter = (post: PostEntry) => !post.data.draft;
-
-const defaultSort = (a: PostEntry, b: PostEntry) => {
+const defaultSort = (a, b) => {
   const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
   const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
   return bDate - aDate;
 };
 
 export async function getPublishedPostsSorted(
-  options: GetPublishedPostsOptions = {},
+  options = {},
 ) {
   const { filter, sort } = options;
   const posts = await getCollection("posts", (post) => {
@@ -34,7 +27,7 @@ export async function getPublishedPostsSorted(
  * @param body 文章內容
  * @returns 預估閱讀分鐘數
  */
-export function calculateReadingTime(body: string): number {
+export function calculateReadingTime(body) {
   const wordCount = body.split(/\s+/).length;
   return Math.ceil(wordCount / 200);
 }
@@ -44,7 +37,7 @@ export function calculateReadingTime(body: string): number {
  * @param post 文章物件
  * @returns 文章描述字串
  */
-export function getPostDescription(post: PostEntry): string {
+export function getPostDescription(post) {
   if (post.data.description) {
     return post.data.description;
   }

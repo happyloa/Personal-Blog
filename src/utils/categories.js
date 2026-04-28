@@ -1,12 +1,5 @@
 // 分類定義
-export interface Category {
-  slug: string;
-  name: string;
-  description: string;
-  icon: string;
-}
-
-export const categories: Category[] = [
+export const categories = [
   {
     slug: "learning",
     name: "學習筆記",
@@ -47,14 +40,6 @@ export const categories: Category[] = [
 
 export const categoryMap = new Map(categories.map((c) => [c.slug, c]));
 
-export function getCategoryBySlug(slug: string): Category | undefined {
+export function getCategoryBySlug(slug) {
   return categoryMap.get(slug);
 }
-
-export type CategorySlug =
-  | "learning"
-  | "tech-deep-dive"
-  | "career"
-  | "project"
-  | "web-basics"
-  | "mindset";

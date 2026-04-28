@@ -3,7 +3,7 @@
  * @param date 日期物件或字串
  * @returns 格式化後的日期字串 (yyyy年M月d日)
  */
-export function formatDate(date: Date | string): string {
+export function formatDate(date) {
   const d = new Date(date);
   return d.toLocaleDateString("zh-TW", {
     year: "numeric",
@@ -17,6 +17,6 @@ export function formatDate(date: Date | string): string {
  * @param date 日期物件或字串
  * @returns ISO 格式日期字串
  */
-export function toISODate(date: Date | string): string {
+export function toISODate(date) {
   return new Date(date).toISOString();
 }

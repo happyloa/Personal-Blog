@@ -4,8 +4,8 @@
 
 ## 主要特色
 
-- **核心架構**：Astro 6 + Tailwind CSS 4 + TypeScript
-- **內容管理**：使用 Content Collections 管理 Markdown 文章，具備嚴格的型別檢查
+- **核心架構**：Astro 6 + Tailwind CSS 4 + JavaScript
+- **內容管理**：使用 Content Collections 管理 Markdown 文章，具備 Zod 資料驗證
 - **效能優化**：靜態生成（SSG）、圖片優化、字型預載
 - **閱讀體驗**：
   - 自動生成目錄（TOC），支援桌面版懸浮與行動版彈出選單

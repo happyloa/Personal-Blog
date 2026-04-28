@@ -18,7 +18,7 @@ export function initTOC() {
   if (!tocDesktop || !mainContent) return;
 
   let isMobileOpen = false;
-  let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+  let scrollTimeout = null;
 
   // 1. 桌面版：使用 Intersection Observer 偵測是否進入文章區域
   // 避免 TOC 在 Banner 區塊就出現，干擾視覺
@@ -95,7 +95,7 @@ export function initTOC() {
   }
 
   // 行動版：hover 觸發開啟/關閉（僅限非觸控設備）
-  let hoverCloseTimeout: ReturnType<typeof setTimeout> | null = null;
+  let hoverCloseTimeout = null;
 
   // 檢測是否為觸控設備
   const isTouchDevice = () =>
@@ -142,7 +142,7 @@ export function initTOC() {
   // 4. 雙向連動：設定 active 狀態與平滑捲動
   const tocLinks = document.querySelectorAll(".toc-link, .toc-link-mobile");
 
-  function setActiveLink(slug: string) {
+  function setActiveLink(slug) {
     tocLinks.forEach((link) => {
       if (link.getAttribute("data-slug") === slug) {
         link.classList.add("active");
