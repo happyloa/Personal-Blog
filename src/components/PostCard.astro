@@ -11,84 +11,40 @@ interface Props {
 const { post } = Astro.props;
 const formattedDate = formatDate(post.data.date);
 const isoDate = toISODate(post.data.date);
-
-// 為了確保摘要穩定且有語意，使用統一的 getPostDescription 抓取邏輯，再轉成純文字摘要。
 const summary = toPlainTextExcerpt(getPostDescription(post));
 ---
 
-<article
-  class="group relative flex flex-col justify-between glass-panel glass-panel-hover rounded-2xl p-6 md:p-8 transition-all duration-500 overflow-hidden">
-  <!-- Subtle gradient border overlay -->
-  <div
-    class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 group-hover:ring-primary/40 transition-all duration-500 pointer-events-none">
-  </div>
-
-  <!-- Animated hover glow background -->
-  <div
-    class="absolute inset-0 z-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl pointer-events-none">
-  </div>
-
-  <!-- Premium inner light reflection -->
-  <div
-    class="absolute inset-0 z-0 bg-gradient-to-b from-white/[0.03] to-transparent h-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-t-2xl">
-  </div>
-
-  <div class="relative z-10">
-    <div class="flex flex-wrap items-center gap-3 mb-5">
-      <time
-        datetime={isoDate}
-        class="font-mono text-[11px] font-medium tracking-widest uppercase px-3 py-1 rounded-full bg-white/5 border border-white/5 text-slate-400 group-hover:text-primary-glow group-hover:border-primary/20 transition-colors">
-        {formattedDate}
-      </time>
-      <div class="h-1 w-1 rounded-full bg-white/20"></div>
-      {
-        post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.slice(0, 3).map((tag) => (
-              <span class="text-[13px] font-medium text-secondary-glow/80 group-hover:text-secondary-glow transition-colors">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )
-      }
-    </div>
-
-    <h2
-      class="font-display text-2xl md:text-[1.75rem] font-bold text-slate-100 mb-4 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-primary-glow transition-all duration-300 leading-snug">
-      <a href={`/posts/${post.id}/`} class="focus:outline-none">
-        <span class="absolute inset-0" aria-hidden="true"></span>
-        {post.data.title}
-      </a>
-    </h2>
-
+<article class="surface surface-hover group p-5 md:p-6">
+  <div class="mb-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+    <time datetime={isoDate} class="font-mono">{formattedDate}</time>
     {
-      summary && (
-        <p class="text-slate-400 text-[15px] leading-relaxed line-clamp-2 md:line-clamp-3 mb-6 relative z-10 font-light mix-blend-plus-lighter">
-          {summary}
-        </p>
-      )
+      post.data.tags.slice(0, 3).map((tag) => (
+        <span class="tag-pill px-2 py-0.5 text-[11px]">#{tag}</span>
+      ))
     }
   </div>
 
-  <div
-    class="relative z-10 mt-auto pt-4 flex items-center text-sm font-semibold text-slate-400 transition-colors group-hover:text-primary-glow border-t border-white/5 border-dashed">
-    <span class="relative">
-      Read article
-      <span
-        class="absolute -bottom-1 left-0 w-0 h-px bg-primary-glow transition-all duration-300 group-hover:w-full"
-      ></span>
-    </span>
-    <svg
-      class="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1.5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <path d="M5 12h14"></path>
-      <path d="M12 5l7 7-7 7"></path>
-    </svg>
-  </div>
+  <h2 class="mb-3 text-xl leading-snug md:text-2xl">
+    <a
+      href={`/posts/${post.id}/`}
+      class="text-slate-50 no-underline group-hover:text-primary-muted">
+      {post.data.title}
+    </a>
+  </h2>
+
+  {
+    summary && (
+      <p class="mb-5 line-clamp-3 text-sm leading-7 text-slate-400">
+        {summary}
+      </p>
+    )
+  }
+
+  <a
+    href={`/posts/${post.id}/`}
+    class="inline-flex items-center gap-2 text-sm font-medium no-underline"
+    aria-label={`閱讀文章：${post.data.title}`}>
+    閱讀文章
+    <span aria-hidden="true">→</span>
+  </a>
 </article>

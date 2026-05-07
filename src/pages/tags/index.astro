@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { site } from "../../utils/site";
 import { slugifyTag } from "../../utils/tags";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -17,35 +18,33 @@ posts.forEach((post) => {
 const tags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
 ---
 
-<BaseLayout title="所有標籤 | Aaron 的部落格" description="瀏覽部落格使用中的所有標籤與文章數量。">
-  <section class="grid gap-4">
-    <div class="flex items-center justify-between gap-4">
-      <h1 class="text-3xl font-bold text-white">標籤索引</h1>
-      <a class="text-sm text-sky-200 hover:text-sky-100" href="/">← 返回文章列表</a>
-    </div>
-    <p class="text-slate-200">
+<BaseLayout
+  title={`所有標籤 — ${site.title}`}
+  description="瀏覽部落格使用中的所有標籤與文章數量">
+  <section class="mb-10 max-w-3xl">
+    <a href="/" class="mb-5 inline-flex text-sm no-underline">← 返回首頁</a>
+    <p class="eyebrow mb-3">Tags</p>
+    <h1 class="mb-4 text-3xl md:text-4xl">標籤索引</h1>
+    <p class="leading-8 text-slate-400">
       快速查看目前文章使用的標籤，以及每個標籤底下的文章數量。
     </p>
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        tags.length === 0 ? (
-          <p class="text-slate-300">目前還沒有任何標籤。</p>
-        ) : (
-          tags.map((tag) => (
-            <a
-              href={`/tags/${tag.slug}/`}
-              class="group relative isolate overflow-hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-sky-400/40 hover:-translate-y-0.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400"
-              aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
-              <div class="flex items-center justify-between gap-3">
-                <span class="tag-pill text-sm">#{tag.display}</span>
-                <span class="text-xs text-slate-200 group-hover:text-sky-100">
-                  {tag.count} 篇
-                </span>
-              </div>
-            </a>
-          ))
-        )
-      }
-    </div>
+  </section>
+
+  <section class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      tags.length === 0 ? (
+        <p class="surface p-5 text-slate-400">目前還沒有任何標籤。</p>
+      ) : (
+        tags.map((tag) => (
+          <a
+            href={`/tags/${tag.slug}/`}
+            class="surface surface-hover flex items-center justify-between gap-4 p-4 no-underline"
+            aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
+            <span class="tag-pill">#{tag.display}</span>
+            <span class="font-mono text-xs text-slate-500">{tag.count} 篇</span>
+          </a>
+        ))
+      )
+    }
   </section>
 </BaseLayout>

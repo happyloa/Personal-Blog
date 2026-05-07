@@ -1,10 +1,11 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { navLinks, site } from "../utils/site";
 import "../styles/global.css";
 
 const {
-  title = "Aaron 的部落格",
-  description = "用 Astro 打造、部署到 Cloudflare Pages 的全新部落格",
+  title = site.title,
+  description = site.description,
   image = "/favicon.svg",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
@@ -23,24 +24,22 @@ const currentYear = new Date().getFullYear();
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" content="#09090b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Aaron 的部落格"
+      title={site.title}
       href="/rss.xml"
     />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
@@ -48,331 +47,152 @@ const currentYear = new Date().getFullYear();
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
     <ClientRouter />
-
-    <style>
-      /* Base Grid Pattern */
-      .bg-grid-pattern {
-        background-size: 40px 40px;
-        background-image:
-          linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.03) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.03) 1px,
-            transparent 1px
-          );
-        mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-      }
-    </style>
   </head>
-  <body
-    class="min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary/30 text-slate-300 antialiased bg-[#050505]">
+  <body class="min-h-screen overflow-x-hidden">
     <a class="skip-link" href="#main-content">跳到主要內容</a>
 
-    <!-- Background Effects (Premium Mesh Gradients & Grid) -->
-    <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-      <!-- Grid -->
-      <div class="absolute inset-0 bg-grid-pattern z-0 opacity-50"></div>
-
-      <!-- Orbs -->
+    <header class="sticky top-0 z-40 border-b border-border-soft bg-base/90 backdrop-blur">
       <div
-        class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-primary/10 rounded-full blur-[120px] mix-blend-screen opacity-60 animate-float"
-        style="animation-duration: 8s;">
-      </div>
-      <div
-        class="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] bg-secondary/10 rounded-full blur-[100px] mix-blend-screen opacity-50 animate-float"
-        style="animation-duration: 12s; animation-delay: 2s;">
-      </div>
-      <div
-        class="absolute bottom-[-10%] left-[20%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-fuchsia-600/5 rounded-full blur-[150px] mix-blend-screen opacity-40 animate-pulse-slow">
-      </div>
-    </div>
-
-    <!-- Floating Pill Navigation -->
-    <header class="sticky top-6 z-50 mx-auto w-full max-w-4xl px-4 mb-16">
-      <div
-        class="bg-[#0a0a0a]/70 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-full px-5 py-3 flex items-center justify-between transition-all duration-300 hover:border-white/20 hover:bg-[#0a0a0a]/80"
-        style="box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 12px 40px rgba(0, 0, 0, 0.5);">
-        <a href="/" class="flex items-center gap-3 group px-2">
-          <div
-            class="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-600 text-white shadow-lg shadow-primary/30 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] group-hover:rotate-3">
-            <span class="font-display font-bold text-lg">A</span>
-            <div class="absolute inset-0 rounded-full ring-1 ring-white/20">
-            </div>
-          </div>
-          <div class="hidden sm:block">
-            <h1
-              class="font-display text-base font-bold text-white tracking-wide group-hover:text-primary-glow transition-colors duration-300">
-              Aaron's Space
-            </h1>
-          </div>
+        class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <a href="/" class="flex items-center gap-3 no-underline">
+          <span
+            class="flex size-9 items-center justify-center rounded-md border border-border-soft bg-surface font-display text-base font-semibold text-slate-50">
+            A
+          </span>
+          <span class="hidden font-display text-base font-semibold text-slate-50 sm:inline">
+            {site.name}
+          </span>
         </a>
 
-        <nav
-          class="flex items-center gap-1 sm:gap-2 px-2"
-          aria-label="主要導覽">
-          <div
-            class="hidden md:flex items-center gap-1 mr-4 bg-white/5 p-1 rounded-full border border-white/5">
-            <a
-              href="/"
-              class="px-4 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
-              >首頁</a
-            >
-            <a
-              href="/categories/"
-              class="px-4 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
-              >專欄</a
-            >
-            <a
-              href="/tags/"
-              class="px-4 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
-              >標籤</a
-            >
-          </div>
-
-          <div class="flex items-center gap-2">
-            <a
-              href="https://github.com/happyloa"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center justify-center size-9 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300"
-              aria-label="GitHub">
-              <svg
-                class="size-4.5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </a>
-            <a
-              href="https://www.cake.me/aaron-yumin"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center justify-center size-9 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:text-secondary hover:bg-secondary/10 hover:border-secondary/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all duration-300"
-              aria-label="CakeResume">
-              <svg
-                class="size-4.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"></path>
-                <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"
-                ></path>
-                <path d="M2 21h20"></path>
-                <path d="M7 8v3"></path>
-                <path d="M12 8v3"></path>
-                <path d="M17 8v3"></path>
-                <path d="M7 4h.01"></path>
-                <path d="M12 4h.01"></path>
-                <path d="M17 4h.01"></path>
-              </svg>
-            </a>
-            <a
-              href="/rss.xml"
-              class="flex items-center justify-center size-9 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:text-orange-400 hover:bg-orange-400/10 hover:border-orange-400/30 hover:shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300"
-              aria-label="RSS">
-              <svg
-                class="size-4.5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true">
-                <path
-                  d="M6.18 15.64a2.18 2.18 0 01-2.18 2.18 2.18 2.18 0 01-2.18-2.18A2.18 2.18 0 014 13.46c1.2 0 2.18.98 2.18 2.18zM4 4.44v3.39c7.03 0 12.73 5.7 12.73 12.73h3.38C20.11 11.36 12.64 4.44 4 4.44zm0 6.78v3.39c3.53 0 6.4 2.86 6.4 6.39h3.38c0-5.4-4.38-9.78-9.78-9.78z"
-                ></path>
-              </svg>
-            </a>
-          </div>
+        <nav class="flex items-center gap-1" aria-label="主要導覽">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                class="rounded-md px-3 py-2 text-sm font-medium text-slate-400 no-underline hover:bg-surface hover:text-slate-50">
+                {link.label}
+              </a>
+            ))
+          }
         </nav>
       </div>
     </header>
 
     <main
       id="main-content"
-      class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 pb-24"
+      class="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:py-16"
       tabindex="-1">
       <slot />
     </main>
 
-    <footer
-      class="mt-auto border-t border-white/[0.08] bg-[#050505]/80 backdrop-blur-2xl relative overflow-hidden">
-      <!-- Footer subtle top glow -->
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent">
+    <footer class="mt-16 border-t border-border-soft bg-base">
+      <div class="mx-auto grid w-full max-w-5xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+        <section>
+          <div class="mb-3 flex items-center gap-3">
+            <span
+              class="flex size-9 items-center justify-center rounded-md border border-border-soft bg-surface font-display font-semibold text-slate-50">
+              A
+            </span>
+            <h2 class="text-lg">{site.name}</h2>
+          </div>
+          <p class="max-w-sm text-sm leading-6 text-slate-400">
+            記錄前端工程、網站效能、專案實作與職涯思考的個人技術筆記。
+          </p>
+        </section>
+
+        <nav aria-label="頁尾導覽">
+          <h2 class="mb-3 text-sm font-semibold text-slate-200">導覽</h2>
+          <ul class="grid gap-2 text-sm">
+            {
+              navLinks.map((link) => (
+                <li>
+                  <a href={link.href} class="text-slate-400 no-underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li><a href="/rss.xml" class="text-slate-400 no-underline">RSS 訂閱</a></li>
+          </ul>
+        </nav>
+
+        <section>
+          <h2 class="mb-3 text-sm font-semibold text-slate-200">連結</h2>
+          <ul class="grid gap-2 text-sm">
+            <li>
+              <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" class="text-slate-400 no-underline">
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href={site.cakeUrl} target="_blank" rel="noopener noreferrer" class="text-slate-400 no-underline">
+                CakeResume
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
 
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 lg:py-16 relative z-10">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
-          <!-- Brand -->
-          <div class="md:col-span-4 space-y-5">
-            <div class="flex items-center gap-3">
-              <div
-                class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-fuchsia-600 flex items-center justify-center text-white font-bold text-lg shadow-[0_0_20px_rgba(139,92,246,0.2)] ring-1 ring-white/20">
-                A
-              </div>
-              <span
-                class="font-display text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400"
-                >Aaron's Space</span
-              >
-            </div>
-            <p class="text-slate-400 text-sm leading-relaxed max-w-xs">
-              探索現代前端技術、系統架構與開發美學的個人空間。
-            </p>
-            <div
-              class="flex items-center gap-2 pt-2 text-xs font-mono text-slate-500">
-              <span
-                class="inline-block w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_theme(colors.emerald.500)]"
-              ></span>
-              All systems operational
-            </div>
-          </div>
-
-          <!-- Links -->
-          <nav
-            class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm"
-            aria-label="頁尾導覽">
-            <div class="space-y-4">
-              <h3
-                class="font-bold text-white tracking-wider flex items-center gap-2">
-                <span class="text-primary">/</span> 導覽
-              </h3>
-              <ul class="space-y-2.5">
-                <li>
-                  <a
-                    href="/"
-                    class="text-slate-400 hover:text-primary-glow transition-colors block py-0.5"
-                    >最新文章</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/categories/"
-                    class="text-slate-400 hover:text-primary-glow transition-colors block py-0.5"
-                    >分類專欄</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/tags/"
-                    class="text-slate-400 hover:text-primary-glow transition-colors block py-0.5"
-                    >標籤索引</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-4">
-              <h3
-                class="font-bold text-white tracking-wider flex items-center gap-2">
-                <span class="text-secondary">/</span> 聯絡
-              </h3>
-              <ul class="space-y-2.5">
-                <li>
-                  <a
-                    href="https://github.com/happyloa"
-                    target="_blank"
-                    class="text-slate-400 hover:text-secondary-glow transition-colors block py-0.5"
-                    >GitHub</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.cake.me/aaron-yumin"
-                    target="_blank"
-                    class="text-slate-400 hover:text-secondary-glow transition-colors block py-0.5"
-                    >CakeResume</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/rss.xml"
-                    class="text-slate-400 hover:text-orange-400 transition-colors block py-0.5"
-                    >RSS 訂閱</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <section class="col-span-2 sm:col-span-1 space-y-4">
-              <h3
-                class="font-bold text-white tracking-wider flex items-center gap-2">
-                <span class="text-fuchsia-500">/</span> 關於
-              </h3>
-              <p class="text-slate-400 leading-relaxed text-sm">
-                謝宗佑 — 前端工程師，專精 Vue / React 生態系、現代化架構與
-                Node.js 後端整合，熱愛打造高效能且具設計感的使用者體驗。
-              </p>
-            </section>
-          </nav>
-        </div>
-
-        <div
-          class="mt-12 pt-8 border-t border-white/[0.05] flex flex-col md:flex-row items-center justify-between text-[13px] text-slate-500 gap-4">
-          <p class="font-mono">
-            © {currentYear} Aaron's Space. Inspired by the web.
-          </p>
-          <div
-            class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.02] border border-white/[0.05]">
-            <span class="text-slate-400">Powered by</span>
-            <span class="text-white font-medium">Astro</span>
-            <span class="text-slate-400">&</span>
-            <span class="text-secondary-glow font-medium">Tailwind v4</span>
-          </div>
-        </div>
+      <div class="border-t border-border-soft px-4 py-5 text-center text-xs text-slate-500">
+        © {currentYear} {site.name}. Built with Astro and Tailwind CSS.
       </div>
     </footer>
 
     <script is:inline type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 
-      function initMermaid() {
+      const mermaidKeywords = [
+        "sequenceDiagram",
+        "flowchart ",
+        "graph ",
+        "classDiagram",
+        "stateDiagram",
+        "erDiagram",
+        "gantt",
+        "pie",
+        "gitgraph",
+      ];
+
+      function prepareMermaidBlocks() {
+        document.querySelectorAll("pre").forEach((pre) => {
+          const text = pre.textContent.trim();
+          if (!mermaidKeywords.some((keyword) => text.startsWith(keyword))) {
+            return;
+          }
+
+          const shell = document.createElement("div");
+          shell.className = "mermaid-shell";
+
+          const diagram = document.createElement("div");
+          diagram.className = "mermaid";
+          diagram.textContent = text;
+
+          shell.appendChild(diagram);
+          pre.replaceWith(shell);
+        });
+      }
+
+      async function initMermaid() {
         mermaid.initialize({
           startOnLoad: false,
           theme: "base",
           themeVariables: {
             darkMode: true,
-            background: "#09090b", // darker background for charts
-            primaryColor: "#8b5cf6", // --color-primary
+            background: "#111116",
+            primaryColor: "#1f2937",
             primaryTextColor: "#f8fafc",
-            primaryBorderColor: "#6d28d9",
-            lineColor: "#475569",
-            secondaryColor: "#06b6d4", // --color-secondary
-            tertiaryColor: "#1e293b",
+            primaryBorderColor: "#38bdf8",
+            lineColor: "#64748b",
+            secondaryColor: "#0f172a",
+            tertiaryColor: "#18181f",
+            fontFamily: "Inter, sans-serif",
           },
         });
 
-        const keywords = [
-          "sequenceDiagram",
-          "flowchart ",
-          "graph ",
-          "classDiagram",
-          "stateDiagram",
-          "erDiagram",
-          "gantt",
-          "pie",
-          "gitgraph",
-        ];
-        document.querySelectorAll("pre").forEach((pre) => {
-          const text = pre.textContent.trim();
-          if (keywords.some((kw) => text.startsWith(kw))) {
-            const div = document.createElement("div");
-            div.className = "mermaid flex justify-center p-4";
-            div.textContent = text;
-            pre.replaceWith(div);
-          }
+        prepareMermaidBlocks();
+        await mermaid.run({
+          querySelector: ".mermaid:not([data-processed='true'])",
         });
-
-        mermaid.run();
       }
 
       initMermaid();

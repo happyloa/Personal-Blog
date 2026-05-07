@@ -7,13 +7,13 @@ interface Props {
 const { src, alt = "" } = Astro.props;
 ---
 
-<figure class="my-6">
+<figure class="my-8">
   <img
     src={src}
     alt={alt}
     loading="lazy"
     decoding="async"
-    class="w-full rounded-lg shadow-lg"
+    class="w-full rounded-lg"
   />
   {
     alt && (

@@ -1,9 +1,10 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
-import { slugifyTag } from "../../utils/tags";
 import { getPublishedPostsSorted } from "../../utils/posts";
-import type { CollectionEntry } from "astro:content";
+import { site } from "../../utils/site";
+import { slugifyTag } from "../../utils/tags";
 
 interface Props {
   displayTag: string;
@@ -11,7 +12,6 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-  // 只查詢一次，然後將資料傳遞給每個標籤頁面
   const allPosts = await getPublishedPostsSorted();
   const tagData = new Map<
     string,
@@ -38,27 +38,26 @@ const { displayTag, posts } = Astro.props;
 ---
 
 <BaseLayout
-  title={`#${displayTag} 標籤文章 | Aaron 的部落格`}
+  title={`#${displayTag} 標籤文章 — ${site.title}`}
   description={`包含 #${displayTag} 標籤的文章彙整`}>
-  <section class="grid gap-6">
-    <div class="flex items-center gap-3">
-      <a href="/" class="text-sm text-sky-200 hover:text-sky-100"
-        >← 返回文章彙整</a
-      >
-      <span class="tag-pill text-sm">#{displayTag}</span>
-    </div>
-    <div class="grid gap-4">
-      {
-        posts.length === 0 ? (
-          <p class="text-slate-200">目前沒有包含這個標籤的文章。</p>
-        ) : (
-          <div class="grid grid-cols-1 gap-4">
-            {posts.map((post) => (
-              <PostCard post={post} />
-            ))}
-          </div>
-        )
-      }
-    </div>
+  <section class="mb-10 max-w-3xl">
+    <a href="/tags/" class="mb-5 inline-flex text-sm no-underline">
+      ← 返回標籤
+    </a>
+    <p class="eyebrow mb-3">Tag</p>
+    <h1 class="mb-4 text-3xl md:text-4xl">#{displayTag}</h1>
+    <p class="font-mono text-xs text-slate-500">共 {posts.length} 篇文章</p>
+  </section>
+
+  <section class="grid gap-4">
+    {
+      posts.length > 0 ? (
+        posts.map((post) => <PostCard post={post} />)
+      ) : (
+        <p class="surface p-5 text-slate-400">
+          目前沒有包含這個標籤的文章。
+        </p>
+      )
+    }
   </section>
 </BaseLayout>
