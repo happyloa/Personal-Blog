@@ -12,9 +12,9 @@ category: web-basics
 
 DNS 不是一本巨大的電話簿，而是一個**分散式、階層式**的資料庫系統。想像它像是一個跨國公司的組織架構：
 
-1.  **根域名伺服器 (Root Nameservers)**：總公司，知道每個頂級域名 (.com, .tw, .org) 的負責人在哪。
-2.  **頂級域名伺服器 (TLD Nameservers)**：部門經理，管理特定結尾的網域 (例如 .com 的註冊局)。
-3.  **權威名稱伺服器 (Authoritative Nameservers)**：專案負責人，真正知道該網域 IP 的伺服器 (通常是 Cloudflare, AWS Route53 或你的網域註冊商)。
+1. **根域名伺服器 (Root Nameservers)**：總公司，知道每個頂級域名 (.com, .tw, .org) 的負責人在哪。
+2. **頂級域名伺服器 (TLD Nameservers)**：部門經理，管理特定結尾的網域 (例如 .com 的註冊局)。
+3. **權威名稱伺服器 (Authoritative Nameservers)**：專案負責人，真正知道該網域 IP 的伺服器 (通常是 Cloudflare, AWS Route53 或你的網域註冊商)。
 
 ## 當你輸入 google.com 時發生了什麼事？
 
@@ -22,20 +22,20 @@ DNS 不是一本巨大的電話簿，而是一個**分散式、階層式**的資
 
 ```mermaid
 sequenceDiagram
-    participant 使用者
-    participant 遞迴解析器
-    participant Root伺服器
-    participant TLD伺服器
-    participant 權威伺服器
+    participant User as 使用者
+    participant Resolver as 遞迴解析器
+    participant Root as Root 伺服器
+    participant TLD as TLD 伺服器
+    participant Auth as 權威伺服器
 
-    使用者->>遞迴解析器: google.com 的 IP 是多少？
-    遞迴解析器->>Root伺服器: 請問 .com 的負責人在哪？
-    Root伺服器-->>遞迴解析器: 去問 .com 的 TLD 伺服器 (IP: 1.2.3.4)
-    遞迴解析器->>TLD伺服器: 請問 google.com 的負責人在哪？
-    TLD伺服器-->>遞迴解析器: 去問 google.com 的權威伺服器 (IP: 5.6.7.8)
-    遞迴解析器->>權威伺服器: google.com 的 IP 是什麼？
-    權威伺服器-->>遞迴解析器: 它是 142.250.1.1
-    遞迴解析器-->>使用者: IP 是 142.250.1.1
+    User->>Resolver: google.com 的 IP 是多少？
+    Resolver->>Root: 請問 .com 的負責人在哪？
+    Root-->>Resolver: 去問 .com 的 TLD 伺服器
+    Resolver->>TLD: 請問 google.com 的負責人在哪？
+    TLD-->>Resolver: 去問 google.com 的權威伺服器
+    Resolver->>Auth: google.com 的 IP 是什麼？
+    Auth-->>Resolver: 它是 142.250.1.1
+    Resolver-->>User: IP 是 142.250.1.1
 ```
 
 **遞迴解析器 (Recursive Resolver)** 通常由你的 ISP (中華電信) 或公共 DNS (Google 8.8.8.8, Cloudflare 1.1.1.1) 提供。它負責幫你跑腿問路，並且**快取 (Cache)** 結果。下次再問同樣的網址，它就不用重新跑一次流程了。

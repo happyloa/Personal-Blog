@@ -12,7 +12,7 @@ category: tech-deep-dive
 
 ### AI Overviews 改變搜尋生態
 
-Google AI Overviews 已達每月 15 億用戶，會直接在搜尋結果顯示 AI 生成的答案，導致「零點擊搜尋」增加。
+Google 在 2025 年 Q2 公布，AI Overviews 已超過每月 20 億用戶，會直接在搜尋結果顯示 AI 生成的答案，導致「零點擊搜尋」增加。
 
 **新策略**：從「爭取排名第一」轉變為「讓內容被 AI 引用」。
 

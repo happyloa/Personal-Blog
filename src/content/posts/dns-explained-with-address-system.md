@@ -90,20 +90,20 @@ DNS 的全名是 **Domain Name System**（域名系統）。它做的事情很�
 
 ```mermaid
 sequenceDiagram
-    participant 你的瀏覽器
-    participant 遞迴DNS伺服器
-    participant 根域名伺服器
-    participant 頂級域名伺服器
-    participant 權威域名伺服器
+    participant Browser as 你的瀏覽器
+    participant Resolver as 遞迴 DNS 伺服器
+    participant Root as 根域名伺服器
+    participant TLD as 頂級域名伺服器
+    participant Auth as 權威域名伺服器
 
-    你的瀏覽器->>遞迴DNS伺服器: www.google.com 的 IP 是什麼？
-    遞迴DNS伺服器->>根域名伺服器: .com 要去哪查？
-    根域名伺服器-->>遞迴DNS伺服器: 去問 .com 頂級域名伺服器
-    遞迴DNS伺服器->>頂級域名伺服器: google.com 要去哪查？
-    頂級域名伺服器-->>遞迴DNS伺服器: 去問 google.com 的權威伺服器
-    遞迴DNS伺服器->>權威域名伺服器: www.google.com 的 IP？
-    權威域名伺服器-->>遞迴DNS伺服器: 142.250.185.78
-    遞迴DNS伺服器-->>你的瀏覽器: 142.250.185.78
+    Browser->>Resolver: www.google.com 的 IP 是什麼？
+    Resolver->>Root: .com 要去哪查？
+    Root-->>Resolver: 去問 .com 頂級域名伺服器
+    Resolver->>TLD: google.com 要去哪查？
+    TLD-->>Resolver: 去問 google.com 的權威伺服器
+    Resolver->>Auth: www.google.com 的 IP？
+    Auth-->>Resolver: 142.250.185.78
+    Resolver-->>Browser: 142.250.185.78
 ```
 
 ## 常見的 DNS 記錄類型

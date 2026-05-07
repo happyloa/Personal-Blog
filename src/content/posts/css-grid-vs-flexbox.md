@@ -103,10 +103,10 @@ Grid 處理的是**平面**上的排列。它同時關心**行 (Row)** 和 **列
 
 例如：
 
-1.  **Grid** 規劃大區塊 (Header, Main, Footer)。
-2.  **Flexbox** 處理 Header 裡面的 Logo 和選單對齊。
-3.  **Grid** 排列 Main 裡面的文章列表。
-4.  **Flexbox** 處理文章卡片裡面的標籤和日期。
+1. **Grid** 規劃大區塊 (Header, Main, Footer)。
+2. **Flexbox** 處理 Header 裡面的 Logo 和選單對齊。
+3. **Grid** 排列 Main 裡面的文章列表。
+4. **Flexbox** 處理文章卡片裡面的標籤和日期。
 
 ## 結論
 
