@@ -6,11 +6,11 @@
 
 - **核心架構**：Astro 6 + Tailwind CSS 4 + JavaScript
 - **內容管理**：使用 Content Collections 管理 Markdown 文章，具備 Zod 資料驗證
-- **效能優化**：靜態生成（SSG）、圖片優化、字型預載
+- **效能優化**：靜態生成（SSG）、本地字型、RSS 與 Sitemap 自動輸出
 - **閱讀體驗**：
-  - 自動生成目錄（TOC），支援桌面版懸浮與行動版彈出選單
+  - 自動生成目錄（TOC），支援桌面版固定目錄與行動版彈出選單
   - 閱讀時間估算與文章摘要自動生成
-  - 深色模式設計，長時間閱讀不刺眼
+  - 簡潔深色介面，適合長時間閱讀與維護
 - **SEO 與分享**：
   - 完整的 Open Graph 與 Twitter Card 設定
   - 自動生成 `sitemap-index.xml` 與 `rss.xml`
@@ -54,7 +54,7 @@ src/
 ├── pages/        # 頁面路由 (首頁, 文章內頁, 標籤頁)
 ├── scripts/      # 客戶端腳本 (例如 TOC 邏輯)
 ├── styles/       # 全域樣式與字型設定
-└── utils/        # 工具函式 (日期, 標籤, 摘要計算)
+└── utils/        # 工具函式與站台設定 (日期, 標籤, 摘要, metadata)
 ```
 
 ## 新增文章指南
@@ -70,6 +70,7 @@ description: （選填）未填則自動擷取內文第一段
 date: 2025-01-27
 tags: [Astro, 前端]
 cover: ../assets/cover.png # （選填）封面圖片
+category: learning
 draft: false # （選填）設為 true 則不會發布
 ---
 
