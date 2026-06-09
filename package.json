@@ -17,15 +17,10 @@
     "@fontsource-variable/noto-sans-tc": "^5.2.10",
     "@fontsource-variable/outfit": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.2",
+    "astro": "^6.4.4",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
-  },
-  "overrides": {
-    "lodash": "^4.17.21",
-    "fast-xml-parser": "^5.5.8",
-    "yaml": "^2.8.3"
+    "@tailwindcss/typography": "^0.5.20"
   }
 }
