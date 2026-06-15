@@ -232,5 +232,3 @@ JavaScript 會暫停 HTML 解析，如果 JavaScript 很多，頁面就要等很
 
 - [Google — 瀏覽器的運作方式](https://web.dev/articles/howbrowserswork)
 - [MDN — 關鍵渲染路徑](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Critical_rendering_path)（英文）
-
-

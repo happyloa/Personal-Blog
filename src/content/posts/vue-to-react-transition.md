@@ -111,7 +111,7 @@ React 把所有副作用都用 `useEffect` 來處理，一開始會覺得有點�
 
 <div class="table-wrapper">
 
-| Vue (時間點思維) | React (同步思維)            | 常見心智模型落差                                                    |
+| Vue（時間點思維） | React（同步思維）            | 常見心智模型落差                                                    |
 | ---------------- | --------------------------- | ------------------------------------------------------------------- |
 | `onMounted`      | `useEffect(..., [])`        | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）  |
 | `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次 |
@@ -147,8 +147,8 @@ React 的 state 是 immutable 的。你想改標題？你不能改舊的 `title`
 
 這個差異導致了寫 code 習慣的不同：
 
-- **Vue**: `arr.push(item)` (開心！)
-- **React**: `setArr([...arr, item])` (麻煩但安全)
+- **Vue**: `arr.push(item)`（開心！）
+- **React**: `setArr([...arr, item])`（麻煩但安全）
 - **Vue**: `obj.prop = 1`
 - **React**: `setObj({ ...obj, prop: 1 })`
 

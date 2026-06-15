@@ -1,7 +1,7 @@
 ﻿---
 title: 用 AI 開發全端天氣 App？六角 Vibe Coding 體驗營心得分享
 description: 參加六角 Vibe Coding 體驗營心得：運用 AI 工具加速開發，串接中央氣象署 API 打造全端天氣預報 App 的實戰經驗。
-date: 2025-11-27 15:07:00
+date: 2025-11-27
 tags: [六角學院, 學習心得]
 category: project
 ---
@@ -15,14 +15,14 @@ category: project
 - [氣象資料開放平臺](https://opendata.cwa.gov.tw/)
 - [API 文件](https://opendata.cwa.gov.tw/dist/opendata-swagger.html)
 
-### 🌐 專案成果
+### 專案成果
 
 - **前端部署網站**：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
 - **後端 API**：[https://hex2025-vibe-coding-week4.zeabur.app/](https://hex2025-vibe-coding-week4.zeabur.app/)
 - **前端原始碼**：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
 - **後端原始碼**：[https://github.com/happyloa/weather-backend](https://github.com/happyloa/weather-backend)
 
-### 🎯 功能亮點
+### 功能亮點
 
 整個系統從前到後都是自己一手包辦，主要功能包括：
 
@@ -47,7 +47,7 @@ category: project
 
 這次開發最大的特色，就是全程使用 **Google Antigravity IDE** 搭配 **Claude Sonnet 4.5** 模型，外加 **Codex Cloud** 來輔助開發。
 
-### 💡 我的開發流程
+### 我的開發流程
 
 1. **Fork 原始碼**：體驗營提供了基本的前後端框架，我先 fork 到自己的 GitHub
 2. **客製化調整**：透過 AI 協助，調整配色、修改文案、更換 icon
@@ -56,7 +56,7 @@ category: project
    - 後端部署到 Zeabur
 4. **串接測試**：確保前端能成功呼叫後端 API，顯示正確的天氣資料
 
-### 🤖 AI 加速開發的關鍵
+### AI 加速開發的關鍵
 
 如果沒有 AI 工具，要在短時間內完成這樣的全端專案確實不容易。以下是 AI 幫了大忙的幾個地方：
 
@@ -69,7 +69,7 @@ category: project
 
 除了自己的專案之外，在 Discord 社群跟同學交流也學到不少東西。
 
-### 🤝 幫助同學排除疑難雜症
+### 幫助同學排除疑難雜症
 
 在課程進行期間，常常會看到同學在討論區提問，像是：
 
@@ -79,7 +79,7 @@ category: project
 
 每次幫同學解決問題，其實也是在學習。有時候別人遇到的問題，正好是我之前踩過的坑，分享解決方法的過程也讓我對這些概念理解得更深了。
 
-### 📈 專業上的成長
+### 專業上的成長
 
 這次體驗營讓我在幾個方面都有進步：
 
@@ -92,7 +92,7 @@ category: project
 
 課程的 LV2 任務鼓勵我們進行「個人風格改造」，這部分真的非常有趣！
 
-### 🎨 我的設計理念
+### 我的設計理念
 
 雖然原始範例叫做「森森天氣」，但我選擇直接使用「台灣六都天氣預報」這個更直白的名稱，讓使用者一眼就知道這個服務的功能。
 
@@ -102,7 +102,7 @@ category: project
 - **卡片式設計**：清楚區分不同時段的天氣資訊
 - **圖示化呈現**：透過天氣圖示讓資訊更直觀
 
-### 🔧 技術細節
+### 技術細節
 
 在技術實作上，有幾個值得一提的地方：
 
@@ -121,13 +121,13 @@ category: project
 
 參加這次體驗營，學到最多的是「**AI 協作**」的工作模式。
 
-### ✅ AI 能做什麼？
+### AI 能做什麼？
 
 - **加速開發**：原本可能需要一週的專案，幾天甚至幾小時內就能完成
 - **降低門檻**：即使對某個框架不熟悉，也能快速上手
 - **提供靈感**：卡關時可以問 AI，獲得不同的解決思路
 
-### ⚠️ 但仍需注意
+### 但仍需注意
 
 - **AI 不是萬能**：還是需要自己理解程式邏輯，才能判斷 AI 的建議是否正確
 - **除錯能力**：遇到問題時，基本的除錯能力還是很重要

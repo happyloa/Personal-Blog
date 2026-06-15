@@ -204,5 +204,3 @@ category: web-basics
 
 - [網路是怎麼運作的？](/posts/how-the-internet-works)
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
-
-

@@ -267,5 +267,3 @@ Content-Type: text/html
 - [Submarine Cable Map — 全球海底電纜地圖](https://www.submarinecablemap.com/)
 - [How Does the Internet Work? — MDN](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work)
 - [Cloudflare — 什麼是 HTTPS？](https://www.cloudflare.com/zh-tw/learning/ssl/what-is-https/)
-
-

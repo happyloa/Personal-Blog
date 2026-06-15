@@ -8,7 +8,7 @@ category: learning
 
 CSS 在這幾年彷彿開了外掛，推出了許多大家敲碗已久的功能。如果你還停留在 SASS/SCSS 的時代，是時候來看看原生 CSS 現在有多強大了。
 
-## 1. 原生巢狀 (Nesting)
+## 1. 原生巢狀（Nesting）
 
 以前我們一定要用 SCSS 才能這樣寫：
 
@@ -44,7 +44,7 @@ CSS 在這幾年彷彿開了外掛，推出了許多大家敲碗已久的功能�
 
 ## 2. 父層選擇器 :has()
 
-這大概是 CSS 歷史上被敲碗最久的功能。以前我們只能往下選 (Parent > Child)，不能往上選 (Child < Parent)。
+這大概是 CSS 歷史上被敲碗最久的功能。以前我們只能往下選（Parent > Child），不能往上選（Child < Parent）。
 
 `:has()` 讓你終於可以說：「如果這個卡片裡面有圖片，就把卡片的 Padding 設小一點」。
 
@@ -67,11 +67,11 @@ label:has(+ input:checked) {
 
 **威力強大**：它不只是父層選擇器，更像是「條件選擇器」。
 
-## 3. 容器查詢 (Container Queries)
+## 3. 容器查詢（Container Queries）
 
-RWD (響應式設計) 一直以來都是基於 **視窗寬度 (Viewport Width)**，也就是 `@media (max-width: 768px)`。
+RWD（響應式設計）一直以來都是基於 **視窗寬度（Viewport Width）**，也就是 `@media (max-width: 768px)`。
 
-但這有個問題：一個卡片元件，放在側邊欄 (窄) 和放在主內容區 (寬)，我們希望它長得不一樣。但 `@media` 不知道卡片現在在多寬的容器裡。
+但這有個問題：一個卡片元件，放在側邊欄（窄）和放在主內容區（寬），我們希望它長得不一樣。但 `@media` 不知道卡片現在在多寬的容器裡。
 
 `@container` 解決了這個問題。它是基於**父容器的寬度**來做變化。
 
@@ -93,7 +93,7 @@ RWD (響應式設計) 一直以來都是基於 **視窗寬度 (Viewport Width)**
 }
 ```
 
-這對於元件化開發 (Component-Driven Development) 來說是革命性的改變。元件終於可以真正做到「隨處可用，自動適應」。
+這對於元件化開發（Component-Driven Development）來說是革命性的改變。元件終於可以真正做到「隨處可用，自動適應」。
 
 ## 結語
 

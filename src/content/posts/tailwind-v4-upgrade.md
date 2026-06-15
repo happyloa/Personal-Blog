@@ -10,7 +10,7 @@ Tailwind CSS v4 是近年來最大的版本更新。它不再只是「好用的 
 
 ## 最大的改變：速度與體積
 
-v4 拋棄了原本的 JavaScript 配置檔 (`tailwind.config.js`)，轉而直接使用 **CSS 變數**。這意味著：
+v4 拋棄了原本的 JavaScript 配置檔（`tailwind.config.js`），轉而直接使用 **CSS 變數**。這意味著：
 
 1. **編譯速度快 10 倍**：不需要等待繁重的 JS 解析。
 2. **更小的打包體積**：只打包你真正用到的樣式。
@@ -31,7 +31,7 @@ v4 拋棄了原本的 JavaScript 配置檔 (`tailwind.config.js`)，轉而直接
 
 然後你就可以直接用 `text-brand-primary` 或 `p-128`。
 
-## 動態數值 (Dynamic Values)
+## 動態數值（Dynamic Values）
 
 以前如果我們要用一個特定的數值，例如 `w-[350px]`，Tailwind 會生成一個 class。現在 v4 的引擎更聰明，它能即時處理這些任意值，而且**支援 CSS 運算**。
 
@@ -41,7 +41,7 @@ v4 拋棄了原本的 JavaScript 配置檔 (`tailwind.config.js`)，轉而直接
 
 注意那個 `/50`，現在透明度也可以直接接在自定義顏色後面了！
 
-## 容器查詢 (Container Queries) 正式轉正
+## 容器查詢（Container Queries）正式轉正
 
 以前要用 `@tailwindcss/container-queries` 外掛，現在直接內建：
 
@@ -53,7 +53,7 @@ v4 拋棄了原本的 JavaScript 配置檔 (`tailwind.config.js`)，轉而直接
 </div>
 ```
 
-## 3D 變換 (3D Transforms)
+## 3D 變換（3D Transforms）
 
 v4 增加了對 3D 屬性的支援：
 
