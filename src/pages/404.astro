@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../utils/site";
+---
+
+<BaseLayout
+  title={`找不到頁面 — ${site.title}`}
+  description="這個頁面不存在或已被移除。">
+  <section class="mx-auto max-w-xl py-16 text-center sm:py-24">
+    <p class="eyebrow mb-4">404</p>
+    <h1 class="mb-4 text-4xl md:text-5xl">找不到這個頁面</h1>
+    <p class="mb-8 leading-8 text-slate-400">
+      你要找的頁面可能已經被移除、改名，或從來沒有存在過。
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="/" class="tag-pill">← 返回首頁</a>
+      <a href="/categories/" class="tag-pill">瀏覽分類</a>
+      <a href="/tags/" class="tag-pill">瀏覽標籤</a>
+    </div>
+  </section>
+</BaseLayout>

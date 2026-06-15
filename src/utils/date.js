@@ -9,6 +9,7 @@ export function formatDate(date) {
     year: "numeric",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 }
 
