@@ -150,3 +150,4 @@ AI 輔助開發已經是現在進行式了，不是未來的事。學會善用�
 
 - [用 AI 開發 WordPress 安全外掛](/posts/site-addon-watchdog-ai-development)
 - [Vibe Coding 體驗營心得](/posts/hex2025-vibe-coding-camp)
+- [從零開始學 n8n](/posts/n8n-automation-learning)

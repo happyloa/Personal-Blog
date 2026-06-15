@@ -119,3 +119,10 @@ flowchart LR
 
 - 免費課程：[n8n 免費教學課程（YouTube 播放清單）](https://www.youtube.com/watch?v=o7Xp2OUOczA&list=PLBd8JGCAcUAEWlyAtVTaoFsaxvXACdZLA)
 - 官方文件：[n8n Docs](https://docs.n8n.io/)
+
+---
+
+站內相關文章：
+
+- [AI 輔助開發工具使用心得](/posts/ai-development-tools)
+- [用 AI 開發 WordPress 安全外掛](/posts/site-addon-watchdog-ai-development)
