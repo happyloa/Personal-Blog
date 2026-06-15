@@ -114,7 +114,7 @@ React 把所有副作用都用 `useEffect` 來處理，一開始會覺得有點�
 | Vue (時間點思維) | React (同步思維)            | 常見心智模型落差                                                    |
 | ---------------- | --------------------------- | ------------------------------------------------------------------- |
 | `onMounted`      | `useEffect(..., [])`        | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）  |
-| `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；UseEffect 在 render 完一定會至少跑一次 |
+| `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次 |
 | `onUnmounted`    | `useEffect` return function | 容易忘記 cleanup，導致 event listener 重複綁定                      |
 
 </div>

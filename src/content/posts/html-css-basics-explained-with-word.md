@@ -251,6 +251,6 @@ CSS 的基礎其實不難，就是「選擇器 + 屬性 + 值」的組合。建�
 站內相關文章：
 
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
-- [用 CSS 隱藏網頁元素的六種方法](/posts/three-ways-to-hide-a-certain-element-using-css)
+- [用 CSS 隱藏網頁元素的六種方法](/posts/six-ways-to-hide-a-certain-element-using-css)
 
 
