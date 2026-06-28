@@ -1,10 +1,10 @@
-# 個人部落格（Astro 6 + Tailwind 4）
+# 個人部落格（Astro 7 + Tailwind 4）
 
-以 Astro 6 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 4（透過 Vite plugin）進行樣式客製化。採用本地端字型（`@fontsource-variable/noto-sans-tc`）優化載入效能，並整合了目錄（TOC）、RSS、Sitemap 等功能，打造高效能且 SEO 友善的個人網站。
+以 Astro 7 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 4（透過 Vite plugin）進行樣式客製化。拉丁文字採用本地端字型（`@fontsource-variable` 的 Inter / Outfit / JetBrains Mono）以優化載入效能，中文則使用系統字型（system-ui，如微軟正黑體、PingFang TC）避免載入大型 CJK 字型檔；並整合了目錄（TOC）、RSS、Sitemap 等功能，打造高效能且 SEO 友善的個人網站。
 
 ## 主要特色
 
-- **核心架構**：Astro 6 + Tailwind CSS 4 + JavaScript
+- **核心架構**：Astro 7 + Tailwind CSS 4 + JavaScript
 - **內容管理**：使用 Content Collections 管理 Markdown 文章，具備 Zod 資料驗證
 - **效能優化**：靜態生成（SSG）、本地字型、RSS 與 Sitemap 自動輸出
 - **閱讀體驗**：

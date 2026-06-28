@@ -4,7 +4,6 @@ import tailwindvite from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://blog.worksbyaaron.com",
-  output: "static",
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindvite()],
