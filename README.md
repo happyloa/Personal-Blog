@@ -1,6 +1,6 @@
 # 個人部落格（Astro 7 + Tailwind 4）
 
-以 Astro 7 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 4（透過 Vite plugin）進行樣式客製化。拉丁文字採用本地端字型（`@fontsource-variable` 的 Inter / Outfit / JetBrains Mono）以優化載入效能，中文則使用系統字型（system-ui，如微軟正黑體、PingFang TC）避免載入大型 CJK 字型檔；並整合了目錄（TOC）、RSS、Sitemap 等功能，打造高效能且 SEO 友善的個人網站。
+以 Astro 7 建置的靜態部落格，文章內容來自 `src/content/posts` 的 Markdown 檔，並運用 Tailwind CSS 4（透過 Vite plugin）進行樣式客製化。字型透過 Astro 內建的 Fonts API 於 build 時下載並自架（毋須安裝 `@fontsource` 套件）：拉丁文字使用 Inter / Outfit / JetBrains Mono，中文使用思源黑體（Noto Sans TC），並以 `unicode-range` 子集化按需載入；同時整合了目錄（TOC）、RSS、Sitemap 等功能，打造高效能且 SEO 友善的個人網站。
 
 ## 主要特色
 
@@ -85,7 +85,7 @@ draft: false # （選填）設為 true 則不會發布
 
 ## 部署
 
-本專案設定為 `output: "static"`，可部署至任何靜態主機（如 Cloudflare Pages, Vercel, Netlify）。
+本專案為靜態輸出（Astro 預設的 `static` 模式），可部署至任何靜態主機（如 Cloudflare Pages, Vercel, Netlify）。
 
 ```bash
 npm run build
