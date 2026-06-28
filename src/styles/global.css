@@ -1,16 +1,18 @@
-@import "@fontsource-variable/outfit";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/jetbrains-mono";
 @import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 
+/* 字型由 Astro 內建 Fonts API 自架（見 astro.config.mjs 與 BaseLayout 的 <Font />）。
+   拉丁字優先 Inter / Outfit / JetBrains Mono，中文順位落到思源黑體（Noto Sans TC），
+   最後才回退系統字型。var(--font-*) 由 Astro 注入，對應自架字型的實際 family 名稱。 */
 @theme {
-  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    var(--font-inter), var(--font-noto-tc), ui-sans-serif, system-ui, sans-serif;
   --font-display:
-    "Outfit Variable", Outfit, ui-sans-serif, system-ui, sans-serif;
+    var(--font-outfit), var(--font-noto-tc), ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono:
-    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular,
+    var(--font-jetbrains), var(--font-noto-tc), ui-monospace, SFMono-Regular,
     Menlo, Monaco, Consolas, monospace;
 
   --color-base: #09090b;

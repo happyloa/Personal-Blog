@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 import { navLinks, site } from "../utils/site";
 import "../styles/global.css";
 
@@ -22,6 +23,11 @@ const currentYear = new Date().getFullYear();
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
+
+    <Font cssVariable="--font-inter" />
+    <Font cssVariable="--font-outfit" />
+    <Font cssVariable="--font-jetbrains" />
+    <Font cssVariable="--font-noto-tc" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
