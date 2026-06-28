@@ -1,18 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { categories } from "../../utils/categories";
+import { categories, getCategoryCounts } from "../../utils/categories";
 import { getPublishedPostsSorted } from "../../utils/posts";
 import { site } from "../../utils/site";
 
 const posts = await getPublishedPostsSorted();
-const categoryCounts = new Map<string, number>();
-
-posts.forEach((post) => {
-  categoryCounts.set(
-    post.data.category,
-    (categoryCounts.get(post.data.category) || 0) + 1,
-  );
-});
+const categoryCounts = getCategoryCounts(posts);
 ---
 
 <BaseLayout
@@ -33,7 +26,7 @@ posts.forEach((post) => {
           class="surface surface-hover block p-5 no-underline">
           <div class="mb-4 flex items-center justify-between">
             <span class="text-2xl" aria-hidden="true">{category.icon}</span>
-            <span class="font-mono text-xs text-slate-500">
+            <span class="font-mono text-xs text-slate-400">
               {categoryCounts.get(category.slug) || 0} 篇
             </span>
           </div>

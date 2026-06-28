@@ -1,36 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
-import { categories } from "../utils/categories";
+import { categories, getCategoryCounts } from "../utils/categories";
 import { getPublishedPostsSorted } from "../utils/posts";
 import { site } from "../utils/site";
-import { slugifyTag } from "../utils/tags";
+import { getAllTags } from "../utils/tags";
 
 const posts = await getPublishedPostsSorted();
-
-const tagMap = new Map<
-  string,
-  { count: number; display: string; slug: string }
->();
-
-const categoryCounts = new Map<string, number>();
-
-posts.forEach((post) => {
-  categoryCounts.set(
-    post.data.category,
-    (categoryCounts.get(post.data.category) || 0) + 1,
-  );
-
-  post.data.tags.forEach((tag) => {
-    const slug = slugifyTag(tag);
-    const current = tagMap.get(slug) ?? { count: 0, display: tag, slug };
-    tagMap.set(slug, { ...current, count: current.count + 1 });
-  });
-});
-
-const topTags = Array.from(tagMap.values())
-  .sort((a, b) => b.count - a.count)
-  .slice(0, 8);
+const categoryCounts = getCategoryCounts(posts);
+const topTags = getAllTags(posts).slice(0, 8);
 ---
 
 <BaseLayout title={site.title} description={site.description}>
@@ -65,7 +43,7 @@ const topTags = Array.from(tagMap.values())
               class="surface surface-hover block p-5 no-underline">
               <div class="mb-4 flex items-center justify-between gap-4">
                 <span class="text-2xl" aria-hidden="true">{category.icon}</span>
-                <span class="font-mono text-xs text-slate-500">
+                <span class="font-mono text-xs text-slate-400">
                   {categoryCounts.get(category.slug) || 0} 篇
                 </span>
               </div>
@@ -98,7 +76,7 @@ const topTags = Array.from(tagMap.values())
               class="tag-pill"
               aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
               #{tag.display}
-              <span class="ml-1 text-slate-600">{tag.count}</span>
+              <span class="ml-1 text-slate-400">{tag.count}</span>
             </a>
           ))
         }

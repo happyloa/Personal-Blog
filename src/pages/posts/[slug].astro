@@ -1,15 +1,15 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MDXImage from "../../components/MDXImage.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
-import { calculateReadingTime } from "../../utils/posts";
+import { calculateReadingTime, getPublishedPostsSorted } from "../../utils/posts";
 import { site } from "../../utils/site";
 import { formatDate, toISODate } from "../../utils/date";
 import { slugifyTag } from "../../utils/tags";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const posts = await getPublishedPostsSorted();
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -22,12 +22,66 @@ const components = { img: MDXImage };
 const readingTime = calculateReadingTime(post.body ?? "");
 const formattedDate = formatDate(post.data.date);
 const isoDate = toISODate(post.data.date);
+
+const description = post.data.description ?? post.data.title;
+const canonicalURL = new URL(`/posts/${post.id}/`, Astro.site);
+const ogImageURL = new URL(post.data.cover?.src ?? "/og-default.png", Astro.site);
+
+// 結構化資料：讓搜尋引擎與社群將文章辨識為 Article 而非一般網頁。
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description,
+  datePublished: isoDate,
+  dateModified: isoDate,
+  inLanguage: "zh-Hant",
+  author: { "@type": "Person", name: site.author },
+  publisher: { "@type": "Organization", name: site.title },
+  image: ogImageURL.href,
+  mainEntityOfPage: canonicalURL.href,
+  ...(post.data.tags.length > 0 && { keywords: post.data.tags.join(", ") }),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "首頁",
+      item: new URL("/", Astro.site).href,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: post.data.title,
+      item: canonicalURL.href,
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title={`${post.data.title} — ${site.title}`}
-  description={post.data.description ?? post.data.title}
-  image={post.data.cover?.src}>
+  description={description}
+  image={post.data.cover?.src}
+  ogType="article">
+  <Fragment slot="head">
+    <meta property="article:published_time" content={isoDate} />
+    <meta property="article:author" content={site.author} />
+    {post.data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(blogPostingSchema)}
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+  </Fragment>
+
   <nav
     class="mb-8 flex min-w-0 items-center gap-2 text-sm text-slate-500"
     aria-label="麵包屑">
@@ -38,7 +92,7 @@ const isoDate = toISODate(post.data.date);
 
   <article class="prose prose-lg prose-a:break-all">
     <header class="not-prose mb-12 border-b border-border-soft pb-8">
-      <div class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+      <div class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
         <time datetime={isoDate}>{formattedDate}</time>
         <span>約 {readingTime} 分鐘閱讀</span>
       </div>

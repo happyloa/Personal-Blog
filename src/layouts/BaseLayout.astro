@@ -7,6 +7,7 @@ const {
   title = site.title,
   description = site.description,
   image = "/og-default.png",
+  ogType = "website",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 
@@ -34,17 +35,21 @@ const currentYear = new Date().getFullYear();
       href="/rss.xml"
     />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:locale" content="zh_Hant_TW" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+
+    <slot name="head" />
 
     <ClientRouter />
   </head>
@@ -133,7 +138,7 @@ const currentYear = new Date().getFullYear();
         </section>
       </div>
 
-      <div class="border-t border-border-soft px-4 py-5 text-center text-xs text-slate-500">
+      <div class="border-t border-border-soft px-4 py-5 text-center text-xs text-slate-400">
         © {currentYear} {site.name}. Built with Astro and Tailwind CSS.
       </div>
     </footer>

@@ -1,21 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getPublishedPostsSorted } from "../../utils/posts";
 import { site } from "../../utils/site";
-import { slugifyTag } from "../../utils/tags";
+import { getAllTags } from "../../utils/tags";
 
-const posts = await getCollection("posts", ({ data }) => !data.draft);
-const tagMap = new Map<string, { count: number; display: string; slug: string }>();
-
-posts.forEach((post) => {
-  post.data.tags.forEach((tag) => {
-    const slug = slugifyTag(tag);
-    const current = tagMap.get(slug) ?? { count: 0, display: tag, slug };
-    tagMap.set(slug, { ...current, count: current.count + 1 });
-  });
-});
-
-const tags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
+const posts = await getPublishedPostsSorted();
+const tags = getAllTags(posts);
 ---
 
 <BaseLayout
@@ -41,7 +31,7 @@ const tags = Array.from(tagMap.values()).sort((a, b) => b.count - a.count);
             class="surface surface-hover flex items-center justify-between gap-4 p-4 no-underline"
             aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
             <span class="tag-pill">#{tag.display}</span>
-            <span class="font-mono text-xs text-slate-500">{tag.count} 篇</span>
+            <span class="font-mono text-xs text-slate-400">{tag.count} 篇</span>
           </a>
         ))
       )

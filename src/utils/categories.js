@@ -43,3 +43,14 @@ export const categoryMap = new Map(categories.map((c) => [c.slug, c]));
 export function getCategoryBySlug(slug) {
   return categoryMap.get(slug);
 }
+
+// 統計每個分類的文章數量（首頁與分類索引共用）。
+export function getCategoryCounts(posts) {
+  const counts = new Map();
+
+  posts.forEach((post) => {
+    counts.set(post.data.category, (counts.get(post.data.category) || 0) + 1);
+  });
+
+  return counts;
+}
