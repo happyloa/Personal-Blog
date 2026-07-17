@@ -24,7 +24,7 @@ category: tech-deep-dive
 
 以前 Vue 專案大多用 Jest，但 Jest 的設定真的很繁瑣，尤其是遇到 TypeScript 和 ESM 的時候。
 
-Vitest 是基於 Vite 的測試框架，最大的優點就是：**設定幾乎零成本**。它直接讀取你的 `vite.config.ts`，也就是說你的 alias、plugins 設定都不用重寫一遍。而且它的速度非常快（因為有 HMR），API 也跟 Jest 幾乎相容。
+Vitest 是基於 Vite 的測試框架，最大的優點就是：**設定幾乎零成本**。它直接讀取你的 `vite.config.ts`，也就是說你的 alias、plugins 設定都不用重寫一遍。而且它的速度非常快（因為共用 Vite 的 esbuild 轉譯管線，還有多執行緒平行跑測試；watch 模式下也會像 HMR 一樣，只重跑受影響檔案對應的測試），API 也跟 Jest 幾乎相容。
 
 ## 實戰：從單元測試開始
 
@@ -52,7 +52,7 @@ import { formatCurrency } from "./currency";
 
 describe("formatCurrency", () => {
   it("應該正確格式化台幣", () => {
-    expect(formatCurrency(1000)).toBe("NT$1,000");
+    expect(formatCurrency(1000)).toBe("$1,000");
   });
 
   it("應該可以處理不同幣別", () => {
@@ -60,12 +60,12 @@ describe("formatCurrency", () => {
   });
 
   it("應該處理 0 元", () => {
-    expect(formatCurrency(0)).toBe("NT$0");
+    expect(formatCurrency(0)).toBe("$0");
   });
 });
 ```
 
-這種測試寫起來很快，而且可以確保邊界情況（比如 0、負數）都有被處理到。
+這種測試寫起來很快，而且可以確保邊界情況（比如 0、負數）都有被處理到。順帶一提，貨幣符號字串會隨 Node／瀏覽器內建的 CLDR 資料版本而不同（例如 zh-TW locale 目前顯示的是 `$` 而非 `NT$`），實際斷言請以你環境跑出來的結果為準，或改用 `toMatch(/1,000/)` 這類不綁定符號的寬鬆寫法，比較不怕未來 CLDR 更新。
 
 ## 進階：元件測試
 
@@ -112,7 +112,7 @@ describe("Counter", () => {
 });
 ```
 
-## 測試金字塔的迷思
+## 該寫多少測試？測試金字塔原則
 
 常常有人糾結要寫多少測試。我的建議是遵循測試金字塔的原則：
 

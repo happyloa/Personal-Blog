@@ -1,6 +1,6 @@
 ﻿---
 title: 前端與後端到底在做什麼？— 用餐廳來比喻網站架構
-description: 前端是餐廳外場，後端是廚房，API 是點菜單。用最生動的餐廳比喻，帶你秒懂網站的前後端架構與分工。
+description: 前端是餐廳外場，後端是廚房，API 是點菜單，資料庫是食材倉庫。用最生動的餐廳比喻，帶你秒懂網站的前後端架構與分工。
 date: 2026-02-09
 tags: [前端, 後端, 新手入門]
 category: web-basics
@@ -43,13 +43,13 @@ category: web-basics
 
 ### 前端用的技術
 
-還記得上一篇介紹的 HTML 和 CSS 嗎？它們就是前端的基本工具：
+還記得[之前介紹的 HTML 和 CSS](/posts/html-css-basics-explained-with-word)嗎？它們就是前端的基本工具：
 
 - **HTML** = 餐廳的基本結構（牆壁、桌子、椅子）
 - **CSS** = 裝潢設計（油漆顏色、燈光、桌布）
 - **JavaScript** = 互動機制（服務鈴、自動門、電子菜單）
 
-而前端工程師常用的 **框架（Framework）**，像是 Vue.js、React、Next.js，就像是「餐廳裝潢的模組化套件」— 讓你可以更有效率地打造出漂亮的外場空間。
+而前端工程師常用的 **框架（Framework）**，像是 Vue.js、React，或是建構在它們之上的 Nuxt、Next.js 等，就像是「餐廳裝潢的模組化套件」— 讓你可以更有效率地打造出漂亮的外場空間。
 
 以我自己的工作為例，在開發[藝術銀行 Art Bank](https://artbank.tfaf.org.tw/) 這個專案時，我們使用 Nuxt 3（Vue.js 的進階框架）來打造前端，讓使用者可以瀏覽藝術作品、收藏作品、操作會員系統。這些你在畫面上看到的互動，全部都是前端的工作。
 
@@ -77,9 +77,9 @@ category: web-basics
 
 後端常見的程式語言和工具：
 
-- **Node.js**（JavaScript 的後端版本）
+- **Node.js**（讓 JavaScript 可以在伺服器端執行的執行環境）
 - **Python**、**PHP**、**Java**、**Go** 等
-- **資料庫**：MySQL、PostgreSQL、MongoDB
+- **資料庫**：MySQL、PostgreSQL、MongoDB（MySQL、PostgreSQL 是「關聯式資料庫」，用資料表儲存資料、以 SQL 操作；MongoDB 則是「NoSQL／文件型資料庫」，用類似 JSON 的文件結構儲存，操作方式不太一樣）
 
 以我的經驗為例，在公司的專案中，後端負責處理 ERP/CRM 企業系統的串接，管理訂單、會員資料和金流物流。這些看不見的幕後工作，全部都是後端在處理。
 

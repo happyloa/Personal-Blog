@@ -1,6 +1,6 @@
 ﻿---
 title: Tailwind CSS v4 來了！速度更快、體積更小、寫法更自由
-description: Tailwind v4 正式發布，帶來了效能的飛躍與更靈活的配置。不用再煩惱 tailwind.config.js，直接在 CSS 變數裡定義你的 Design System。
+description: Tailwind v4 正式發布，帶來了效能的飛躍與更靈活的配置方式。預設設定改用 CSS 變數，直接在 CSS 裡定義你的 Design System，舊的 tailwind.config.js 也還能透過 @config 沿用。
 date: 2026-02-19
 tags: [CSS, Tailwind]
 category: learning
@@ -10,10 +10,10 @@ Tailwind CSS v4 是近年來最大的版本更新。它不再只是「好用的 
 
 ## 最大的改變：速度與體積
 
-v4 拋棄了原本的 JavaScript 配置檔（`tailwind.config.js`），轉而直接使用 **CSS 變數**。這意味著：
+v4 把預設的配置方式從 JavaScript 設定檔換成了 **CSS 變數**（舊的 `tailwind.config.js` 仍可透過 `@config` 指令沿用，但官方建議直接改用 CSS 端的 `@theme`）。這次改版最有感的地方是：
 
-1. **編譯速度快 10 倍**：不需要等待繁重的 JS 解析。
-2. **更小的打包體積**：只打包你真正用到的樣式。
+1. **編譯速度大幅提升**：官方實測顯示，完整建置最高可提升約 5 倍，而未新增樣式時的增量建置更可達 100 倍以上、以微秒計算。這主要來自全新以 Rust 打造、內建 Lightning CSS 的引擎，而不只是省去 JS 設定檔解析。
+2. **更小的打包體積**：只打包你真正用到的樣式——這其實是 JIT 模式從 v3 就有的特性，v4 則是在效能與架構上做了大幅升級。
 
 ## 全新的配置方式
 
@@ -33,13 +33,13 @@ v4 拋棄了原本的 JavaScript 配置檔（`tailwind.config.js`），轉而直
 
 ## 動態數值（Dynamic Values）
 
-以前如果我們要用一個特定的數值，例如 `w-[350px]`，Tailwind 會生成一個 class。現在 v4 的引擎更聰明，它能即時處理這些任意值，而且**支援 CSS 運算**。
+其實方括號任意值語法（例如 `w-[350px]`）與其中的 **CSS 運算**（`calc()`），從 v3 的 JIT 引擎就開始支援了；v4 帶來的新意在於引擎效能更好，處理這些任意值時更快、更省資源。
 
 ```html
 <div class="w-[calc(100%-20px)] bg-brand-primary/50">...</div>
 ```
 
-注意那個 `/50`，現在透明度也可以直接接在自定義顏色後面了！
+注意那個 `/50`：v4 底層改用 `color-mix()` 處理透明度，因此即使顏色是用 CSS 變數表示，`/50` 這類修飾語也能正常運作，不再需要額外的 hack。
 
 ## 容器查詢（Container Queries）正式轉正
 
@@ -68,7 +68,7 @@ v4 增加了對 3D 屬性的支援：
 如果你還在用 v3，升級其實很無痛。官方提供了一個遷移工具：
 
 ```bash
-npx @tailwindcss/upgrade@next
+npx @tailwindcss/upgrade
 ```
 
 它會自動幫你把 `tailwind.config.js` 的設定轉換成新的 CSS 變數格式。

@@ -18,7 +18,7 @@ DNS 不是一本巨大的電話簿，而是一個**分散式、階層式**的資
 
 ## 當你輸入 google.com 時發生了什麼事？
 
-這是一個**遞迴查詢（Recursive Query）** 的過程：
+這整個過程叫做 **DNS 解析**，但其實裡面藏了兩種不同的查詢方式：使用者向遞迴解析器發出的是**遞迴查詢（Recursive Query）**——「幫我查到底，直接告訴我答案」；而遞迴解析器接著向 Root、TLD、權威伺服器發出的，則是**迭代查詢（Iterative Query）**——每一站只會回覆「你去問誰」，不會幫你追到底：
 
 ```mermaid
 sequenceDiagram
@@ -46,7 +46,7 @@ sequenceDiagram
 
 ### A 與 AAAA 紀錄
 
-- **A（Address）**：將域名指向 **IPv4** 位址（例如 `192.168.1.1`）。這是最基本的紀錄。
+- **A（Address）**：將域名指向 **IPv4** 位址（例如 `142.250.1.1`，也就是前面提到的 google.com 其中一個 IP）。這是最基本的紀錄。
 - **AAAA**：將域名指向 **IPv6** 位址。隨著 IPv4 枯竭，這越來越重要。
 
 ### CNAME（Canonical Name）
@@ -102,5 +102,6 @@ DNS 真的就像是網路世界裡的隱形接線生。懂了它是怎麼運作�
 
 站內相關文章：
 
+- [DNS 是什麼？— 用門牌號碼來理解網路世界的地址系統](/posts/dns-explained-with-address-system)
 - [網路是怎麼運作的？](/posts/how-the-internet-works)
 - [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)

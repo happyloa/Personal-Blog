@@ -22,7 +22,7 @@ category: tech-deep-dive
 2. **資源被佔用**：你的 Server 連線、Thread 被這個請求卡住，無法服務其他人
 3. **連鎖反應**：一個服務卡住，可能拖垮整個系統
 
-所以，我們需要一套「彈性」（Resilience）機制來應對這種情況。
+所以，我們需要一套「韌性」（Resilience）機制來應對這種情況。
 
 ## 第一道防線：Timeout（超時設定）
 
@@ -116,7 +116,8 @@ function sleep(ms) {
 - ✅ 5xx 錯誤（Server Error）
 - ✅ Timeout
 - ❌ 4xx 錯誤（Client Error）—— 這是你的問題，重試也沒用
-- ❌ 認證失敗（401/403）—— 重試前應該先刷新 Token
+- ❌ 401 認證失效 —— 通常是 Token 過期，可以先刷新 Token 再重試一次
+- ❌ 403 權限不足 —— 代表身分沒問題但沒有權限，換 Token 通常沒用，不建議直接重試，需要調整權限或走其他流程
 
 ## 第三道防線：Circuit Breaker（斷路器）
 
@@ -143,6 +144,7 @@ class CircuitBreaker {
     this.state = "CLOSED";
     this.failureCount = 0;
     this.lastFailureTime = null;
+    this.halfOpenInFlight = false; // Half-Open 狀態下是否已有試探請求在進行
   }
 
   async call(fn) {
@@ -155,6 +157,14 @@ class CircuitBreaker {
       }
     }
 
+    // Half-Open 時只放行一個試探請求，避免服務剛恢復就被一次湧入的請求打垮
+    if (this.state === "HALF_OPEN") {
+      if (this.halfOpenInFlight) {
+        throw new Error("Circuit breaker is HALF_OPEN - probing in progress");
+      }
+      this.halfOpenInFlight = true;
+    }
+
     try {
       const result = await fn();
 
@@ -165,6 +175,8 @@ class CircuitBreaker {
       // 請求失敗，更新失敗計數
       this.onFailure();
       throw error;
+    } finally {
+      this.halfOpenInFlight = false;
     }
   }
 
@@ -194,11 +206,19 @@ async function processPayment(data) {
   return paymentBreaker.call(() =>
     fetchWithRetry("https://api.payment.com/charge", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // 用 orderId 當 Idempotency Key：同一筆訂單就算被重試多次，
+        // 伺服器端也能辨識出是同一筆請求，回傳原本的結果而不會重複扣款
+        "Idempotency-Key": data.orderId,
+      },
       body: JSON.stringify(data),
     }),
   );
 }
 ```
+
+要特別注意的是，像扣款這種**非幂等（non-idempotent）**操作，重試前務必確認 API 有支援 Idempotency Key，否則 Timeout 造成的重試可能讓使用者被重複扣款——上面範例特地帶上 `Idempotency-Key`，就是為了讓伺服器端能辨識重複請求、避免這個問題。
 
 ## 實務上的整合
 
@@ -206,12 +226,12 @@ async function processPayment(data) {
 
 ```mermaid
 flowchart LR
-    A["發出請求"] --> B["Timeout\n單次請求不會無限等待"]
-    B -->|"超時"| C["Retry with Backoff\n暫時性失敗自動恢復"]
-    C -->|"連續失敗"| D["Circuit Breaker\n持續故障時快速失敗"]
+    A["發出請求"] --> B["Timeout<br/>單次請求不會無限等待"]
+    B -->|"超時"| C["Retry with Backoff<br/>暫時性失敗自動恢復"]
+    C -->|"連續失敗"| D["Circuit Breaker<br/>持續故障時快速失敗"]
     B -->|"成功"| E["回傳結果"]
     C -->|"重試成功"| E
-    D -->|"熔斷開啟"| F["快速失敗\n保護系統"]
+    D -->|"熔斷開啟"| F["快速失敗<br/>保護系統"]
 ```
 
 如果你用的是 Node.js，可以考慮使用現成的套件：

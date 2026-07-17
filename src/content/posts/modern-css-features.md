@@ -1,5 +1,5 @@
 ﻿---
-title: 你可能還不知道的現代 CSS 功能 — :has(), @container 與 Nesting
+title: 你可能還不知道的現代 CSS 功能 — Nesting、:has() 與 @container
 description: CSS 進化得太快了！這篇文章介紹三個改變遊戲規則的新功能，讓你的 CSS 寫法更強大、更簡潔。
 date: 2026-02-18
 tags: [CSS, 新技術]
@@ -46,7 +46,7 @@ CSS 在這幾年彷彿開了外掛，推出了許多大家敲碗已久的功能�
 
 這大概是 CSS 歷史上被敲碗最久的功能。以前我們只能往下選（Parent > Child），不能往上選（Child < Parent）。
 
-`:has()` 讓你終於可以說：「如果這個卡片裡面有圖片，就把卡片的 Padding 設小一點」。
+`:has()` 讓你終於可以說：「如果這個卡片裡面有圖片，就讓卡片自動變成左右兩欄的 grid 版面」。
 
 ```css
 /* 如果 .card 裡面包含 .image，就讓 .card 變成 grid layout */
@@ -55,11 +55,14 @@ CSS 在這幾年彷彿開了外掛，推出了許多大家敲碗已久的功能�
   grid-template-columns: 1fr 1fr;
 }
 
-/* 如果 input 被勾選了，就把旁邊的 label 變紅色 */
+/* HTML: <input id="x"><label for="x">...</label> */
+/* 如果 input 被勾選了，就把緊接在後面的 label 變紅色 */
 input:checked + label {
   color: red;
 }
-/* 用 :has() 可以寫得更語意化 */
+
+/* HTML: <label>...</label><input id="x">（label 在前、input 在後時）*/
+/* :has() 讓我們終於能「往前選取」：根據後面兄弟元素的狀態，反過來選取前面的元素 */
 label:has(+ input:checked) {
   color: red;
 }

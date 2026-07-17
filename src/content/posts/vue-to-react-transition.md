@@ -94,12 +94,12 @@ Vue 和 React 的生命週期可以這樣對應：
 
 <div class="table-wrapper">
 
-| Vue 3         | React                             |
-| ------------- | --------------------------------- |
-| `onMounted`   | `useEffect(() => {}, [])`         |
-| `onUpdated`   | `useEffect(() => {})`             |
-| `onUnmounted` | `useEffect` 的 cleanup function   |
-| `watch`       | `useEffect` 搭配 dependency array |
+| Vue 3         | React                              | 常見陷阱／心智模型落差                                                                                            |
+| ------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `onMounted`   | `useEffect(() => {}, [])`            | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）                                              |
+| `onUpdated`   | `useEffect(() => {})`                | 注意：這個寫法沒有 dependency array，第一次 render（也就是 mount）也會先執行一次，和 Vue 的 `onUpdated`（明確不含初次掛載）並不對等 |
+| `onUnmounted` | `useEffect` 的 cleanup function      | 容易忘記 cleanup，導致 event listener 重複綁定                                                                  |
+| `watch`       | `useEffect` 搭配 dependency array     | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次                                             |
 
 </div>
 
@@ -107,17 +107,7 @@ React 把所有副作用都用 `useEffect` 來處理，一開始會覺得有點�
 
 ### 詳細的生命週期對照與陷阱
 
-很多從 Vue 轉過來的人（包含我）最容易在 `useEffect` 踩坑，因為我們習慣了 `onMounted` 這種「時間點」的思考模式，但 React 的 Hooks 是「狀態同步」的思考模式。
-
-<div class="table-wrapper">
-
-| Vue（時間點思維） | React（同步思維）            | 常見心智模型落差                                                    |
-| ---------------- | --------------------------- | ------------------------------------------------------------------- |
-| `onMounted`      | `useEffect(..., [])`        | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）  |
-| `watch(xx)`      | `useEffect(..., [xx])`      | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次 |
-| `onUnmounted`    | `useEffect` return function | 容易忘記 cleanup，導致 event listener 重複綁定                      |
-
-</div>
+很多從 Vue 轉過來的人（包含我）最容易在 `useEffect` 踩坑，因為我們習慣了 `onMounted` 這種「時間點」的思考模式，但 React 的 Hooks 是「狀態同步」的思考模式。上面表格最後一欄整理了幾個最常見的落差，其中最容易誤用的是 `onUpdated` 對應的 `useEffect(() => {})`：因為沒有 dependency array，它在 mount 時也會執行一次；如果只是想模擬「只在更新時執行」的效果，需要自己用 `useRef` 記錄是否為首次渲染，在該次提前 return。
 
 **最大的陷阱：Stale Closure**
 
@@ -281,7 +271,7 @@ if (isLoggedIn) {
 
 4. **不要硬套 Vue 思維**：有些東西在 Vue 很自然，在 React 要換一種方式思考
 
-5. **從 Next.js 開始也行**：如果已經會 Nuxt，直接學 Next.js 會很有帶入感，學得也快
+5. **從 Next.js 開始也行**：如果已經會 Nuxt，直接學 Next.js 會很有代入感，學得也快
 
 ## 結語
 

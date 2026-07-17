@@ -10,7 +10,7 @@ category: learning
 
 這篇文章整理了六種常見的 CSS 隱藏方法，並說明各自的適用場景和無障礙（Accessibility）考量。
 
-## 1. display: none;
+## 1. display: none — 完全從文件流移除
 
 ```css
 .hidden {
@@ -30,7 +30,7 @@ category: learning
 
 **適用場景：** 需要完全隱藏某個區塊，例如 Tab 切換時隱藏非當前的內容、手機版隱藏桌面版專用的元素。
 
-## 2. visibility: hidden;
+## 2. visibility: hidden — 保留空間但視覺隱藏
 
 ```css
 .invisible {
@@ -51,7 +51,7 @@ category: learning
 
 **適用場景：** 需要保留佈局空間的情況，例如等待載入時的佔位元素。
 
-## 3. visibility: collapse;
+## 3. visibility: collapse — 表格／Flex 專用的收合
 
 ```css
 .collapsed {
@@ -63,13 +63,14 @@ category: learning
 
 **特性：**
 
-- 在 `<table>` 的列（`<tr>`）或欄（`<col>`）：隱藏且不佔空間
-- 在 Flexbox 或 Grid 子元素：隱藏且不佔空間
+- 在 `<table>` 的列（`<tr>`）或欄（`<col>`）：規範定義為隱藏且不佔空間
+- 在 Flexbox 子項目：規範定義為隱藏且不佔用主軸空間，但**目前僅 Firefox 完整實作**；Chrome/Edge（Chromium）與 Safari 大多仍把它當成 `visibility: hidden` 處理（仍會佔據空間），正式環境使用前請先實測目標瀏覽器
+- 在 Grid 子項目：**規範並未給予特例**，等同於 `visibility: hidden`，仍會佔據原本的空間
 - 在其他元素：等同於 `visibility: hidden`
 
-**適用場景：** 動態顯示/隱藏表格的列或欄，或是 Flex 項目的切換。
+**適用場景：** 動態顯示/隱藏表格的列或欄；若想用於 Flex 項目的切換，記得先確認目標瀏覽器是否支援「不佔空間」的行為，否則建議當成 `visibility: hidden` 的等效寫法使用。
 
-## 4. opacity: 0;
+## 4. opacity: 0 — 完全透明
 
 ```css
 .transparent {
@@ -99,7 +100,7 @@ category: learning
 }
 ```
 
-## 5. 移出可視範圍（Position）
+## 5. 移出可視範圍（position: absolute）
 
 ```css
 .offscreen {
@@ -113,7 +114,7 @@ category: learning
 **特性：**
 
 - 視覺上看不見（因為在畫面外）
-- 不影響文件流（因為是 absolute）
+- 元素脫離文件流（因為是 absolute），不會影響其他元素的佈局位置
 - **螢幕閱讀器可以讀取**
 - 仍然可以被 Tab 鍵聚焦
 
@@ -137,7 +138,7 @@ category: learning
 
 這是 Bootstrap 和 Tailwind CSS 使用的 `.sr-only`（Screen Reader Only）寫法。
 
-## 6. clip-path
+## 6. clip-path — 裁切成不可見
 
 ```css
 .clipped {
@@ -164,12 +165,14 @@ category: learning
 | ----------------------- | :------: | :----: | :--------: | :---------: | :----: |
 | `display: none`         |    ❌    |   ❌   |     ❌     |     ❌      |   ❌   |
 | `visibility: hidden`    |    ✅    |   ❌   |     ❌     |     ❌      |   ✅   |
-| `visibility: collapse`  |  看情況  |   ❌   |     ❌     |     ❌      |   ✅   |
+| `visibility: collapse`  | 看情況＊ |   ❌   |     ❌     |     ❌      |   ✅   |
 | `opacity: 0`            |    ✅    |   ✅   |     ✅     |     ✅      |   ✅   |
 | Position 移出螢幕       |    ❌    |   ❌   |     ✅     |     ✅      |   ❌   |
 | `clip-path: inset(50%)` |    ✅    |   ❌   |     ✅     |     ✅      |   ✅   |
 
 </div>
+
+＊`visibility: collapse` 是否「不佔空間」依元素類型與瀏覽器而異：table 列/欄一律不佔空間；Flex 項目僅 Firefox 完整支援，Chrome/Edge/Safari 大多仍佔據空間；Grid 子項目則一律等同 `visibility: hidden`，仍佔據空間（詳見上方第 3 節說明）。
 
 ## 無障礙（Accessibility）考量
 

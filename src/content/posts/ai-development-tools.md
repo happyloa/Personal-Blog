@@ -1,7 +1,7 @@
 ﻿---
-title: AI 輔助開發工具使用心得 — Claude Code、Cursor、Antigravity IDE 實戰分享
+title: AI 輔助開發工具使用心得 — Claude、Cursor、Antigravity IDE 實戰分享
 description: 分享 Claude、Cursor 等 AI 輔助開發工具的實戰心得。探討如何善用 AI 加速重複性工作，讓工程師專注於更有價值的核心邏輯。
-date: 2025-07-08
+date: 2025-12-20
 tags: [AI, 職涯]
 category: career
 ---
@@ -72,7 +72,7 @@ AI 在這個專案中幫了很多忙：
 
 **CSS 轉換**：有時候需要把設計稿的樣式轉成 Tailwind class，描述一下要的效果，AI 就能給出對應的 class 組合。
 
-**正則表達式**：每次要寫 regex 都要查很久，現在直接問 AI「我要匹配 xxx 格式的字串」，它就會給我正確的正則表達式。
+**正則表達式**：每次要寫 regex 都要查很久，現在直接問 AI「我要匹配 xxx 格式的字串」，它通常能給我很接近需求的正則表達式，我再測試調整。
 
 **Git 操作**：遇到不熟悉的 Git 情境，像是怎麼 rebase、怎麼 cherry-pick，問 AI 比查 Stack Overflow 快。
 

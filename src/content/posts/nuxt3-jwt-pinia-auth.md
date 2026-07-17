@@ -1,6 +1,6 @@
 ﻿---
 title: Nuxt 3 JWT 身份驗證實作筆記 — 搭配 Pinia 與 Cookie 管理登入狀態
-description: 完整教學：如何在 Nuxt 3 專案中實作 JWT 身份驗證，結合 Pinia 狀態管理與 Cookie，完美解決 SSR 登入狀態同步問題。
+description: 實作筆記：如何在 Nuxt 3 專案中用 Pinia 搭配 Cookie 管理 JWT 登入狀態，並處理 SSR 時的登入狀態同步問題。
 date: 2025-03-05
 tags: [Nuxt, Vue]
 category: learning
@@ -55,6 +55,8 @@ Cookie 負責持久化儲存，這樣重新整理頁面或關掉瀏覽器再開�
 // stores/auth.ts
 export const useAuthStore = defineStore("auth", () => {
   const tokenCookie = useCookie("auth_token", {
+    // 範例為求簡化，用 7 天的長效單一 token；
+    // 正式環境建議改用短效 access token（幾小時內）+ refresh token，並實作換發機制
     maxAge: 60 * 60 * 24 * 7, // 7 天
     secure: true,
     sameSite: "strict",
@@ -169,11 +171,13 @@ export default defineNuxtPlugin(async () => {
 
 1. **Token 不要存敏感資訊**：JWT 的 payload 只是 base64 編碼，不是加密，任何人都能解開來看
 
-2. **設定合理的過期時間**：太長有安全風險，太短使用者體驗差。通常 access token 設幾小時到一天
+2. **useCookie 存 token 一樣有 XSS 風險**：範例裡的 `auth_token` cookie 沒有設定 `httpOnly`，因為前端還要用 `authStore.token` 組出 `Authorization` header，架構上本來就無法設成 httpOnly。也就是說網站一旦被注入惡意 script，這顆 cookie 照樣能被讀走，風險其實跟存在 localStorage 差不多，只是多了「SSR 或重新整理頁面時不用等 client 端恢復」的方便。如果前後端在同一個網域，更安全的做法是讓後端直接發 httpOnly Cookie，前端不主動讀 token，改由 Server 端轉發 API 請求
 
-3. **登出要確實清除**：cookie 要清，store 也要清
+3. **設定合理的過期時間**：太長有安全風險，太短使用者體驗差。通常 access token 設幾小時到一天，搭配 refresh token 來延長登入狀態，而不是像本文範例直接用單一長效 token
 
-4. **錯誤處理要完整**：網路斷線、token 過期、權限不足，這些情況都要跟使用者說清楚
+4. **登出要確實清除**：cookie 要清，store 也要清
+
+5. **錯誤處理要完整**：網路斷線、token 過期、權限不足，這些情況都要跟使用者說清楚
 
 ## 結語
 

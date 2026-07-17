@@ -6,7 +6,7 @@ tags: [WordPress, AI, 專案開發]
 category: project
 ---
 
-前陣子開發了一個 WordPress 安全外掛——[Site Add-on Watchdog](https://tw.wordpress.org/plugins/site-add-on-watchdog/)，主要功能是自動監控網站上安裝的外掛有沒有安全漏洞。這個專案比較特別的地方是，全程都是用 AI 輔助開發，從需求分析到程式碼撰寫，幾乎都是跟 AI 協作完成的。
+前陣子開發了一個 WordPress 安全外掛——[Site Add-on Watchdog](https://tw.wordpress.org/plugins/site-add-on-watchdog/)，主要功能是自動監控網站上安裝的外掛有沒有安全漏洞。這個專案比較特別的地方是，幾乎全程都是用 AI 輔助開發，從需求分析到程式碼撰寫都是跟 AI 協作完成的。
 
 ## 為什麼要做這個外掛
 
@@ -67,7 +67,7 @@ WordPress 外掛開發有一套自己的規範，像是 Hook 機制、設定頁�
 
 外掛的核心功能是漏洞偵測，這部分整合了 WPScan API。WPScan 是一個知名的 WordPress 安全掃描工具，他們維護了一個完整的漏洞資料庫。
 
-整合的流程是：先抓取網站上所有已安裝的外掛清單和版本號，然後打 WPScan API 查詢每個外掛是否有已知的 CVE 漏洞。如果有，就記錄下來並觸發通知。
+整合的流程是：先抓取網站上所有已安裝的外掛清單和版本號，然後打 WPScan API 查詢每個外掛是否有已知的 CVE 漏洞。如果有，就記錄下來並觸發通知。除了透過 WPScan API 查詢已收錄的 CVE，外掛也會比對外掛官方 Changelog 中提到的安全修補字樣，作為 WPScan 資料庫尚未收錄時的輔助判斷。
 
 ### Webhook 通知機制
 

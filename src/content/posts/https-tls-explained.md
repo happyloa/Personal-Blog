@@ -45,22 +45,22 @@ sequenceDiagram
     participant Client as 瀏覽器
     participant Server as 伺服器
 
-    Client->>Server: 1. Client Hello（我支援 TLS 1.3，這是我的亂數）
-    Server->>Client: 2. Server Hello（好，用 TLS 1.3，這是我的憑證和亂數）
+    Client->>Server: 1. Client Hello（我支援 TLS 1.3，這是我的亂數 + 金鑰交換參數 key_share）
+    Server->>Client: 2. Server Hello（好，用 TLS 1.3，這是我的憑證、亂數和 key_share）
     Note over Client: 3. 驗證憑證是否合法
-    Client->>Server: 4. 用伺服器公鑰加密「Pre-Master Secret」傳過去
-    Note over Server: 5. 用私鑰解密取得 Secret
-    Note over Client, Server: 雙方利用 Secret 和亂數，生成同一把「對稱金鑰」
-    Client->>Server: 6. 之後的對話都用這把鑰匙加密
-    Server->>Client: 7. 沒問題
+    Note over Client, Server: 4. 雙方各自用「自己的私密亂數」+「對方的 key_share」，各自算出同一把「對稱金鑰」
+    Client->>Server: 5. 之後的對話都用這把鑰匙加密
+    Server->>Client: 6. 沒問題
 ```
 
-1. **打招呼**：瀏覽器跟伺服器說 Hello，確認要用哪種加密演算法。
-2. **給憑證**：伺服器把自己的身分證（SSL 憑證）給瀏覽器看，裡面包含**公鑰**。
+1. **打招呼**：瀏覽器跟伺服器說 Hello，同時各自附上一組用來交換金鑰的隨機參數（key_share），確認要用哪種加密演算法。
+2. **給憑證**：伺服器把自己的身分證（SSL 憑證）和自己的 key_share 一起交給瀏覽器，憑證裡包含**公鑰**。
 3. **驗證**：瀏覽器檢查憑證是不是合法的 CA（Certificate Authority）發的、有沒有過期。
-4. **交換鑰匙**：瀏覽器生成一個隨機數（Pre-Master Secret），用伺服器的**公鑰**加密後傳回去。
-5. **生成會話金鑰**：伺服器用**私鑰**解開。現在雙方都有了同樣的祕密，用它生成一把**對稱金鑰（Session Key）**。
+4. **交換鑰匙**：瀏覽器和伺服器分別用「自己的私密亂數」和「對方傳來的 key_share」，透過（Elliptic Curve）Diffie-Hellman 演算法各自獨立算出同一把祕密——這把祕密從頭到尾都不會真的在網路上傳輸，就算封包被攔截也無法還原。
+5. **生成會話金鑰**：雙方用這把共同祕密生成一把**對稱金鑰（Session Key）**。
 6. **開始加密通訊**：接下來的資料傳輸都改用這把對稱金鑰來加密，速度就很快了。
+
+這套做法叫做 **(EC)DHE（Diffie-Hellman Ephemeral）金鑰交換**，也是 TLS 1.3 唯一支援的方式。舊版 TLS（如 TLS 1.2 以前）允許瀏覽器直接用伺服器公鑰加密一個亂數傳過去，但這種做法不具「前向保密（Forward Secrecy）」——只要伺服器私鑰哪天外洩，過去側錄下來的封包也能被回頭解密。TLS 1.3 因此完全移除了這種舊式作法，並且把握手縮短到只需 1 個 RTT（一來一回）就能完成，比舊版更快、更安全。
 
 ## SSL 憑證（Certificate）
 
@@ -72,7 +72,7 @@ sequenceDiagram
 
 ## 結語
 
-下次上網看到網址旁邊那個小鎖頭，你就知道背後發生了多酷的事情啦！你的瀏覽器和伺服器在幾毫秒內神不知鬼不覺地完成了一次超複雜的握手，互相換了密碼，確保你們的對話絕對安全，連駭客也拿你們沒轍。
+下次上網看到網址旁邊那個小鎖頭，你就知道背後發生了多酷的事情啦！你的瀏覽器和伺服器在幾毫秒內神不知鬼不覺地完成了一次超複雜的握手，協商出一把只有彼此知道的加密金鑰，確保你們的對話絕對安全，連駭客也拿你們沒轍。
 
 ---
 

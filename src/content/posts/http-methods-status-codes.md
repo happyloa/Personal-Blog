@@ -10,7 +10,7 @@ category: web-basics
 
 ## HTTP 方法：動作是什麼？
 
-最常見的四種方法對應到資料庫操作的 CRUD：
+最常見的方法對應到資料庫操作的 CRUD（PUT 與 PATCH 都對應「Update」，所以底下會介紹五種方法）：
 
 ### GET：讀取資料
 
@@ -68,8 +68,8 @@ category: web-basics
 - **401 Unauthorized**：**未認證**。你沒有登入或 Token 無效。
 - **403 Forbidden**：**禁止存取**。你登入了，但權限不足（例如一般會員想看管理者頁面）。
 - **404 Not Found**：資源不存在。
-- **429 Too Many Requests**：請求次數過多，被限流了。
 - **418 I'm a teapot**：愚人節玩笑定義的狀態碼，意思是「你不能用茶壺來泡咖啡」，偶爾會在某些 IoT 設備或彩蛋中看到它。
+- **429 Too Many Requests**：請求次數過多，被限流了。
 
 ### 5xx：伺服器錯誤（Server Error）
 
