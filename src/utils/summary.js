@@ -1,3 +1,9 @@
+/**
+ * 將文字（可能含 Markdown 語法）去除連結與標記符號後，壓成單行純文字摘要。
+ * @param {string} text 原始文字，可能含 Markdown 語法
+ * @param {number} [maxLength=160] 摘要最大字元數
+ * @returns {string} 去除 Markdown 語法並裁切長度後的純文字摘要
+ */
 export const toPlainTextExcerpt = (
   text,
   maxLength = 160,

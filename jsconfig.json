@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
-  }
+    "baseUrl": ".",
+    "checkJs": true
+  },
+  "exclude": ["dist", "node_modules", ".astro"]
 }
