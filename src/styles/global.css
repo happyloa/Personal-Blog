@@ -183,6 +183,12 @@ figure img {
   scrollbar-color: #3f3f46 transparent;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

@@ -78,7 +78,11 @@ const currentYear = new Date().getFullYear();
       <div
         class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
       >
-        <a href="/" class="flex items-center gap-3 no-underline">
+        <a
+          href="/"
+          class="flex items-center gap-3 no-underline"
+          aria-label={`${site.name} 首頁`}
+        >
           <span
             class="flex size-9 items-center justify-center rounded-md border border-border-soft bg-surface font-display text-base font-semibold text-slate-50"
           >
