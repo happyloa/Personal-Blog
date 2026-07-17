@@ -17,7 +17,7 @@
 
 ## 環境需求
 
-- Node.js 18.17 以上（建議使用 LTS 版本）
+- Node.js 22.12 以上（astro 7 要求，建議使用 LTS 版本）
 - npm 10 以上
 
 ## 本地開發流程
@@ -79,7 +79,7 @@ draft: false # （選填）設為 true 則不會發布
 
 ### 撰寫建議
 
-- **圖片**：建議將圖片放於 `src/assets` 並以相對路徑引用，Astro 會自動優化。
+- **圖片**：文章內文圖片目前慣例放在 `public/images/posts/<slug>/`，在 Markdown 中以絕對路徑引用（例如 `/images/posts/my-post/cover.webp`）。這個路徑不會經過 Astro 的圖片優化管線，請自行先壓縮/轉檔（建議 WebP）再上傳。若要使用 frontmatter 的 `cover` 欄位，則走 Astro 內建的 `image()` 優化管線，圖片路徑需相對於文章檔案可解析（例如放在 `src/assets` 並用相對路徑引用）。
 - **標籤**：系統會自動將標籤轉為小寫並移除特殊符號（Slugify），自動生成對應的 `/tags/[tag]/` 頁面。
 - **目錄**：文章內頁會自動解析 `h2` 與 `h3` 標題生成目錄。
 
