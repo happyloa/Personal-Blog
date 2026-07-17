@@ -130,13 +130,13 @@ category: learning
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 ```
 
-這是 Bootstrap 和 Tailwind CSS 使用的 `.sr-only`（Screen Reader Only）寫法。
+這是 Tailwind CSS（`sr-only` utility）目前使用的寫法；Bootstrap 5+ 稱為 `.visually-hidden`（Bootstrap 4 稱為 `.sr-only`），兩者現行版本都已改用 `clip-path` 而非較舊的 `clip: rect(...)`。
 
 ## 6. clip-path — 裁切成不可見
 
@@ -153,6 +153,8 @@ category: learning
 - 元素被裁切成不可見
 - 佔據原本的空間
 - 無法被點擊（被裁切的區域不會觸發事件）
+- 螢幕閱讀器可以讀取
+- 仍然可以被 Tab 鍵聚焦
 - 可以套用 CSS transition 動畫
 
 **適用場景：** 需要特殊裁切動畫效果時使用。
@@ -234,8 +236,8 @@ category: learning
 
 ---
 
-- [visibility - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/visibility)
-- [display - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/display)
+- [visibility - MDN](https://developer.mozilla.org/zh-TW/docs/Web/CSS/visibility)
+- [display - MDN](https://developer.mozilla.org/zh-TW/docs/Web/CSS/display)
 - [Inclusively Hidden - Scott O'Hara](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)
 
 ---

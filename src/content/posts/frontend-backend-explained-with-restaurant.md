@@ -43,7 +43,7 @@ category: web-basics
 
 ### 前端用的技術
 
-還記得[之前介紹的 HTML 和 CSS](/posts/html-css-basics-explained-with-word)嗎？它們就是前端的基本工具：
+還記得[之前介紹的 HTML 和 CSS](/posts/html-css-basics-explained-with-word) 嗎？它們就是前端的基本工具：
 
 - **HTML** = 餐廳的基本結構（牆壁、桌子、椅子）
 - **CSS** = 裝潢設計（油漆顏色、燈光、桌布）

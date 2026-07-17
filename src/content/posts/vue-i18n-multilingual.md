@@ -140,6 +140,7 @@ key 的命名最好有規則可循，例如 `頁面.區塊.元素`。這樣找�
 有些文字會包含變數，或是需要處理複數形式：
 
 ```json
+// locales/zh-TW.json
 {
   "items": {
     "count": "共 {count} 個項目"
@@ -155,6 +156,7 @@ key 的命名最好有規則可循，例如 `頁面.區塊.元素`。這樣找�
 英文的複數比較麻煩，好在 Vue i18n 有內建處理：
 
 ```json
+// locales/en.json（同一個 items.count key，換成 en 語系的複數寫法）
 {
   "items": {
     "count": "no items | one item | {count} items"

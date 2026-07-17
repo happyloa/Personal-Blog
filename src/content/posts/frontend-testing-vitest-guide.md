@@ -24,7 +24,7 @@ category: tech-deep-dive
 
 以前 Vue 專案大多用 Jest，但 Jest 的設定真的很繁瑣，尤其是遇到 TypeScript 和 ESM 的時候。
 
-Vitest 是基於 Vite 的測試框架，最大的優點就是：**設定幾乎零成本**。它直接讀取你的 `vite.config.ts`，也就是說你的 alias、plugins 設定都不用重寫一遍。而且它的速度非常快（因為共用 Vite 的 esbuild 轉譯管線，還有多執行緒平行跑測試；watch 模式下也會像 HMR 一樣，只重跑受影響檔案對應的測試），API 也跟 Jest 幾乎相容。
+Vitest 是基於 Vite 的測試框架，最大的優點就是：**設定幾乎零成本**。它直接讀取你的 `vite.config.ts`，也就是說你的 alias、plugins 設定都不用重寫一遍。而且它的速度非常快（因為共用 Vite 的 esbuild 轉譯管線，還會平行執行測試檔案——預設用多行程 fork，也可切換成 threads；watch 模式下也會像 HMR 一樣，只重跑受影響檔案對應的測試），API 也跟 Jest 幾乎相容。
 
 ## 實戰：從單元測試開始
 
@@ -61,6 +61,10 @@ describe("formatCurrency", () => {
 
   it("應該處理 0 元", () => {
     expect(formatCurrency(0)).toBe("$0");
+  });
+
+  it("應該處理負數", () => {
+    expect(formatCurrency(-1000)).toBe("-$1,000");
   });
 });
 ```

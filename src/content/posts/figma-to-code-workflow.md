@@ -1,6 +1,6 @@
 ﻿---
 title: Figma to Code 工作流程分享
-description: 解析從 Figma 設計稿轉化為 Vue + Tailwind 程式碼的高效工作流程，建立 Design System 以確保設計與開發的一致性。
+description: 解析從 Figma 設計稿轉化為 Vue + TypeScript + Tailwind 程式碼的高效工作流程，建立 Design System 以確保設計與開發的一致性。
 date: 2023-06-20
 tags: [UI/UX, 職涯]
 category: tech-deep-dive
@@ -169,7 +169,7 @@ const buttonClasses = computed(() => {
 </script>
 
 <template>
-  <button :class="buttonClasses" :disabled="disabled">
+  <button :class="buttonClasses" :disabled="props.disabled">
     <slot />
   </button>
 </template>
@@ -189,11 +189,22 @@ const buttonClasses = computed(() => {
 
 ## 確保一致性的做法
 
-**命名對齊**：Figma 的 Component 名稱和程式碼的元件名稱保持一致，例如 Figma 端是 `Button/Primary/Large`，程式碼端就對應寫成 `<Button variant="primary" size="lg" />`，這樣溝通時不會搞混。
+### 命名對齊
 
-**定期同步**：Design System 會不斷更新，要有機制讓設計和程式碼保持同步——設計師更新 Figma 的 Component 後通知工程師有什麼改動，工程師更新對應的程式碼，最後再更新文件，確保兩邊不會脫節。
+Figma 的 Component 名稱和程式碼的元件名稱保持一致，例如 Figma 端是 `Button/Primary/Large`，程式碼端就對應寫成 `<Button variant="primary" size="lg" />`，這樣溝通時不會搞混。
 
-**Code Review 檢查**：Code Review 時確認新做的 UI 有使用共用元件，不是自己從頭寫。如果有新的樣式需求，討論是不是應該加到 Design System 裡面。
+### 定期同步
+
+Design System 會不斷更新，要有機制讓設計和程式碼保持同步：
+
+1. 設計師更新 Figma 的 Component
+2. 通知工程師有什麼改動
+3. 工程師更新對應的程式碼
+4. 最後再更新文件，確保兩邊不會脫節
+
+### Code Review 檢查
+
+Code Review 時確認新做的 UI 有使用共用元件，不是自己從頭寫。如果有新的樣式需求，討論是不是應該加到 Design System 裡面。
 
 ## Figma 常用操作技巧
 

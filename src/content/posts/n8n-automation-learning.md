@@ -38,7 +38,7 @@ flowchart LR
 
 跟 Zapier、Make 比起來，n8n 的優勢在於：
 
-- **原始碼公開、可自架**：n8n 採用 fair-code 的 Sustainable Use License，個人或內部使用可以免費自架、不用付月費，但因附帶使用限制，嚴格來說不是 OSI 認定的開源軟體；如果像我一樣要包成 SaaS 對外提供給其他商家使用，建議先確認授權條款是否允許
+- **原始碼公開、可自架**：n8n 採用 fair-code 的 Sustainable Use License，個人或內部使用可以免費自架、不用付月費，但因附帶使用限制，嚴格來說不是 OSI（Open Source Initiative，開源定義的認證機構）認定的開源軟體；如果像我一樣要包成 SaaS 對外提供給其他商家使用，建議先確認授權條款是否允許
 - **彈性高**：需要的時候可以直接寫 JavaScript 處理資料
 - **節點豐富**：內建超多服務的整合，常見的工具幾乎都有
 

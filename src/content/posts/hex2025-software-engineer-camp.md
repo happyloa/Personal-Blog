@@ -61,7 +61,7 @@ category: project
 
 課程本身教的是 HTML + CSS，著重於 Flexbox 排版技巧，這對新手來說是非常紮實的基礎訓練。但我想給自己一點挑戰，所以選擇了：
 
-- **Nuxt 4.2**：Vue 的超級加強版，有更好的 SEO 支援
+- **Nuxt**：Vue 的超級加強版，有更好的 SEO 支援
 - **Tailwind CSS**：寫起來超快的 Utility-First CSS 框架
 - **Nuxt Content**：讓我可以用 Markdown 寫部落格
 - **Nuxt AOS**：做滾動動畫的套件
