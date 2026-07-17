@@ -26,7 +26,8 @@ const { displayTag, posts } = Astro.props;
 
 <BaseLayout
   title={`#${displayTag} 標籤文章 — ${site.title}`}
-  description={`包含 #${displayTag} 標籤的文章彙整`}>
+  description={`包含 #${displayTag} 標籤的文章彙整`}
+>
   <section class="mb-10 max-w-3xl">
     <a href="/tags/" class="mb-5 inline-flex text-sm no-underline">
       ← 返回標籤
@@ -41,9 +42,7 @@ const { displayTag, posts } = Astro.props;
       posts.length > 0 ? (
         posts.map((post) => <PostCard post={post} />)
       ) : (
-        <p class="surface p-5 text-slate-400">
-          目前沒有包含這個標籤的文章。
-        </p>
+        <p class="surface p-5 text-slate-400">目前沒有包含這個標籤的文章。</p>
       )
     }
   </section>

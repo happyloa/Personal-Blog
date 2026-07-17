@@ -10,7 +10,9 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const filteredHeadings = headings.filter(
+  (heading) => heading.depth >= 2 && heading.depth <= 3,
+);
 ---
 
 {
@@ -18,7 +20,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
     <>
       <aside
         id="toc-desktop"
-        class="fixed right-6 top-24 z-30 hidden max-h-[calc(100vh-7rem)] w-64 overflow-y-auto 2xl:block">
+        class="fixed right-6 top-24 z-30 hidden max-h-[calc(100vh-7rem)] w-64 overflow-y-auto 2xl:block"
+      >
         <nav class="surface p-4 text-sm" aria-label="文章目錄">
           <p class="mb-3 font-semibold text-slate-200">目錄</p>
           <ol class="grid gap-1">
@@ -27,7 +30,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
                 <a
                   href={`#${heading.slug}`}
                   class="toc-link block rounded-md px-2 py-1.5 text-slate-400 no-underline hover:bg-surface-soft hover:text-slate-100"
-                  data-slug={heading.slug}>
+                  data-slug={heading.slug}
+                >
                   {heading.text}
                 </a>
               </li>
@@ -43,7 +47,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
           class="fixed bottom-4 right-4 z-50 rounded-md border border-border-soft bg-surface px-4 py-3 text-sm font-semibold text-slate-100 shadow-lg"
           aria-label="開啟目錄"
           aria-controls="toc-mobile"
-          aria-expanded="false">
+          aria-expanded="false"
+        >
           目錄
         </button>
 
@@ -57,7 +62,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
           id="toc-mobile"
           class="fixed bottom-20 right-4 z-50 max-h-[60vh] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-lg border border-border-soft bg-surface p-4 opacity-0 pointer-events-none transition-opacity"
           aria-label="文章目錄"
-          aria-hidden="true">
+          aria-hidden="true"
+        >
           <p class="mb-3 font-semibold text-slate-200">目錄</p>
           <ol class="grid gap-1 text-sm">
             {filteredHeadings.map((heading) => (
@@ -65,7 +71,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
                 <a
                   href={`#${heading.slug}`}
                   class="toc-link-mobile block rounded-md px-2 py-1.5 text-slate-400 no-underline hover:bg-surface-soft hover:text-slate-100"
-                  data-slug={heading.slug}>
+                  data-slug={heading.slug}
+                >
                   {heading.text}
                 </a>
               </li>
@@ -75,8 +82,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
       </div>
 
       <script>
-        import { initTOC } from "../scripts/toc";
-
+        import {initTOC} from "../scripts/toc";
         document.addEventListener("astro:page-load", initTOC);
       </script>
     </>

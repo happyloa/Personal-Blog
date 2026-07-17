@@ -36,8 +36,9 @@ export function calculateReadingTime(body) {
     .replace(/<[^>]+>/g, "")
     .trim();
   const cjkCount = (text.match(/[\u4e00-\u9fff]/g) ?? []).length;
-  const latinWordCount = (text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) ?? [])
-    .length;
+  const latinWordCount = (
+    text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) ?? []
+  ).length;
 
   return Math.max(1, Math.ceil(cjkCount / 400 + latinWordCount / 200));
 }

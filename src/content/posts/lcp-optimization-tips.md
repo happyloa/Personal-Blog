@@ -63,7 +63,8 @@ WebP 的壓縮效率比 JPEG 和 PNG 好很多，同樣畫質下檔案可以縮�
     /images/hero-1200w.webp 1200w
   "
   sizes="(max-width: 768px) 100vw, 50vw"
-  alt="Hero image" />
+  alt="Hero image"
+/>
 ```
 
 這樣手機會載入 400w 的小圖，桌機才載入大圖。我之前做的[個人品牌網站專案](https://github.com/happyloa/Hex2025-mission2/blob/main/components/Common/Hero/Hero.vue#L31)就有用到這個技巧。

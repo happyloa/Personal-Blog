@@ -24,7 +24,8 @@ const posts = allPosts.filter((post) => post.data.category === categorySlug);
 
 <BaseLayout
   title={`${categoryInfo.name} — ${site.title}`}
-  description={categoryInfo.description}>
+  description={categoryInfo.description}
+>
   <section class="mb-10 max-w-3xl">
     <a href="/categories/" class="mb-5 inline-flex text-sm no-underline">
       ← 返回分類

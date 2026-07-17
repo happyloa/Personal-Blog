@@ -18,16 +18,19 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
   <div class="mb-4 flex flex-wrap items-center gap-2 text-xs text-slate-400">
     <time datetime={isoDate} class="font-mono">{formattedDate}</time>
     {
-      post.data.tags.slice(0, 3).map((tag) => (
-        <span class="tag-pill px-2 py-0.5 text-[11px]">#{tag}</span>
-      ))
+      post.data.tags
+        .slice(0, 3)
+        .map((tag) => (
+          <span class="tag-pill px-2 py-0.5 text-[11px]">#{tag}</span>
+        ))
     }
   </div>
 
   <h2 class="mb-3 text-xl leading-snug md:text-2xl">
     <a
       href={`/posts/${post.id}/`}
-      class="text-slate-50 no-underline group-hover:text-primary-muted">
+      class="text-slate-50 no-underline group-hover:text-primary-muted"
+    >
       {post.data.title}
     </a>
   </h2>
@@ -43,7 +46,8 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
   <a
     href={`/posts/${post.id}/`}
     class="inline-flex items-center gap-2 text-sm font-medium no-underline"
-    aria-label={`閱讀文章：${post.data.title}`}>
+    aria-label={`閱讀文章：${post.data.title}`}
+  >
     閱讀文章
     <span aria-hidden="true">→</span>
   </a>

@@ -98,15 +98,15 @@ CSS 的全名是 **Cascading Style Sheets**（層疊樣式表）。它的工作�
 
 <div class="table-wrapper">
 
-| Word 裡的操作   | 對應的 CSS 寫法             |
-| --------------- | --------------------------- |
-| 字體變大         | `font-size: 24px;`（示意用，實際換算 1pt ≈ 1.33px） |
-| 字體顏色 → 紅色 | `color: red;`               |
-| 粗體            | `font-weight: bold;`        |
-| 斜體            | `font-style: italic;`       |
-| 文字置中        | `text-align: center;`       |
-| 背景顏色 → 黃色 | `background-color: yellow;` |
-| 段落間距        | `margin: 20px;`             |
+| Word 裡的操作   | 對應的 CSS 寫法                                     |
+| --------------- | --------------------------------------------------- |
+| 字體變大        | `font-size: 24px;`（示意用，實際換算 1pt ≈ 1.33px） |
+| 字體顏色 → 紅色 | `color: red;`                                       |
+| 粗體            | `font-weight: bold;`                                |
+| 斜體            | `font-style: italic;`                               |
+| 文字置中        | `text-align: center;`                               |
+| 背景顏色 → 黃色 | `background-color: yellow;`                         |
+| 段落間距        | `margin: 20px;`                                     |
 
 </div>
 

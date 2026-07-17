@@ -94,12 +94,12 @@ Vue 和 React 的生命週期可以這樣對應：
 
 <div class="table-wrapper">
 
-| Vue 3         | React                              | 常見陷阱／心智模型落差                                                                                            |
-| ------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `onMounted`   | `useEffect(() => {}, [])`            | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）                                              |
-| `onUpdated`   | `useEffect(() => {})`                | 注意：這個寫法沒有 dependency array，第一次 render（也就是 mount）也會先執行一次，和 Vue 的 `onUpdated`（明確不含初次掛載）並不對等 |
-| `onUnmounted` | `useEffect` 的 cleanup function      | 容易忘記 cleanup，導致 event listener 重複綁定                                                                  |
-| `watch`       | `useEffect` 搭配 dependency array     | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次                                             |
+| Vue 3         | React                             | 常見陷阱／心智模型落差                                                                                                              |
+| ------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `onMounted`   | `useEffect(() => {}, [])`         | Vue 只跑一次；React 在 StrictMode 開發環境會跑兩次（這是正常的！）                                                                  |
+| `onUpdated`   | `useEffect(() => {})`             | 注意：這個寫法沒有 dependency array，第一次 render（也就是 mount）也會先執行一次，和 Vue 的 `onUpdated`（明確不含初次掛載）並不對等 |
+| `onUnmounted` | `useEffect` 的 cleanup function   | 容易忘記 cleanup，導致 event listener 重複綁定                                                                                      |
+| `watch`       | `useEffect` 搭配 dependency array | Vue 的 watch 預設是 lazy 的；useEffect 在 render 完一定會至少跑一次                                                                 |
 
 </div>
 

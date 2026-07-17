@@ -10,7 +10,8 @@ const tags = getAllTags(posts);
 
 <BaseLayout
   title={`所有標籤 — ${site.title}`}
-  description="瀏覽部落格使用中的所有標籤與文章數量">
+  description="瀏覽部落格使用中的所有標籤與文章數量"
+>
   <section class="mb-10 max-w-3xl">
     <a href="/" class="mb-5 inline-flex text-sm no-underline">← 返回首頁</a>
     <p class="eyebrow mb-3">Tags</p>
@@ -29,7 +30,8 @@ const tags = getAllTags(posts);
           <a
             href={`/tags/${tag.slug}/`}
             class="surface surface-hover flex items-center justify-between gap-4 p-4 no-underline"
-            aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
+            aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}
+          >
             <span class="tag-pill">#{tag.display}</span>
             <span class="font-mono text-xs text-slate-400">{tag.count} 篇</span>
           </a>

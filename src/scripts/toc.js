@@ -54,7 +54,9 @@ export function initTOC() {
   tocOverlay?.addEventListener("click", () => setMobileOpen(false));
 
   document.querySelectorAll(".toc-link-mobile").forEach((link) => {
-    link.addEventListener("click", () => setMobileOpen(false, { returnFocus: false }));
+    link.addEventListener("click", () =>
+      setMobileOpen(false, { returnFocus: false }),
+    );
   });
 
   // 以 Escape 關閉行動版目錄，並在開啟時把 Tab 焦點侷限在面板內；先移除舊監聽器避免跨頁面累積。

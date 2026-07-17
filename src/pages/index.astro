@@ -40,9 +40,12 @@ const topTags = getAllTags(posts).slice(0, 8);
           categories.map((category) => (
             <a
               href={`/categories/${category.slug}/`}
-              class="surface surface-hover block p-5 no-underline">
+              class="surface surface-hover block p-5 no-underline"
+            >
               <div class="mb-4 flex items-center justify-between gap-4">
-                <span class="text-2xl" aria-hidden="true">{category.icon}</span>
+                <span class="text-2xl" aria-hidden="true">
+                  {category.icon}
+                </span>
                 <span class="font-mono text-xs text-slate-400">
                   {categoryCounts.get(category.slug) || 0} 篇
                 </span>
@@ -74,7 +77,8 @@ const topTags = getAllTags(posts).slice(0, 8);
             <a
               href={`/tags/${tag.slug}/`}
               class="tag-pill"
-              aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}>
+              aria-label={`查看 #${tag.display} 標籤的 ${tag.count} 篇文章`}
+            >
               #{tag.display}
               <span class="ml-1 text-slate-400">{tag.count}</span>
             </a>

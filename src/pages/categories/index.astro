@@ -10,12 +10,15 @@ const categoryCounts = getCategoryCounts(posts);
 
 <BaseLayout
   title={`文章分類 — ${site.title}`}
-  description="依照主題分類瀏覽所有文章">
+  description="依照主題分類瀏覽所有文章"
+>
   <section class="mb-10 max-w-3xl">
     <a href="/" class="mb-5 inline-flex text-sm no-underline">← 返回首頁</a>
     <p class="eyebrow mb-3">Categories</p>
     <h1 class="mb-4 text-3xl md:text-4xl">文章分類</h1>
-    <p class="leading-8 text-slate-400">選擇你有興趣的主題，從一組相關文章開始讀。</p>
+    <p class="leading-8 text-slate-400">
+      選擇你有興趣的主題，從一組相關文章開始讀。
+    </p>
   </section>
 
   <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -23,9 +26,12 @@ const categoryCounts = getCategoryCounts(posts);
       categories.map((category) => (
         <a
           href={`/categories/${category.slug}/`}
-          class="surface surface-hover block p-5 no-underline">
+          class="surface surface-hover block p-5 no-underline"
+        >
           <div class="mb-4 flex items-center justify-between">
-            <span class="text-2xl" aria-hidden="true">{category.icon}</span>
+            <span class="text-2xl" aria-hidden="true">
+              {category.icon}
+            </span>
             <span class="font-mono text-xs text-slate-400">
               {categoryCounts.get(category.slug) || 0} 篇
             </span>

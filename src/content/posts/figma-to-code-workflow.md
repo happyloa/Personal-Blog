@@ -135,37 +135,37 @@ module.exports = {
 ```vue
 // components/Button.vue
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'md' | 'lg'
-  disabled?: boolean
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  size: 'md',
-  disabled: false
-})
+  variant: "primary",
+  size: "md",
+  disabled: false,
+});
 
 const buttonClasses = computed(() => {
-  const base = 'font-medium rounded-lg transition-colors'
+  const base = "font-medium rounded-lg transition-colors";
 
   const variants = {
-    primary: 'bg-primary-500 text-white hover:bg-primary-600',
-    secondary: 'bg-gray-100 text-gray-800 hover:bg-gray-200',
-    outline: 'border border-primary-500 text-primary-500 hover:bg-primary-50'
-  }
+    primary: "bg-primary-500 text-white hover:bg-primary-600",
+    secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
+    outline: "border border-primary-500 text-primary-500 hover:bg-primary-50",
+  };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg'
-  }
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
+  };
 
-  return [base, variants[props.variant], sizes[props.size]]
-})
+  return [base, variants[props.variant], sizes[props.size]];
+});
 </script>
 
 <template>
