@@ -45,6 +45,13 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindvite()],
+    // 關閉小型腳本自動內嵌：Astro 預設會把體積小於 assetsInlineLimit 的 <script> chunk
+    // 直接內嵌進 HTML（例如 TableOfContents 的 toc.js），這類 inline script 沒有 nonce/hash
+    // 會被 public/_headers 的 CSP script-src 擋下。設為 0 讓所有腳本一律輸出成外部檔案，
+    // 才能在不放寬 CSP、不必手動維護 hash 的情況下正常執行。
+    build: {
+      assetsInlineLimit: 0,
+    },
   },
   build: {
     inlineStylesheets: "auto",

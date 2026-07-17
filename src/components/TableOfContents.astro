@@ -80,11 +80,11 @@ const filteredHeadings = headings.filter(
           </ol>
         </nav>
       </div>
-
-      <script>
-        import {initTOC} from "../scripts/toc";
-        document.addEventListener("astro:page-load", initTOC);
-      </script>
     </>
   )
 }
+
+<script>
+  import { initTOC } from "../scripts/toc";
+  document.addEventListener("astro:page-load", initTOC);
+</script>

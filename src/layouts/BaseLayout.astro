@@ -7,7 +7,7 @@ import "../styles/global.css";
 const {
   title = site.title,
   description = site.description,
-  image = "/og-default.png",
+  image = site.defaultOgImage,
   ogType = "website",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
@@ -139,8 +139,8 @@ const currentYear = new Date().getFullYear();
               ))
             }
             <li>
-              <a href="/rss.xml" class="text-slate-400 no-underline"
-                >RSS 訂閱</a>
+              <a href="/rss.xml" class="text-slate-400 no-underline">RSS 訂閱</a
+              >
             </li>
           </ul>
         </nav>
@@ -183,8 +183,7 @@ const currentYear = new Date().getFullYear();
     <script>
       import { initMermaid } from "../scripts/mermaid";
 
-      initMermaid();
-      document.addEventListener("astro:after-swap", initMermaid);
+      document.addEventListener("astro:page-load", initMermaid);
     </script>
   </body>
 </html>
