@@ -31,7 +31,7 @@ const isoDate = toISODate(post.data.date);
 const description = toPlainTextExcerpt(getPostDescription(post));
 const canonicalURL = new URL(`/posts/${post.id}/`, Astro.site);
 const ogImageURL = new URL(
-  post.data.cover?.src ?? "/og-default.png",
+  post.data.cover?.src ?? site.defaultOgImage,
   Astro.site,
 );
 

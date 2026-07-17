@@ -14,6 +14,8 @@ export function getStaticPaths() {
 const { category: categorySlug } = Astro.params;
 const categoryInfo = getCategoryBySlug(categorySlug);
 
+// 目前是全靜態輸出（static），getStaticPaths 只會用合法 slug 產生頁面，
+// 這段在現況下不會被觸發；保留作為未來若改成 SSR/hybrid 輸出時的保險。
 if (!categoryInfo) {
   return Astro.redirect("/404");
 }

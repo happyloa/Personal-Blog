@@ -1,0 +1,31 @@
+---
+interface Category {
+  slug: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  category: Category;
+  count: number;
+  headingLevel?: "h2" | "h3";
+}
+
+const { category, count, headingLevel = "h3" } = Astro.props;
+const Heading = headingLevel;
+---
+
+<a
+  href={`/categories/${category.slug}/`}
+  class="surface surface-hover block p-5 no-underline"
+>
+  <div class="mb-4 flex items-center justify-between gap-4">
+    <span class="text-2xl" aria-hidden="true">
+      {category.icon}
+    </span>
+    <span class="font-mono text-xs text-slate-400">{count} 篇</span>
+  </div>
+  <Heading class="mb-2 text-lg">{category.name}</Heading>
+  <p class="text-sm leading-6 text-slate-400">{category.description}</p>
+</a>

@@ -12,7 +12,11 @@ export const toPlainTextExcerpt = (text, maxLength = 160) => {
     value.replace(/\[(.*?)\]\((.*?)\)/g, "$1");
 
   return stripMarkdownLinks(text)
-    .replace(/[#>*-]/g, "")
+    .replace(/^[ \t]*#+\s*/gm, "") // 標題標記
+    .replace(/^[ \t]*>\s*/gm, "") // 引用標記
+    .replace(/^[ \t]*[-*]\s+/gm, "") // 項目符號（僅限行首，避免誤刪文字中的連字號）
+    .replace(/\*\*(.*?)\*\*/g, "$1") // 粗體
+    .replace(/\*(.*?)\*/g, "$1") // 斜體
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, maxLength);

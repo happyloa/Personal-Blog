@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
+import CategoryCard from "../components/CategoryCard.astro";
 import { categories, getCategoryCounts } from "../utils/categories";
 import { getPublishedPostsSorted } from "../utils/posts";
 import { site } from "../utils/site";
@@ -38,23 +39,11 @@ const topTags = getAllTags(posts).slice(0, 8);
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           categories.map((category) => (
-            <a
-              href={`/categories/${category.slug}/`}
-              class="surface surface-hover block p-5 no-underline"
-            >
-              <div class="mb-4 flex items-center justify-between gap-4">
-                <span class="text-2xl" aria-hidden="true">
-                  {category.icon}
-                </span>
-                <span class="font-mono text-xs text-slate-400">
-                  {categoryCounts.get(category.slug) || 0} 篇
-                </span>
-              </div>
-              <h3 class="mb-2 text-lg">{category.name}</h3>
-              <p class="text-sm leading-6 text-slate-400">
-                {category.description}
-              </p>
-            </a>
+            <CategoryCard
+              category={category}
+              count={categoryCounts.get(category.slug) || 0}
+              headingLevel="h3"
+            />
           ))
         }
       </div>
