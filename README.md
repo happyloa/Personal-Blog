@@ -43,6 +43,13 @@
    npm run preview # 預覽 build 後的結果
    ```
 
+4. **格式化**
+
+   ```bash
+   npm run format       # 用 Prettier 自動排版
+   npm run format:check # 只檢查、不修改，適合 commit 前執行
+   ```
+
 ## 專案結構
 
 ```bash
