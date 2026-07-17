@@ -5,7 +5,10 @@ import tailwindvite from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://blog.worksbyaaron.com",
   integrations: [sitemap()],
-  // 使用 Astro 內建 Fonts API：在 build 時下載並自架字型，毋須安裝 @fontsource 套件。
+  // 使用 Astro 內建 Fonts API：在 build 時下載並自架拉丁字型，毋須安裝 @fontsource 套件。
+  // 中文思源黑體（Noto Sans TC）改回外部 Google Fonts <link>（見 BaseLayout.astro）：
+  // 自架時每一頁都要內嵌一份完整的 CJK unicode-range CSS（約 103KB gzip 且無法跨頁快取），
+  // 改用外部連結可讓這段 CSS 變成單一、可被瀏覽器跨頁/跨站快取的資源。
   fonts: [
     // 拉丁字型不附加通用 fallback（sans-serif），讓中文能在字級串接中順位落到思源黑體；
     // 通用 fallback 統一在 global.css 的字型堆疊尾端補上。
@@ -30,15 +33,6 @@ export default defineConfig({
       name: "JetBrains Mono",
       cssVariable: "--font-jetbrains",
       weights: [400, 500],
-      fallbacks: [],
-      optimizedFallbacks: false,
-    },
-    {
-      // 思源黑體（繁體）：中文內文與標題字型。
-      provider: fontProviders.google(),
-      name: "Noto Sans TC",
-      cssVariable: "--font-noto-tc",
-      weights: [400, 500, 700],
       fallbacks: [],
       optimizedFallbacks: false,
     },

@@ -2,18 +2,18 @@
 
 @plugin '@tailwindcss/typography';
 
-/* 字型由 Astro 內建 Fonts API 自架（見 astro.config.mjs 與 BaseLayout 的 <Font />）。
-   拉丁字優先 Inter / Outfit / JetBrains Mono，中文順位落到思源黑體（Noto Sans TC），
-   最後才回退系統字型。var(--font-*) 由 Astro 注入，對應自架字型的實際 family 名稱。 */
+/* 拉丁字型由 Astro 內建 Fonts API 自架（見 astro.config.mjs 與 BaseLayout 的 <Font />），
+   優先順序為 Inter / Outfit / JetBrains Mono；var(--font-*) 由 Astro 注入，對應自架字型的實際
+   family 名稱。中文思源黑體（Noto Sans TC）改走外部 Google Fonts <link>（見 BaseLayout.astro），
+   因此直接以字型名稱 "Noto Sans TC" 加入字型堆疊，最後才回退系統字型。 */
 @theme {
   --font-sans:
-    var(--font-inter), var(--font-noto-tc), ui-sans-serif, system-ui, sans-serif;
+    var(--font-inter), "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
   --font-display:
-    var(--font-outfit), var(--font-noto-tc), ui-sans-serif, system-ui,
-    sans-serif;
+    var(--font-outfit), "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    var(--font-jetbrains), var(--font-noto-tc), ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Consolas, monospace;
+    var(--font-jetbrains), "Noto Sans TC", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
 
   --color-base: #09090b;
   --color-surface: #111116;
