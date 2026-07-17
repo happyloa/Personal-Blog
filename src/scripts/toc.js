@@ -1,5 +1,5 @@
-// 在模組層保存 Escape 監聽器，避免每次 astro:page-load 重新初始化時於 document 上層層疊加。
-let tocEscapeHandler;
+// 在模組層保存鍵盤監聽器，避免每次 astro:page-load 重新初始化時於 document 上層層疊加。
+let tocKeydownHandler;
 
 export function initTOC() {
   const tocMobile = document.getElementById("toc-mobile");
@@ -16,6 +16,8 @@ export function initTOC() {
     isOpen = nextOpen;
     tocFab?.setAttribute("aria-expanded", String(isOpen));
     tocMobile?.setAttribute("aria-hidden", String(!isOpen));
+    // 關閉時用 inert 讓面板內連結整體退出 Tab 順序與無障礙樹，避免與 aria-hidden 衝突。
+    tocMobile?.toggleAttribute("inert", !isOpen);
     tocMobile?.classList.toggle("opacity-100", isOpen);
     tocMobile?.classList.toggle("pointer-events-auto", isOpen);
     tocMobile?.classList.toggle("opacity-0", !isOpen);
@@ -39,8 +41,7 @@ export function initTOC() {
       const isActive = link.getAttribute("data-slug") === slug;
       link.classList.toggle("bg-surface-soft", isActive);
       link.classList.toggle("text-slate-100", isActive);
-      link.classList.toggle("text-slate-500", !isActive && link.classList.contains("toc-link"));
-      link.classList.toggle("text-slate-400", !isActive && link.classList.contains("toc-link-mobile"));
+      link.classList.toggle("text-slate-400", !isActive);
       if (isActive) {
         link.setAttribute("aria-current", "true");
       } else {
@@ -56,16 +57,34 @@ export function initTOC() {
     link.addEventListener("click", () => setMobileOpen(false, { returnFocus: false }));
   });
 
-  // 以 Escape 關閉行動版目錄；先移除舊監聽器避免跨頁面累積。
-  if (tocEscapeHandler) {
-    document.removeEventListener("keydown", tocEscapeHandler);
+  // 以 Escape 關閉行動版目錄，並在開啟時把 Tab 焦點侷限在面板內；先移除舊監聽器避免跨頁面累積。
+  if (tocKeydownHandler) {
+    document.removeEventListener("keydown", tocKeydownHandler);
   }
-  tocEscapeHandler = (event) => {
-    if (event.key === "Escape" && isOpen) {
+  tocKeydownHandler = (event) => {
+    if (!isOpen) return;
+
+    if (event.key === "Escape") {
       setMobileOpen(false);
+      return;
+    }
+
+    if (event.key === "Tab" && tocMobile) {
+      const focusable = tocMobile.querySelectorAll("a[href]");
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   };
-  document.addEventListener("keydown", tocEscapeHandler);
+  document.addEventListener("keydown", tocKeydownHandler);
 
   const headingObserver = new IntersectionObserver(
     (entries) => {

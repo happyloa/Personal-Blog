@@ -38,13 +38,22 @@ export const categories = [
   },
 ];
 
-export const categoryMap = new Map(categories.map((c) => [c.slug, c]));
+const categoryMap = new Map(categories.map((c) => [c.slug, c]));
 
+/**
+ * 依 slug 查詢分類定義。
+ * @param {string} slug 分類 slug（對應 content.config.js 的 category 列舉值）
+ * @returns {{slug: string, name: string, description: string, icon: string} | undefined} 對應的分類定義，查無則回傳 undefined
+ */
 export function getCategoryBySlug(slug) {
   return categoryMap.get(slug);
 }
 
-// 統計每個分類的文章數量（首頁與分類索引共用）。
+/**
+ * 統計每個分類的文章數量（首頁與分類索引共用）。
+ * @param {Array<{data: {category: string}}>} posts 已發布文章集合
+ * @returns {Map<string, number>} 以分類 slug 為 key 的文章數量統計
+ */
 export function getCategoryCounts(posts) {
   const counts = new Map();
 

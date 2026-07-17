@@ -43,17 +43,21 @@ const currentYear = new Date().getFullYear();
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.title} />
-    <meta property="og:locale" content="zh_Hant_TW" />
+    <meta property="og:locale" content="zh_TW" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={Astro.url} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.url)} />
+    <meta name="twitter:image:alt" content={title} />
 
     <slot name="head" />
 
@@ -68,7 +72,7 @@ const currentYear = new Date().getFullYear();
         <a href="/" class="flex items-center gap-3 no-underline">
           <span
             class="flex size-9 items-center justify-center rounded-md border border-border-soft bg-surface font-display text-base font-semibold text-slate-50">
-            A
+            {site.name.charAt(0)}
           </span>
           <span class="hidden font-display text-base font-semibold text-slate-50 sm:inline">
             {site.name}
@@ -102,7 +106,7 @@ const currentYear = new Date().getFullYear();
           <div class="mb-3 flex items-center gap-3">
             <span
               class="flex size-9 items-center justify-center rounded-md border border-border-soft bg-surface font-display font-semibold text-slate-50">
-              A
+              {site.name.charAt(0)}
             </span>
             <h2 class="text-lg">{site.name}</h2>
           </div>
@@ -149,75 +153,8 @@ const currentYear = new Date().getFullYear();
       </div>
     </footer>
 
-    <script is:inline type="module">
-      const mermaidKeywords = [
-        "sequenceDiagram",
-        "flowchart ",
-        "graph ",
-        "classDiagram",
-        "stateDiagram",
-        "erDiagram",
-        "gantt",
-        "pie",
-        "gitgraph",
-      ];
-
-      // 將符合語法的 <pre> 轉成 mermaid 容器，並回傳轉換出的數量。
-      function prepareMermaidBlocks() {
-        let count = 0;
-        document.querySelectorAll("pre").forEach((pre) => {
-          const text = pre.textContent.trim();
-          if (!mermaidKeywords.some((keyword) => text.startsWith(keyword))) {
-            return;
-          }
-
-          const shell = document.createElement("div");
-          shell.className = "mermaid-shell";
-
-          const diagram = document.createElement("div");
-          diagram.className = "mermaid";
-          diagram.textContent = text;
-
-          shell.appendChild(diagram);
-          pre.replaceWith(shell);
-          count += 1;
-        });
-        return count;
-      }
-
-      // 只在頁面確實有圖時才動態載入 mermaid（約 488KB），並只初始化一次。
-      let mermaidReady;
-      function loadMermaid() {
-        mermaidReady ??= import(
-          "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"
-        ).then(({ default: mermaid }) => {
-          mermaid.initialize({
-            startOnLoad: false,
-            theme: "base",
-            themeVariables: {
-              darkMode: true,
-              background: "#111116",
-              primaryColor: "#1f2937",
-              primaryTextColor: "#f8fafc",
-              primaryBorderColor: "#38bdf8",
-              lineColor: "#64748b",
-              secondaryColor: "#0f172a",
-              tertiaryColor: "#18181f",
-              fontFamily: "Inter, sans-serif",
-            },
-          });
-          return mermaid;
-        });
-        return mermaidReady;
-      }
-
-      async function initMermaid() {
-        if (prepareMermaidBlocks() === 0) return;
-        const mermaid = await loadMermaid();
-        await mermaid.run({
-          querySelector: ".mermaid:not([data-processed='true'])",
-        });
-      }
+    <script>
+      import { initMermaid } from "../scripts/mermaid";
 
       initMermaid();
       document.addEventListener("astro:after-swap", initMermaid);

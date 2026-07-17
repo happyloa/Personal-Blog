@@ -1,5 +1,6 @@
 import rss from "@astrojs/rss";
-import { getPublishedPostsSorted } from "../utils/posts";
+import { getPostDescription, getPublishedPostsSorted } from "../utils/posts";
+import { toPlainTextExcerpt } from "../utils/summary";
 import { site } from "../utils/site";
 
 export async function GET(context) {
@@ -11,9 +12,9 @@ export async function GET(context) {
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
-      description: post.data.description,
+      description: toPlainTextExcerpt(getPostDescription(post)),
       link: `/posts/${post.id}/`,
     })),
-    customData: `<language>zh-Hant</language>`,
+    customData: `<language>zh-tw</language>`,
   });
 }

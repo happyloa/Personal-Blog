@@ -3,10 +3,15 @@ import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MDXImage from "../../components/MDXImage.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
-import { calculateReadingTime, getPublishedPostsSorted } from "../../utils/posts";
+import {
+  calculateReadingTime,
+  getPostDescription,
+  getPublishedPostsSorted,
+} from "../../utils/posts";
 import { site } from "../../utils/site";
 import { formatDate, toISODate } from "../../utils/date";
 import { slugifyTag } from "../../utils/tags";
+import { toPlainTextExcerpt } from "../../utils/summary";
 
 export async function getStaticPaths() {
   const posts = await getPublishedPostsSorted();
@@ -23,7 +28,7 @@ const readingTime = calculateReadingTime(post.body ?? "");
 const formattedDate = formatDate(post.data.date);
 const isoDate = toISODate(post.data.date);
 
-const description = post.data.description ?? post.data.title;
+const description = toPlainTextExcerpt(getPostDescription(post));
 const canonicalURL = new URL(`/posts/${post.id}/`, Astro.site);
 const ogImageURL = new URL(post.data.cover?.src ?? "/og-default.png", Astro.site);
 

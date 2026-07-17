@@ -2,18 +2,23 @@
 interface Props {
   src: string;
   alt?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
-const { src, alt = "" } = Astro.props;
+const { src, alt = "", width, height } = Astro.props;
 ---
 
 <figure class="my-8">
   <img
     src={src}
     alt={alt}
+    width={width}
+    height={height}
     loading="lazy"
     decoding="async"
     class="w-full rounded-lg"
+    style={width && height ? `aspect-ratio: ${width} / ${height}` : undefined}
   />
   {
     alt && (

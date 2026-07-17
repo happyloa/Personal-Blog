@@ -18,16 +18,15 @@ const filteredHeadings = headings.filter((heading) => heading.depth >= 2 && head
     <>
       <aside
         id="toc-desktop"
-        class="fixed right-6 top-24 z-30 hidden max-h-[calc(100vh-7rem)] w-64 overflow-y-auto 2xl:block"
-        aria-label="文章目錄">
-        <nav class="surface p-4 text-sm">
+        class="fixed right-6 top-24 z-30 hidden max-h-[calc(100vh-7rem)] w-64 overflow-y-auto 2xl:block">
+        <nav class="surface p-4 text-sm" aria-label="文章目錄">
           <p class="mb-3 font-semibold text-slate-200">目錄</p>
           <ol class="grid gap-1">
             {filteredHeadings.map((heading) => (
               <li class={heading.depth === 3 ? "pl-4" : ""}>
                 <a
                   href={`#${heading.slug}`}
-                  class="toc-link block rounded-md px-2 py-1.5 text-slate-500 no-underline hover:bg-surface-soft hover:text-slate-100"
+                  class="toc-link block rounded-md px-2 py-1.5 text-slate-400 no-underline hover:bg-surface-soft hover:text-slate-100"
                   data-slug={heading.slug}>
                   {heading.text}
                 </a>
