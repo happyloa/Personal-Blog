@@ -1,0 +1,54 @@
+本專案採用雙授權：程式碼與文章內容適用不同條款。
+
+================================================================================
+一、程式碼 —— MIT License
+================================================================================
+
+適用範圍：本儲存庫中除 `src/content/` 與 `public/images/` 以外的所有檔案
+（含 .astro / .js / .mjs / .css / .json 設定與元件）。
+
+MIT License
+
+Copyright (c) 2026 Aaron (happyloa)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+二、文章內容 —— CC BY-NC-SA 4.0
+================================================================================
+
+適用範圍：`src/content/` 底下的所有文章，以及 `public/images/` 底下的圖片。
+
+本著作採用「創用 CC 姓名標示-非商業性-相同方式分享 4.0 國際」授權條款。
+
+您可以自由：
+  - 分享：以任何媒介或格式重製及散布本著作
+  - 修改：重混、轉換本著作、及依本著作建立新著作
+
+惟需遵守下列條件：
+  - 姓名標示：您必須給予適當表彰、提供指向本授權條款的連結，
+    並指出是否已變更原始內容。
+  - 非商業性：您不得將本著作用於商業目的。
+  - 相同方式分享：若您重混、轉換本著作或依本著作建立新著作，
+    您必須依本著作的授權條款來散布您的貢獻。
+
+授權條款全文：
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hant
+授權條款摘要：
+https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant

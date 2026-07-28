@@ -105,6 +105,9 @@ module.exports = {
     extend: {
       colors: {
         primary: {
+          // 自訂色階不會和 Tailwind 預設調色盤合併，用到哪一階就要定義哪一階。
+          // 少定義 50，下面 outline 樣式的 hover:bg-primary-50 就不會生成任何 CSS。
+          50: "#EFF6FF",
           500: "#3B82F6",
           600: "#2563EB",
         },
@@ -128,12 +131,14 @@ module.exports = {
 
 這樣 Tailwind 的 class 和 Figma 的 Design Token 就能對應起來。
 
+> **後記（2026 更新）**：上面是 Tailwind v3 的寫法。v4 起改用 CSS 端的 `@theme` 區塊定義變數，不再需要 `tailwind.config.js`（舊檔仍可透過 `@config` 沿用）。同一套 Design Token 在 v4 的寫法可以參考〈[Tailwind CSS v4 升級指南](/posts/tailwind-v4-upgrade/)〉。
+
 ### 建立 TypeScript 元件
 
 把 Figma 的 Component 轉成 Vue 元件，用 TypeScript 定義好 props：
 
 ```vue
-// components/Button.vue
+<!-- components/Button.vue -->
 <script setup lang="ts">
 import { computed } from "vue";
 
@@ -268,5 +273,5 @@ Icon 通常用 SVG，照片用 WebP 或 JPG。如果需要響應式圖片，可�
 
 站內相關文章：
 
-- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development)
-- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition)
+- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development/)
+- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition/)

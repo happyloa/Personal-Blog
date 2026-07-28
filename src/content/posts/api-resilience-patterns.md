@@ -252,5 +252,5 @@ flowchart LR
 
 站內相關文章：
 
-- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide)
-- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)
+- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide/)
+- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth/)

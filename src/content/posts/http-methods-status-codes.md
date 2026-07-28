@@ -94,4 +94,4 @@ category: web-basics
 
 站內相關文章：
 
-- [DNS 深度解析](/posts/dns-deep-dive)
+- [DNS 深度解析](/posts/dns-deep-dive/)

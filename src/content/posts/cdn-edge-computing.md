@@ -59,5 +59,5 @@ CDN 是由一群分佈在世界各地的伺服器組成的網路。它們的功�
 
 站內相關文章：
 
-- [網站 SEO 優化攻略](/posts/seo-optimization-guide)
-- [DNS 深度解析](/posts/dns-deep-dive)
+- [網站 SEO 優化攻略](/posts/seo-optimization-guide/)
+- [DNS 深度解析](/posts/dns-deep-dive/)

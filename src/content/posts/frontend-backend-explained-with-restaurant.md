@@ -28,7 +28,7 @@ category: web-basics
 
 用餐廳來比喻：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 餐廳外場               | 網站前端                   |
 | ---------------------- | -------------------------- |
@@ -43,7 +43,7 @@ category: web-basics
 
 ### 前端用的技術
 
-還記得[之前介紹的 HTML 和 CSS](/posts/html-css-basics-explained-with-word) 嗎？它們就是前端的基本工具：
+還記得[之前介紹的 HTML 和 CSS](/posts/html-css-basics-explained-with-word/) 嗎？它們就是前端的基本工具：
 
 - **HTML** = 餐廳的基本結構（牆壁、桌子、椅子）
 - **CSS** = 裝潢設計（油漆顏色、燈光、桌布）
@@ -61,7 +61,7 @@ category: web-basics
 
 用餐廳來比喻：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 餐廳廚房                   | 網站後端                     |
 | -------------------------- | ---------------------------- |
@@ -122,7 +122,7 @@ category: web-basics
 
 每間餐廳都需要一個倉庫來儲存食材。網站也需要一個地方來存放資料，那就是**資料庫（Database）**。
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 餐廳倉庫               | 資料庫                               |
 | ---------------------- | ------------------------------------ |
@@ -202,5 +202,5 @@ category: web-basics
 
 站內相關文章：
 
-- [網路是怎麼運作的？](/posts/how-the-internet-works)
-- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+- [網路是怎麼運作的？](/posts/how-the-internet-works/)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage/)

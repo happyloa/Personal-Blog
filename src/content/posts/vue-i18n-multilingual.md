@@ -70,6 +70,8 @@ export default i18n;
 
 ```vue
 <script setup>
+import { useI18n } from "vue-i18n";
+
 const { t, locale } = useI18n();
 
 const switchLanguage = (lang) => {
@@ -77,6 +79,9 @@ const switchLanguage = (lang) => {
 };
 </script>
 ```
+
+（純 Vue 專案沒有 auto-import，`useI18n` 一定要自己 import；如果是 Nuxt 搭配
+`@nuxtjs/i18n`，這行才可以省略。）
 
 ## 語言切換的 UI
 
@@ -231,5 +236,5 @@ HTML 標籤要加上正確的語言屬性：
 
 站內相關文章：
 
-- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition)
-- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development)
+- [從 Vue 跳到 React 的開發心得](/posts/vue-to-react-transition/)
+- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development/)

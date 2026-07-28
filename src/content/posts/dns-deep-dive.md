@@ -6,7 +6,7 @@ tags: [網路, 後端]
 category: web-basics
 ---
 
-我們在[網路運作原理](/posts/how-the-internet-works)中提到了 DNS（Domain Name System）將網址轉換為 IP 位址。但這個過程究竟是如何發生的？為什麼有時候網站明明沒掛，你卻連不上？今天我們就來深度解析這個網路世界的地址簿。
+我們在[網路運作原理](/posts/how-the-internet-works/)中提到了 DNS（Domain Name System）將網址轉換為 IP 位址。但這個過程究竟是如何發生的？為什麼有時候網站明明沒掛，你卻連不上？今天我們就來深度解析這個網路世界的地址簿。
 
 ## DNS 的階層式架構
 
@@ -87,8 +87,8 @@ nslookup google.com
 
 如果你剛修改了 DNS 設定但沒生效，可能是因為 **TTL** 還沒過期。TTL 決定了 DNS 紀錄在快取中存活多久。
 
-- **TTL = 3600（1小時）**：修改後，世界各地的 DNS 伺服器最多可能需要 1 小時才會更新。
-- **建議**：在計畫遷移主機或修改 DNS 前，先把 TTL 調低（例如 300秒），可以減少轉換時的空窗期。
+- **TTL = 3600（1 小時）**：修改後，世界各地的 DNS 伺服器最多可能需要 1 小時才會更新。
+- **建議**：在計畫遷移主機或修改 DNS 前，先把 TTL 調低（例如 300 秒），可以減少轉換時的空窗期。
 
 ### 3. DNS 污染與劫持
 
@@ -102,6 +102,6 @@ DNS 真的就像是網路世界裡的隱形接線生。懂了它是怎麼運作�
 
 站內相關文章：
 
-- [DNS 是什麼？— 用門牌號碼來理解網路世界的地址系統](/posts/dns-explained-with-address-system)
-- [網路是怎麼運作的？](/posts/how-the-internet-works)
-- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+- [DNS 是什麼？— 用門牌號碼來理解網路世界的地址系統](/posts/dns-explained-with-address-system/)
+- [網路是怎麼運作的？](/posts/how-the-internet-works/)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage/)

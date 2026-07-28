@@ -149,5 +149,5 @@ Review 別人的 Code 時，不用命令句（比如「這裡改掉」），而�
 
 站內相關文章：
 
-- [工程師與冒名頂替症候群](/posts/imposter-syndrome)
-- [AI 輔助開發工具使用心得](/posts/ai-development-tools)
+- [工程師與冒名頂替症候群](/posts/imposter-syndrome/)
+- [AI 輔助開發工具使用心得](/posts/ai-development-tools/)

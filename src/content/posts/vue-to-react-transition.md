@@ -92,7 +92,7 @@ const increment = () => {
 
 Vue 和 React 的生命週期可以這樣對應：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | Vue 3         | React                             | 常見陷阱／心智模型落差                                                                                                              |
 | ------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -165,16 +165,23 @@ const { data } = await useFetch("/api/posts");
 
 Next.js 的 App Router 用 async component：
 
-```javascript
+```jsx
 async function Page() {
-  const data = await fetch("/api/posts");
+  // Server Component 的 fetch 跑在伺服器上，沒有「目前網址」可以當基準，
+  // 相對路徑會直接丟 TypeError，必須給絕對網址。
+  const res = await fetch(`${process.env.API_BASE_URL}/api/posts`);
+  const data = await res.json();
   return <div>{/* ... */}</div>;
 }
 ```
 
+這一點是從 Nuxt 過來最容易踩的坑：`useFetch("/api/posts")` 在 Nuxt 裡不管跑在伺服器還是瀏覽器都能正常運作，但 Next.js 的 Server Component 沒有這層包裝。
+
 ## 狀態管理工具
 
 Vue 生態系用 Pinia，React 生態系選擇比較多：Redux、Zustand、Jotai、Recoil...
+
+> **後記（2026 更新）**：Recoil 已於 2025 年初被 Meta 封存（archived），不再維護，新專案請不要再採用。下面提到的 Zustand、Jotai 都仍在活躍開發中。
 
 我自己比較喜歡 Zustand，寫法簡潔，跟 Pinia 的感覺有點像：
 
@@ -283,6 +290,6 @@ Vue 和 React 都是很棒的框架，沒有誰比較好的問題。多學一個
 
 站內相關文章：
 
-- [Vue i18n 多語系開發](/posts/vue-i18n-multilingual)
-- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow)
-- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide)
+- [Vue i18n 多語系開發](/posts/vue-i18n-multilingual/)
+- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow/)
+- [前端測試實戰 — Vitest 入門](/posts/frontend-testing-vitest-guide/)

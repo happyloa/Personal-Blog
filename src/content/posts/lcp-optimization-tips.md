@@ -67,7 +67,25 @@ WebP 的壓縮效率比 JPEG 和 PNG 好很多，同樣畫質下檔案可以縮�
 />
 ```
 
-這樣手機會載入 400w 的小圖，桌機才載入大圖。我之前做的[個人品牌網站專案](https://github.com/happyloa/Hex2025-mission2/blob/main/components/Common/Hero/Hero.vue#L31)就有用到這個技巧。
+要注意瀏覽器挑檔案的規則：它先用 `sizes` 算出這張圖實際要佔多寬的 CSS 像素，再乘上裝置的 DPR，然後挑出最接近的 `srcset` 候選。所以「手機一定拿小圖」是常見的誤解——390px 寬、DPR 3 的手機算出來是 1170px，反而會挑 1200w；只有 DPR 1 的裝置才會取到 400w。真正省下流量的是「不讓桌機的大圖被小螢幕下載」這件事本身。
+
+如果你要的是「不同螢幕給不同構圖」而不是同一張圖的不同尺寸，那要用的是 `<picture>` 搭配 `<source media>` 的 art direction 寫法，我之前做的[個人品牌網站專案](https://github.com/happyloa/Hex2025-mission2/blob/main/components/Common/Hero/Hero.vue#L31)用的就是後者。
+
+**替 LCP 圖片提高優先級**
+
+瀏覽器預設不知道哪張圖是 LCP 元素，會照文件順序慢慢排。對首屏主圖加上 `fetchpriority="high"`，可以讓它插隊到最前面：
+
+```html
+<img src="/images/hero-1200w.webp" fetchpriority="high" alt="Hero image" />
+```
+
+如果那張圖是被 CSS 背景或 JS 才載入的，瀏覽器在解析 HTML 時看不到它，這時要在 `<head>` 主動預載：
+
+```html
+<link rel="preload" as="image" href="/images/hero-1200w.webp" />
+```
+
+這兩招通常是 LCP 最立竿見影的改善，成本也最低。
 
 **圖片懶載入**
 
@@ -163,5 +181,5 @@ LCP 優化不是一次性的工作，每次加新功能或新圖片都要注意�
 
 站內相關文章：
 
-- [SEO 優化攻略](/posts/seo-optimization-guide)
-- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+- [SEO 優化攻略](/posts/seo-optimization-guide/)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage/)

@@ -93,4 +93,4 @@ Elementor 的好處是可以直接在後台寫 CSS，不需要另外開發佈景
 
 站內相關文章：
 
-- [SEO 優化攻略](/posts/seo-optimization-guide)
+- [SEO 優化攻略](/posts/seo-optimization-guide/)

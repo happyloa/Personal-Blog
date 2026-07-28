@@ -161,7 +161,7 @@ category: learning
 
 ## 比較表格
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 方法                    | 佔據空間 | 可點擊 | 螢幕閱讀器 | 可 Tab 聚焦 | 可動畫 |
 | ----------------------- | :------: | :----: | :--------: | :---------: | :----: |
@@ -236,12 +236,12 @@ category: learning
 
 ---
 
-- [visibility - MDN](https://developer.mozilla.org/zh-TW/docs/Web/CSS/visibility)
-- [display - MDN](https://developer.mozilla.org/zh-TW/docs/Web/CSS/display)
+- [visibility - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/visibility)
+- [display - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
 - [Inclusively Hidden - Scott O'Hara](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)
 
 ---
 
 站內相關文章：
 
-- [HTML 與 CSS 入門 — 用 Word 文件來比喻網頁的結構與樣式](/posts/html-css-basics-explained-with-word)
+- [HTML 與 CSS 入門 — 用 Word 文件來比喻網頁的結構與樣式](/posts/html-css-basics-explained-with-word/)

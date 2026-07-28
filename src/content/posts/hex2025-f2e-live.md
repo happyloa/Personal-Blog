@@ -1,6 +1,6 @@
 ---
 title: 從零到有！六角學院網頁切版直播班心得 — 用 Nuxt 實戰三大專案
-description: 六角學院 2025 網頁切版直播班學習全紀錄。使用 Nuxt（從 Nuxt 3 升級到 Nuxt 4.2）+ Tailwind CSS 實戰電商、職涯媒合與旅遊訂購三大專案的心得。
+description: 六角學院 2025 網頁切版直播班學習全紀錄。使用 Nuxt（從 Nuxt 3 升級到 Nuxt 4）+ Tailwind CSS 實戰電商、職涯媒合與旅遊訂購三大專案的心得。
 date: 2025-09-21
 tags: [六角學院, 學習心得]
 category: project
@@ -100,7 +100,7 @@ category: project
 
 ## 專案三：ZOBAA! 旅遊網站 — 升級 Nuxt 4 與進階應用
 
-第三個專案的難度又上去了。這次用的是 **Nuxt 4.2**，還加了 Composables、Plugins、Utils 這些進階的東西。
+第三個專案的難度又上去了。這次用的是 **Nuxt 4**，還加了 Composables、Plugins、Utils 這些進階的東西。
 
 ### ZOBAA! 的主要功能與技術
 
@@ -114,7 +114,7 @@ category: project
 
 技術上的一大亮點是專案結構更加完整：
 
-- **Nuxt 4.2**：體驗最新版本的框架特性
+- **Nuxt 4**：體驗 Nuxt 4 的新特性
 - **Composables**：抽離可重複使用的邏輯（如 `useAuth.ts`）
 - **Plugins**：實作客戶端外掛（如 `auth.client.ts`）
 - **Utils**：工具函式（如數字格式化）
@@ -138,9 +138,9 @@ category: project
 
 ### 核心技術
 
-- **框架**：Nuxt 3 → Nuxt 4.2（隨著課程進度升級）
+- **框架**：Nuxt 3 → Nuxt 4（隨著課程進度升級）
 - **樣式**：Tailwind CSS（全專案採用 Utility-First 的設計方式）
-- **開發工具**：VSCode + Vue Official + Nuxtr + Tailwind CSS IntelliSense
+- **開發工具**：VS Code + Vue Official + Nuxtr + Tailwind CSS IntelliSense
 
 ### 常用套件
 
@@ -203,7 +203,17 @@ category: project
 
 經過密集的學習與實作，很開心能順利完成課程並獲得六角學院頒發的結業證書！這不僅是對自己努力的肯定，更是未來繼續精進前端技能的動力。
 
-![六角學院 2025 網頁切版直播班結業證書](/images/posts/hex2025-f2e-live/certificate.webp)
+<figure>
+  <img
+    src="/images/posts/hex2025-f2e-live/certificate.webp"
+    alt="六角學院 2025 網頁切版直播班結業證書"
+    width="843"
+    height="596"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>六角學院 2025 網頁切版直播班結業證書</figcaption>
+</figure>
 
 ## 結語
 
@@ -238,4 +248,7 @@ category: project
 - 🌐 線上展示：[https://hex2025-f2e-live-week7and8.pages.dev/](https://hex2025-f2e-live-week7and8.pages.dev/)
 - 💻 GitHub 原始碼：[https://github.com/happyloa/Hex2025-f2e-live-week7and8](https://github.com/happyloa/Hex2025-f2e-live-week7and8)
 
----
+## 延伸閱讀
+
+- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow/)
+- [藝術銀行 Art Bank 會員系統開發紀錄 — Nuxt 3 + JWT 實戰經驗](/posts/artbank-nuxt3-ssr-development/)

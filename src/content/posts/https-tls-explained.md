@@ -78,5 +78,5 @@ sequenceDiagram
 
 站內相關文章：
 
-- [DNS 深度解析](/posts/dns-deep-dive)
-- [HTTP 方法與狀態碼](/posts/http-methods-status-codes)
+- [DNS 深度解析](/posts/dns-deep-dive/)
+- [HTTP 方法與狀態碼](/posts/http-methods-status-codes/)

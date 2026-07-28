@@ -49,7 +49,7 @@ https://www.google.com/search?q=hello
 
 瀏覽器收到你的「訂單」，但它只知道你要去 `www.google.com`，不知道具體地址在哪裡。
 
-這時候就需要 **DNS**（如果你看過前面那篇 [DNS 的文章](/posts/dns-explained-with-address-system)，你已經知道它了！）。
+這時候就需要 **DNS**（如果你看過前面那篇 [DNS 的文章](/posts/dns-explained-with-address-system/)，你已經知道它了！）。
 
 DNS 會把 `www.google.com` 翻譯成 IP 位址 `142.250.185.78`。
 
@@ -111,7 +111,7 @@ Content-Type: text/html
 
 回應的開頭有一個數字 `200`，這就是 **HTTP 狀態碼**，用來告訴你這次「取貨」的結果：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 狀態碼 | 意思       | 生活化比喻                         |
 | ------ | ---------- | ---------------------------------- |
@@ -212,7 +212,7 @@ JavaScript 會暫停 HTML 解析，如果 JavaScript 很多，頁面就要等很
 
 後端處理太久、資料庫查詢太慢，都會讓使用者等更久。
 
-這些都是前端工程師每天在處理的**效能優化**問題。如果你對這個主題有興趣，我之前寫過一篇 [LCP 優化的文章](/posts/lcp-optimization-tips)，歡迎看看。
+這些都是前端工程師每天在處理的**效能優化**問題。如果你對這個主題有興趣，我之前寫過一篇 [LCP 優化的文章](/posts/lcp-optimization-tips/)，歡迎看看。
 
 ## 結語
 

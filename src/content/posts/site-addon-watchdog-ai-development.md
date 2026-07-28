@@ -111,4 +111,4 @@ Site Add-on Watchdog 已經上架到 WordPress 官方外掛庫了，歡迎有需
 
 站內相關文章：
 
-- [AI 輔助開發工具使用心得](/posts/ai-development-tools)
+- [AI 輔助開發工具使用心得](/posts/ai-development-tools/)

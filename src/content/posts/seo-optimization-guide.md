@@ -57,7 +57,7 @@ Google 是依 SERP 顯示的像素寬度（桌面版約 920px、行動版約 680
 
 ## Core Web Vitals（2025-2026 更新）
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 指標    | 衡量內容     | 2024 標準  | 2025-2026 建議 |
 | ------- | ------------ | ---------- | -------------- |
@@ -117,5 +117,5 @@ Google 是依 SERP 顯示的像素寬度（桌面版約 920px、行動版約 680
 
 站內相關文章：
 
-- [LCP 優化實戰](/posts/lcp-optimization-tips)
-- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
+- [LCP 優化實戰](/posts/lcp-optimization-tips/)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage/)

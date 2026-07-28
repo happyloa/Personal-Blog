@@ -31,7 +31,7 @@ HTML 做的事情一模一樣！只是寫法不同。在 Word 裡，你用滑鼠
 
 ### Word vs HTML 的對照表
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | Word 裡的操作        | HTML 標籤       | 說明                   |
 | -------------------- | --------------- | ---------------------- |
@@ -96,7 +96,7 @@ CSS 的全名是 **Cascading Style Sheets**（層疊樣式表）。它的工作�
 
 回想一下你在 Word 裡做格式設定的經驗：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | Word 裡的操作   | 對應的 CSS 寫法                                     |
 | --------------- | --------------------------------------------------- |
@@ -195,7 +195,10 @@ HTML 檔案會引用 CSS 檔案，告訴瀏覽器：「請用這張表來幫我�
 
 ```css
 body {
-  font-family: "微軟正黑體", sans-serif;
+  /* 中文字體要疊好幾層：Mac 用 PingFang、Windows 用微軟正黑體，
+     都沒有時再退回 Noto Sans TC 與系統預設的無襯線字體。
+     只寫「微軟正黑體」的話，非 Windows 的讀者根本吃不到這個設定。 */
+  font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -250,5 +253,5 @@ CSS 的基礎其實不難，就是「選擇器 + 屬性 + 值」的組合。建�
 
 站內相關文章：
 
-- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage)
-- [用 CSS 隱藏網頁元素的六種方法](/posts/six-ways-to-hide-a-certain-element-using-css)
+- [瀏覽器是怎麼顯示網頁的？](/posts/how-browser-renders-webpage/)
+- [用 CSS 隱藏網頁元素的六種方法](/posts/six-ways-to-hide-a-certain-element-using-css/)

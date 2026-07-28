@@ -119,7 +119,17 @@ category: project
 
 經過一個多月的努力，很開心拿到了六角學院頒發的結業證書！這張證書不只是一個獎勵，更是對自己學習成果的肯定。
 
-![六角學院 30 天軟體工程師體驗營結業證書](/images/posts/hex2025-software-engineer-camp/certificate.webp)
+<figure>
+  <img
+    src="/images/posts/hex2025-software-engineer-camp/certificate.webp"
+    alt="六角學院 30 天軟體工程師體驗營結業證書"
+    width="843"
+    height="596"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>六角學院 30 天軟體工程師體驗營結業證書</figcaption>
+</figure>
 
 拿到證書的那一刻，我想起開學典禮時老師說的話：「證書不是終點，而是起點。」確實，這 30 天只是打開了一扇門，真正的學習之路才剛開始。
 
@@ -196,4 +206,7 @@ NT$ 822 的投資，換來的是 60+ 小時的系統化課程、5 堂直播課�
 - 📝 **部落格系統**：[Blog 頁面](https://hex2025-mission2.vercel.app/blog)
 - 💻 **原始碼**：[GitHub Repository](https://github.com/happyloa/Hex2025-mission2)
 
----
+## 延伸閱讀
+
+- [HTML 與 CSS 入門 — 用 Word 文件來比喻網頁的結構與樣式](/posts/html-css-basics-explained-with-word/)
+- [前端測試實戰 — 為什麼你需要寫測試？（以 Vitest 為例）](/posts/frontend-testing-vitest-guide/)

@@ -42,7 +42,7 @@ category: learning
 
 ## Git 的核心概念 — 用遊戲來比喻
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 遊戲概念           | Git 的概念            | 說明                           |
 | ------------------ | --------------------- | ------------------------------ |
@@ -164,13 +164,38 @@ git log
 
 看所有的歷史存檔。從最新的開始列出。
 
+### 開一條新的路線
+
+```bash
+git switch -c feature/dark-mode
+```
+
+從目前的進度分岔出一條新路線，並且直接切過去。就像前面說的「另存一個新檔來嘗試不同選擇」。想切回主線就用 `git switch main`，想看有哪些路線就用 `git branch`。
+
+### 把新路線合回主線
+
+```bash
+git switch main
+git merge feature/dark-mode
+```
+
+先回到主線，再把剛才那條路線的成果併進來。如果兩邊改到同一個地方，Git 會停下來要你決定保留哪一版，這就是所謂的「衝突（conflict）」。
+
+### 連結雲端存檔空間
+
+```bash
+git remote add origin https://github.com/你的帳號/你的專案.git
+```
+
+告訴 Git「我的雲端存檔要放在這裡」。這個步驟每個專案只要做一次；如果專案是用 `git clone` 從 GitHub 抓下來的，Git 已經自動設定好了，可以跳過。
+
 ### 上傳存檔到雲端
 
 ```bash
-git push
+git push -u origin main
 ```
 
-把你的存檔同步到遠端（GitHub）。就像把遊戲存檔上傳到雲端。
+把你的存檔同步到遠端（GitHub）。就像把遊戲存檔上傳到雲端。`-u` 只有第一次要加，之後直接 `git push` 就好。
 
 ### 從雲端下載最新存檔
 
@@ -248,4 +273,4 @@ Git 是工程師每天都在用的基本工具。學會它之後，你就再也�
 
 站內相關文章：
 
-- [前端與後端到底在做什麼？](/posts/frontend-backend-explained-with-restaurant)
+- [前端與後端到底在做什麼？](/posts/frontend-backend-explained-with-restaurant/)

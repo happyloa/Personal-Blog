@@ -78,5 +78,5 @@ category: mindset
 
 站內相關文章：
 
-- [Vue 轉 React 陣痛期與心態調適](/posts/vue-to-react-transition)
-- [遠端工作經驗分享](/posts/remote-work-experience)
+- [Vue 轉 React 陣痛期與心態調適](/posts/vue-to-react-transition/)
+- [遠端工作經驗分享](/posts/remote-work-experience/)

@@ -67,7 +67,7 @@ const schema = yup.object({
 
 驗證這塊選用 JWT，搭配 **Pinia** 來管理登入狀態，用 `useCookie` 讓 SSR 和 CSR 的 token 可以同步。這個架構的好處是全站任何地方都能方便地存取登入狀態，而且重新整理頁面時也能自動恢復。
 
-關於 JWT + Pinia + Cookie 的完整實作細節（包含自動帶 token、權限控制、初始化登入狀態等），我在另一篇文章有更詳細的說明：[Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)。
+關於 JWT + Pinia + Cookie 的完整實作細節（包含自動帶 token、權限控制、初始化登入狀態等），我在另一篇文章有更詳細的說明：[Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth/)。
 
 ## 收藏功能實作
 
@@ -131,6 +131,6 @@ const handleSubmit = async () => {
 
 站內相關文章：
 
-- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth)
-- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow)
-- [Vue i18n 多語系開發](/posts/vue-i18n-multilingual)
+- [Nuxt 3 JWT 身份驗證實作筆記](/posts/nuxt3-jwt-pinia-auth/)
+- [Figma to Code 工作流程分享](/posts/figma-to-code-workflow/)
+- [Vue i18n 多語系開發](/posts/vue-i18n-multilingual/)

@@ -97,10 +97,9 @@ export default defineNuxtPlugin(() => {
   const api = $fetch.create({
     onRequest({ options }) {
       if (authStore.token) {
-        options.headers = {
-          ...options.headers,
-          Authorization: `Bearer ${authStore.token}`,
-        };
+        // ofetch 已把 options.headers 正規化成 Headers 實例，
+        // 用物件展開會得到空物件並毀掉原有的標頭，必須改用 .set()。
+        options.headers.set("Authorization", `Bearer ${authStore.token}`);
       }
     },
     onResponseError({ response }) {
@@ -187,5 +186,5 @@ JWT 驗證機制看起來簡單，但實作起來有不少細節要注意。Cook
 
 站內相關文章：
 
-- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development)
-- [API 請求卡住怎麼辦？Timeout、Retry 與 Circuit Breaker](/posts/api-resilience-patterns)
+- [藝術銀行 Art Bank 開發紀錄](/posts/artbank-nuxt3-ssr-development/)
+- [API 請求卡住怎麼辦？Timeout、Retry 與 Circuit Breaker](/posts/api-resilience-patterns/)

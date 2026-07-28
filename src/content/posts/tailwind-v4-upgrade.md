@@ -1,12 +1,14 @@
 ---
-title: Tailwind CSS v4 來了！速度更快、體積更小、寫法更自由
-description: Tailwind v4 正式發布，帶來了效能的飛躍與更靈活的配置方式。預設設定改用 CSS 變數，直接在 CSS 裡定義你的 Design System，舊的 tailwind.config.js 也還能透過 @config 沿用。
+title: Tailwind CSS v4 升級指南 — 速度更快、體積更小、寫法更自由
+description: v4 推出一年後的升級重點整理：設定從 JS 檔改成在 CSS 的 @theme 裡定義變數，舊的 tailwind.config.js 仍可透過 @config 沿用。
 date: 2026-02-19
 tags: [CSS]
 category: learning
 ---
 
 Tailwind CSS v4 是近年來最大的版本更新。它不再只是「好用的 Utility-First CSS」，而是一個經過重新設計的 CSS 引擎。
+
+v4.0 在 2025 年 1 月正式發布，這篇是我在它推出一年、生態系與周邊工具都跟上之後，回頭整理的升級重點——比起剛發布時的功能速覽，這裡更著重在實際搬遷時真正會卡住的地方。
 
 ## 最大的改變：速度與體積
 
@@ -24,12 +26,17 @@ v4 把預設的配置方式從 JavaScript 設定檔換成了 **CSS 變數**（�
 
 @theme {
   --color-brand-primary: #ff5722;
-  --font-family-sans: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
   --spacing-128: 32rem;
 }
 ```
 
-然後你就可以直接用 `text-brand-primary` 或 `p-128`。
+然後你就可以直接用 `text-brand-primary`、`font-sans` 或 `p-128`。
+
+這裡的變數前綴不能亂取，它決定了會生成哪一組 utility：`--color-*` 對應
+`text-*`／`bg-*`／`border-*`，`--font-*` 對應 `font-*`，`--spacing-*` 對應
+`p-*`／`m-*`／`gap-*`。寫成 `--font-family-sans` 這種不存在的命名空間不會報錯，
+但也不會生成任何 utility，是很容易踩到的坑。
 
 ## 任意值語法與 CSS 運算
 
@@ -81,5 +88,5 @@ npx @tailwindcss/upgrade
 
 站內相關文章：
 
-- [現代 CSS 功能](/posts/modern-css-features)
-- [Figma to Code 工作流](/posts/figma-to-code-workflow)
+- [現代 CSS 功能](/posts/modern-css-features/)
+- [Figma to Code 工作流](/posts/figma-to-code-workflow/)

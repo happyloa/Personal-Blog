@@ -124,5 +124,5 @@ flowchart LR
 
 站內相關文章：
 
-- [AI 輔助開發工具使用心得](/posts/ai-development-tools)
-- [用 AI 開發 WordPress 安全外掛](/posts/site-addon-watchdog-ai-development)
+- [AI 輔助開發工具使用心得](/posts/ai-development-tools/)
+- [用 AI 開發 WordPress 安全外掛](/posts/site-addon-watchdog-ai-development/)

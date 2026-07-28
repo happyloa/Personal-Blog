@@ -17,8 +17,8 @@ category: project
 
 ### 專案成果
 
-- **前端部署網站**：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
-- **後端 API**：[https://hex2025-vibe-coding-week4.zeabur.app/](https://hex2025-vibe-coding-week4.zeabur.app/)
+- **前端部署網站**：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)（後端已停止託管，目前只能看介面，查不到天氣資料）
+- **後端 API**：`https://hex2025-vibe-coding-week4.zeabur.app/`（Zeabur 免費方案的託管已到期，服務目前不再運作）
 - **前端原始碼**：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
 - **後端原始碼**：[https://github.com/happyloa/weather-backend](https://github.com/happyloa/weather-backend)
 
@@ -115,7 +115,17 @@ category: project
 
 經過這次體驗營的學習，我也拿到了完課證書，證書數量 +1😎
 
-![六角學院 Vibe Coding 體驗營完課證書](/images/posts/hex2025-vibe-coding-camp/certificate.webp)
+<figure>
+  <img
+    src="/images/posts/hex2025-vibe-coding-camp/certificate.webp"
+    alt="六角學院 Vibe Coding 體驗營完課證書"
+    width="843"
+    height="596"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>六角學院 Vibe Coding 體驗營完課證書</figcaption>
+</figure>
 
 ## 學習心得：擁抱 AI 時代的開發方式
 
@@ -137,7 +147,9 @@ category: project
 
 這次體驗營讓我學到了新的開發技巧，也體驗到透過社群互助帶來的成長。
 
-如果你對 AI 開發有興趣，或是想嘗試全端專案，可以參考我的 GitHub 原始碼，或是直接玩玩看這個天氣查詢網站。
+如果你對 AI 開發有興趣，或是想嘗試全端專案，可以參考我的 GitHub 原始碼。
+
+> **後記（2026 更新）**：這個專案的後端當初部署在 Zeabur 的免費方案，託管期限到期後已經停止服務，因此前端展示站雖然還開得起來，但查不到天氣資料。要實際跑起來的話，請從上面的原始碼自行部署。
 
 ---
 
@@ -145,10 +157,13 @@ category: project
 
 - ☁️ 氣象資料開放平臺：[https://opendata.cwa.gov.tw/](https://opendata.cwa.gov.tw/)
 - 📚 API 文件：[https://opendata.cwa.gov.tw/dist/opendata-swagger.html](https://opendata.cwa.gov.tw/dist/opendata-swagger.html)
-- 🌐 前端部署網站：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)
-- 🔌 後端 API：[https://hex2025-vibe-coding-week4.zeabur.app/](https://hex2025-vibe-coding-week4.zeabur.app/)
+- 🌐 前端部署網站：[https://cwaweather-frontend.pages.dev/](https://cwaweather-frontend.pages.dev/)（僅供介面參考）
+- 🔌 後端 API：`https://hex2025-vibe-coding-week4.zeabur.app/`（已停止託管）
 - 💻 前端原始碼：[https://github.com/happyloa/CwaWeather-frontend](https://github.com/happyloa/CwaWeather-frontend)
 - 💻 後端原始碼：[https://github.com/happyloa/weather-backend](https://github.com/happyloa/weather-backend)
 - 🎓 六角學院：[https://www.hexschool.com/](https://www.hexschool.com/)
 
----
+## 延伸閱讀
+
+- [AI 輔助開發工具使用心得 — Claude、Cursor、Antigravity IDE 實戰分享](/posts/ai-development-tools/)
+- [從零開始學 n8n — 用免費課程搭配 AI 輔助，把重複工作自動化](/posts/n8n-automation-learning/)

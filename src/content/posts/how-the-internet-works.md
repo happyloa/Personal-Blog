@@ -27,7 +27,7 @@ category: web-basics
 - 裡面是極細的光纖，用**光的速度**傳輸資料
 - 由 Google、Meta、Microsoft 等科技公司和電信商共同出資鋪設
 
-所以當你打開一個美國的網站，你的資料很可能真的穿越了太平洋的海底才到達那台伺服器（不過如果該網站有透過 CDN 在鄰近地區部署快取，熱門內容不一定每次都要橫跨大洋，詳見〈CDN 與 Edge Computing〉一文）。聽起來是不是很壯觀？
+所以當你打開一個美國的網站，你的資料很可能真的穿越了太平洋的海底才到達那台伺服器（不過如果該網站有透過 CDN 在鄰近地區部署快取，熱門內容不一定每次都要橫跨大洋，詳見〈[CDN 與 Edge Computing](/posts/cdn-edge-computing/)〉一文）。聽起來是不是很壯觀？
 
 ### 那 Wi-Fi 和行動網路呢？
 
@@ -49,7 +49,7 @@ ISP 的全名是 **Internet Service Provider**（網際網路服務提供商）�
 
 你可以把 ISP 想成高速公路的**收費站兼交流道**：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 高速公路           | 網路世界                         |
 | ------------------ | -------------------------------- |
@@ -87,7 +87,7 @@ ISP 就是那個讓你的家庭網路「接上」全球網路的中間人。
 
 當然，專業的伺服器跟你的筆電還是有一些差異：
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 你的電腦         | 專業伺服器                   |
 | ---------------- | ---------------------------- |
@@ -103,15 +103,15 @@ ISP 就是那個讓你的家庭網路「接上」全球網路的中間人。
 
 Google、Amazon、Microsoft 這些大公司在全球各地都有**資料中心（Data Center）**。想像一個巨大的倉庫，裡面放著成千上萬台伺服器，有獨立的供電系統、冷卻系統和安全管制。
 
-你每次搜尋 Google、看 YouTube、滑 Instagram，你的請求最終會被送到這些資料中心裡的某一台伺服器上——不過熱門內容常常會先被鄰近的快取伺服器（CDN／Edge Server）攔下來，不用每次都跑到最遠的機房，詳見〈[CDN 與 Edge Computing](/posts/cdn-edge-computing)〉一文。
+你每次搜尋 Google、看 YouTube、滑 Instagram，你的請求最終會被送到這些資料中心裡的某一台伺服器上——不過熱門內容常常會先被鄰近的快取伺服器（CDN／Edge Server）攔下來，不用每次都跑到最遠的機房，詳見〈[CDN 與 Edge Computing](/posts/cdn-edge-computing/)〉一文。
 
 ## Request 和 Response — 寄信和回信
 
-我們在[瀏覽器那篇文章](/posts/how-browser-renders-webpage)有提過 Request 和 Response，這裡用另一個角度再解釋一次。
+我們在[瀏覽器那篇文章](/posts/how-browser-renders-webpage/)有提過 Request 和 Response，這裡用另一個角度再解釋一次。
 
 ### 網路的溝通方式就像寄信
 
-<div class="table-wrapper">
+<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
 
 | 寄信流程         | 網路流程                        |
 | ---------------- | ------------------------------- |
@@ -237,7 +237,7 @@ Content-Type: text/html
 4. 你的 **Request** 從 ISP 出發，透過**光纖和海底電纜**，傳到 Google 在美國（或亞洲）的**資料中心**
 5. 資料中心裡的**伺服器**收到你的 Request，從**資料庫**裡找到 YouTube 首頁的內容
 6. 伺服器把 **Response**（HTML、CSS、JavaScript、影片資料）傳回來
-7. 資料沿著**海底電纜**回到台灣，經過 **ISP**、你家的路由器、**Wi-Fi**，最後到達你的電腦（原因見前述 CDN 快取說明）
+7. 資料沿著**海底電纜**回到台灣，經過 **ISP**、你家的路由器、**Wi-Fi**，最後到達你的電腦（如果該內容已經被 CDN 快取在鄰近的節點，這一段就不用真的跨海）
 8. 你的**瀏覽器**接收到這些檔案，解析 HTML、套用 CSS、執行 JavaScript
 9. 畫面出現了 YouTube 的首頁，連 **favicon**（那個紅色播放鍵）都顯示在分頁上
 
