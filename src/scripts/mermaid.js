@@ -1,3 +1,26 @@
+// mermaid 圖表類型 → 中文名稱。用來給容器一個有意義的 aria-label，
+// 而不是不管畫什麼都朗讀成「流程圖」。
+const DIAGRAM_LABELS = {
+  flowchart: "流程圖",
+  graph: "流程圖",
+  sequenceDiagram: "循序圖",
+  classDiagram: "類別圖",
+  stateDiagram: "狀態圖",
+  "stateDiagram-v2": "狀態圖",
+  erDiagram: "實體關聯圖",
+  journey: "使用者旅程圖",
+  gantt: "甘特圖",
+  pie: "圓餅圖",
+  mindmap: "心智圖",
+  timeline: "時間軸",
+  gitGraph: "Git 線圖",
+};
+
+function labelFor(source) {
+  const keyword = /^\s*([A-Za-z][\w-]*)/.exec(source)?.[1] ?? "";
+  return DIAGRAM_LABELS[keyword] ?? "圖表";
+}
+
 // 將 ```mermaid 圍欄產生的 <pre data-language="mermaid"> 轉成 mermaid 容器。
 // 直接用 Shiki 標好的屬性選取，不必比對內容開頭關鍵字，因此不會誤判一般程式碼範例，
 // 也自動支援 journey / mindmap / timeline 等所有圖表類型。
@@ -13,7 +36,7 @@ function prepareMermaidBlocks() {
     // 圖表可能比容器寬，容器會水平捲動；沒有 tabindex 的話純鍵盤使用者看不到右側被截掉的部分。
     shell.tabIndex = 0;
     shell.setAttribute("role", "group");
-    shell.setAttribute("aria-label", "流程圖");
+    shell.setAttribute("aria-label", labelFor(source));
 
     // 先用原始碼區塊的高度撐住版面，等 SVG 算完再放開，避免圖以下的內容連續位移兩次。
     const height = pre.getBoundingClientRect().height;
@@ -39,7 +62,7 @@ function prepareMermaidBlocks() {
 }
 
 // 只在頁面確實有圖時才動態載入 mermaid（約 488KB），並只初始化一次。
-// 套件改為專案自架（package.json 的 mermaid），Vite 會切成帶 hash 的獨立 chunk：
+// 套件為專案自架（package.json 的 mermaid），Vite 會切成帶 hash 的獨立 chunk：
 // 「有圖才下載」的行為不變，但不再依賴第三方 CDN，CSP 也才能收回 script-src 'self'。
 let mermaidReady;
 function loadMermaid() {
@@ -68,13 +91,21 @@ export async function initMermaid() {
   const shells = prepareMermaidBlocks();
   if (shells.length === 0) return;
 
-  const mermaid = await loadMermaid();
-  await mermaid.run({
-    querySelector: ".mermaid:not([data-processed='true'])",
-  });
-
-  // SVG 已就位，放開佔位高度讓容器回到內容高度。
-  shells.forEach((shell) => {
-    shell.style.minHeight = "";
-  });
+  try {
+    const mermaid = await loadMermaid();
+    // suppressErrors 讓單一張圖的語法錯誤不會中斷同頁其他圖表的渲染。
+    await mermaid.run({
+      querySelector: ".mermaid:not([data-processed='true'])",
+      suppressErrors: true,
+    });
+  } catch (error) {
+    // chunk 載入失敗或初始化拋錯時清掉快取，讓下次換頁還有機會重試。
+    mermaidReady = undefined;
+    console.error("[mermaid] 圖表初始化失敗", error);
+  } finally {
+    // 無論成功或失敗都要放開佔位高度，否則整頁圖表會卡成空白框。
+    shells.forEach((shell) => {
+      shell.style.minHeight = "";
+    });
+  }
 }

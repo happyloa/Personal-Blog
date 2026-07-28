@@ -14,6 +14,7 @@ const POSTS_DIR = fileURLToPath(
 
 const postLastmod = new Map();
 const tagCounts = new Map();
+const categoryCounts = new Map();
 
 for (const file of readdirSync(POSTS_DIR)) {
   if (!file.endsWith(".md")) continue;
@@ -43,22 +44,32 @@ for (const file of readdirSync(POSTS_DIR)) {
     const slug = slugifyTag(trimmed);
     tagCounts.set(slug, (tagCounts.get(slug) ?? 0) + 1);
   }
+
+  const category = field("category");
+  if (category) {
+    categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
+  }
 }
 
-const thinTagPaths = new Set(
-  Array.from(tagCounts.entries())
+// 少於兩篇的列表頁會輸出 noindex（見 tags/[tag].astro 與 categories/[category].astro），
+// 同時也要排除在 sitemap 之外，否則等於同時送出兩個互相矛盾的索引訊號。
+const thinListingPaths = new Set([
+  ...Array.from(tagCounts.entries())
     .filter(([, count]) => count < 2)
     .map(([slug]) => `/tags/${slug}/`),
-);
+  ...Array.from(categoryCounts.entries())
+    .filter(([, count]) => count < 2)
+    .map(([slug]) => `/categories/${slug}/`),
+]);
 
 export default defineConfig({
   site: "https://blog.worksbyaaron.com",
   integrations: [
     sitemap({
       // sitemap 給的是百分比編碼過的網址（中文標籤會變成 /tags/%E8%B3%87%E5%AE%89/），
-      // 必須先解碼才能和 thinTagPaths 裡的原始標籤 slug 比對。
+      // 必須先解碼才能和 thinListingPaths 裡的原始 slug 比對。
       filter: (page) =>
-        !thinTagPaths.has(decodeURIComponent(new URL(page).pathname)),
+        !thinListingPaths.has(decodeURIComponent(new URL(page).pathname)),
       serialize(item) {
         const lastmod = postLastmod.get(new URL(item.url).pathname);
         if (lastmod) {
@@ -69,11 +80,23 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    // defaultColor: false 讓 Shiki 以 --shiki-* CSS 變數輸出顏色，而不是寫死 inline style。
-    // 原本的 inline style 會壓過 global.css 的 .prose pre 規則，導致自訂的程式碼區塊配色從未生效。
     shikiConfig: {
-      themes: { light: "github-dark", dark: "github-dark" },
-      defaultColor: false,
+      // 單一深色主題。github-dark 的註解色 #6a737d 在本站程式碼底色（#0c0c10）上只有 4.05:1，
+      // 未達 WCAG AA；github-dark-default 的 #8b949e 為 6.35:1。註解正是承載教學解說的部分。
+      theme: "github-dark-default",
+      transformers: [
+        {
+          // Shiki 會把主題底色寫成 <pre> 的 inline style，優先權高於任何樣式表，
+          // 導致 global.css 的 .prose pre 底色永遠套不上。這裡把它拿掉，
+          // 讓底色回歸 --color-code-surface 統一管理。
+          pre(node) {
+            const style = String(node.properties.style ?? "");
+            node.properties.style = style
+              .replace(/background-color:[^;]*;?/g, "")
+              .trim();
+          },
+        },
+      ],
     },
   },
   // 使用 Astro 內建 Fonts API：在 build 時下載並自架拉丁字型，毋須安裝 @fontsource 套件。

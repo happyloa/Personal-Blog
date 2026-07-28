@@ -7,7 +7,7 @@ import {
   getPostDescription,
   getPublishedPostsSorted,
 } from "../../utils/posts";
-import { site } from "../../utils/site";
+import { site, toJsonLd } from "../../utils/site";
 import { formatDate, toISODate } from "../../utils/date";
 import { slugifyTag } from "../../utils/tags";
 import { getCategoryBySlug } from "../../utils/categories";
@@ -104,14 +104,8 @@ const breadcrumbSchema = {
     <meta property="article:author" content={site.author} />
     {category && <meta property="article:section" content={category.name} />}
     {post.data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(blogPostingSchema)}
-    />
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(breadcrumbSchema)}
-    />
+    <script type="application/ld+json" set:html={toJsonLd(blogPostingSchema)} />
+    <script type="application/ld+json" set:html={toJsonLd(breadcrumbSchema)} />
   </Fragment>
 
   <nav

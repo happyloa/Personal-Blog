@@ -6,8 +6,12 @@ import { site } from "../utils/site";
 export async function GET(context) {
   const posts = await getPublishedPostsSorted();
   const feedURL = new URL("/rss.xml", context.site).href;
-  // 最新一篇的日期即為 feed 的最後更新時間；沒有文章時退回目前時間。
-  const latest = posts[0]?.data.updated ?? posts[0]?.data.date ?? new Date();
+  // 取全站最新的異動時間。不能只看 posts[0]：排序只依 date，若替舊文補了 updated，
+  // 它不會排到最前面，lastBuildDate 就反映不出那次修訂。
+  const latest = posts.reduce((max, post) => {
+    const stamp = new Date(post.data.updated ?? post.data.date);
+    return stamp > max ? stamp : max;
+  }, new Date(0));
 
   return rss({
     title: site.title,

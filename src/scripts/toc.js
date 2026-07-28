@@ -1,13 +1,23 @@
-// 在模組層保存鍵盤監聽器，避免每次 astro:page-load 重新初始化時於 document 上層層疊加。
+// 這兩個都保存在模組層：ClientRouter 換頁時 initTOC 會重跑，若不先清掉舊的，
+// 監聽器會在 document 上層層疊加，observer 也會連同整份舊 DOM 一起被留住。
 let tocKeydownHandler;
-// 同理保存 IntersectionObserver：ClientRouter 換頁時若不中斷，舊 observer 會連同整份舊 DOM
-// 一起被留住，逐頁累積成記憶體洩漏。
+let tocFocusoutHandler;
 let headingObserver;
 
 export function initTOC() {
-  // 先中斷上一頁的 observer，再判斷本頁有沒有目錄——early return 也必須先清乾淨。
+  // 清理必須在 early return 之前：換到沒有目錄的頁面（首頁、標籤頁）時，
+  // 舊頁面的監聽器與 observer 同樣要斷乾淨。
   headingObserver?.disconnect();
   headingObserver = undefined;
+
+  if (tocKeydownHandler) {
+    document.removeEventListener("keydown", tocKeydownHandler);
+    tocKeydownHandler = undefined;
+  }
+  if (tocFocusoutHandler) {
+    document.removeEventListener("focusout", tocFocusoutHandler);
+    tocFocusoutHandler = undefined;
+  }
 
   const tocMobile = document.getElementById("toc-mobile");
   const tocOverlay = document.getElementById("toc-overlay");
@@ -68,34 +78,25 @@ export function initTOC() {
     );
   });
 
-  // 以 Escape 關閉行動版目錄，並在開啟時把 Tab 焦點侷限在面板內；先移除舊監聽器避免跨頁面累積。
-  if (tocKeydownHandler) {
-    document.removeEventListener("keydown", tocKeydownHandler);
-  }
+  // Escape 關閉面板。這是 disclosure（aria-expanded + aria-controls），不是 modal dialog，
+  // 所以刻意不做 Tab 循環攔截——那會把鍵盤使用者困在目錄裡，而唯一的關閉按鈕（FAB）
+  // 還在面板之外、不在循環內。
   tocKeydownHandler = (event) => {
-    if (!isOpen) return;
-
-    if (event.key === "Escape") {
+    if (isOpen && event.key === "Escape") {
       setMobileOpen(false);
-      return;
-    }
-
-    if (event.key === "Tab" && tocMobile) {
-      const focusable = tocMobile.querySelectorAll("a[href]");
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
     }
   };
   document.addEventListener("keydown", tocKeydownHandler);
+
+  // 焦點離開面板（且不是移到 FAB）時自動收合，讓 Tab 能自然地往下走，
+  // 同時不會留下一個看不見卻仍在 Tab 順序裡的面板。
+  tocFocusoutHandler = (event) => {
+    if (!isOpen || !tocMobile) return;
+    const next = event.relatedTarget;
+    if (next && (tocMobile.contains(next) || next === tocFab)) return;
+    setMobileOpen(false, { returnFocus: false });
+  };
+  document.addEventListener("focusout", tocFocusoutHandler);
 
   headingObserver = new IntersectionObserver(
     (entries) => {

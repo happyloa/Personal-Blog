@@ -28,7 +28,7 @@ category: web-basics
 
 用餐廳來比喻：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 餐廳外場               | 網站前端                   |
 | ---------------------- | -------------------------- |
@@ -61,7 +61,7 @@ category: web-basics
 
 用餐廳來比喻：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 餐廳廚房                   | 網站後端                     |
 | -------------------------- | ---------------------------- |
@@ -122,7 +122,7 @@ category: web-basics
 
 每間餐廳都需要一個倉庫來儲存食材。網站也需要一個地方來存放資料，那就是**資料庫（Database）**。
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 餐廳倉庫               | 資料庫                               |
 | ---------------------- | ------------------------------------ |

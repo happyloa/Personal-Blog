@@ -44,7 +44,7 @@ DNS 的全名是 **Domain Name System**（域名系統）。它做的事情很�
 
 就像一本超級電話簿：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 你輸入的（域名）   | DNS 翻譯出的（IP 位址） |
 | ------------------ | ----------------------- |
@@ -110,7 +110,7 @@ sequenceDiagram
 
 DNS 不只能翻譯 IP 位址，它其實像一本功能很多的通訊錄：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 記錄類型  | 功能              | 生活化比喻                           |
 | --------- | ----------------- | ------------------------------------ |
@@ -162,7 +162,7 @@ nslookup google.com
 
 你的電腦預設使用 ISP（像是中華電信）提供的 DNS。但你也可以換成其他的：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | DNS 服務       | 位址      | 特色         |
 | -------------- | --------- | ------------ |

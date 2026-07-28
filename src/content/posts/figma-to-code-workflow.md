@@ -2,6 +2,7 @@
 title: Figma to Code 工作流程分享
 description: 解析從 Figma 設計稿轉化為 Vue + TypeScript + Tailwind 程式碼的高效工作流程，建立 Design System 以確保設計與開發的一致性。
 date: 2023-06-20
+updated: 2026-07-28
 tags: [UI/UX, 職涯]
 category: tech-deep-dive
 ---
@@ -105,8 +106,10 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          // 自訂色階不會和 Tailwind 預設調色盤合併，用到哪一階就要定義哪一階。
+          // primary 是全新的色票名稱，沒有預設值可繼承，用到哪一階就要定義哪一階；
           // 少定義 50，下面 outline 樣式的 hover:bg-primary-50 就不會生成任何 CSS。
+          // （在 extend 底下擴充「既有」色票如下面的 gray 則是深層合併，
+          //   預設的 gray-300~900 仍然可用，所以後面才能寫 text-gray-800。）
           50: "#EFF6FF",
           500: "#3B82F6",
           600: "#2563EB",

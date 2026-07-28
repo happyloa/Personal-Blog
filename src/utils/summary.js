@@ -11,13 +11,19 @@ export const toPlainTextExcerpt = (text, maxLength = 160) => {
   const stripMarkdownLinks = (value) =>
     value.replace(/\[(.*?)\]\((.*?)\)/g, "$1");
 
-  return stripMarkdownLinks(text)
-    .replace(/^[ \t]*#+\s*/gm, "") // 標題標記
-    .replace(/^[ \t]*>\s*/gm, "") // 引用標記
-    .replace(/^[ \t]*[-*]\s+/gm, "") // 項目符號（僅限行首，避免誤刪文字中的連字號）
-    .replace(/\*\*(.*?)\*\*/g, "$1") // 粗體
-    .replace(/\*(.*?)\*/g, "$1") // 斜體
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, maxLength);
+  return (
+    stripMarkdownLinks(text)
+      // 文章中允許直接寫 HTML（表格容器、figure、img），沒有先剝掉的話，
+      // 缺 description 時自動摘要會把 <div class="table-wrapper" …> 整串塞進 meta 與 RSS。
+      .replace(/<[^<>]*>/g, " ") // HTML 標籤
+      .replace(/`([^`]*)`/g, "$1") // 行內程式碼
+      .replace(/^[ \t]*#+\s*/gm, "") // 標題標記
+      .replace(/^[ \t]*>\s*/gm, "") // 引用標記
+      .replace(/^[ \t]*[-*]\s+/gm, "") // 項目符號（僅限行首，避免誤刪文字中的連字號）
+      .replace(/\*\*(.*?)\*\*/g, "$1") // 粗體
+      .replace(/\*(.*?)\*/g, "$1") // 斜體
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, maxLength)
+  );
 };

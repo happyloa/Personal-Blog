@@ -2,6 +2,7 @@
 title: Git 版本控制入門 — 用遊戲存檔來理解版本管理
 description: Git 就像遊戲存檔一樣，幫你記錄程式碼的每一個進度。本文用 RPG 遊戲的比喻介紹 Commit、Branch、Merge 等核心概念。
 date: 2026-02-08
+updated: 2026-07-28
 tags: [工具, 新手入門]
 category: learning
 ---
@@ -42,7 +43,7 @@ category: learning
 
 ## Git 的核心概念 — 用遊戲來比喻
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 遊戲概念           | Git 的概念            | 說明                           |
 | ------------------ | --------------------- | ------------------------------ |
@@ -126,10 +127,12 @@ feature:                D --- E
 ### 開始新遊戲
 
 ```bash
-git init
+git init -b main
 ```
 
 在目前的資料夾建立一個新的 Git 儲存庫。就像開始一場新遊戲。
+
+`-b main` 是指定主線分支叫 `main`。不加的話 Git 預設會叫 `master`，後面用到 `main` 的指令就會全部對不上。如果你的 Git 版本太舊不支援 `-b`，就先跑 `git init`，等第一次 commit 完再補一句 `git branch -M main` 改名。
 
 ### 查看目前狀態
 

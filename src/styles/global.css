@@ -130,8 +130,10 @@
     box-shadow: inset 2px 0 0 var(--color-primary);
   }
 
+  /* 一律可水平捲動，不分視窗寬度。原本只在 ≤768px 才打開 overflow-x，
+     但文章裡的 tabindex="0" 是寫死的，桌機就變成一堆按了沒反應的空焦點站。 */
   .table-wrapper {
-    @apply my-8 overflow-hidden rounded-lg border border-border-soft bg-surface;
+    @apply my-8 overflow-x-auto rounded-lg border border-border-soft bg-surface;
   }
 
   .mermaid-shell {
@@ -142,10 +144,20 @@
     @apply min-w-fit;
   }
 
-  /* 可水平捲動的容器帶 tabindex="0"（見 mermaid.js 與文章內的 .table-wrapper），
-     必須給鍵盤使用者看得見的焦點框。 */
+  .mermaid-source {
+    @apply mt-3 border-t border-border-soft pt-3 text-sm text-slate-400;
+  }
+
+  .mermaid-source summary {
+    @apply cursor-pointer select-none;
+  }
+
+  /* 可水平捲動的容器帶 tabindex="0"，必須給鍵盤使用者看得見的焦點框。
+     .prose pre 也要納入——Shiki 會自動幫程式碼區塊加 tabindex="0"，
+     那其實是全站數量最多的可捲動容器。 */
   .mermaid-shell:focus-visible,
-  .table-wrapper:focus-visible {
+  .table-wrapper:focus-visible,
+  .prose pre:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
 }
@@ -184,16 +196,12 @@
   @apply rounded-md border border-border-soft bg-surface-soft px-1.5 py-0.5 text-code font-medium text-slate-100;
 }
 
-/* Shiki 以 CSS 變數輸出顏色（astro.config.mjs 的 defaultColor: false），
-   因此這裡的背景與文字色才有機會生效，不會被 inline style 蓋掉。 */
+/* 文字顏色由 Shiki 以 inline style 提供（語法高亮），底色則由這裡統一管理——
+   astro.config.mjs 的 transformer 已把 Shiki 寫在 <pre> 上的 inline 背景拿掉。
+   注意不要再加一條同樣以 .prose pre 開頭的規則去設 background，
+   特異度相同會直接蓋掉這裡，token 就變成死變數。 */
 .prose pre {
   @apply my-8 overflow-x-auto rounded-lg border border-border-soft bg-code-surface p-4;
-}
-
-.prose pre,
-.prose pre span {
-  color: var(--shiki-dark, #e2e8f0);
-  background-color: transparent;
 }
 
 .prose pre code {
@@ -229,10 +237,6 @@ figure img {
 }
 
 @media (max-width: 768px) {
-  .table-wrapper {
-    @apply overflow-x-auto;
-  }
-
   .prose th,
   .prose td {
     @apply whitespace-nowrap px-3 py-2;

@@ -2,6 +2,7 @@
 title: HTML 與 CSS 入門 — 用 Word 文件來比喻網頁的結構與樣式
 description: 用最直覺的 Microsoft Word 比喻，帶你一次搞懂 HTML 的結構與 CSS 的樣式設計，新手入門網頁開發的最佳指南。
 date: 2026-02-06
+updated: 2026-07-28
 tags: [CSS, 新手入門]
 category: web-basics
 ---
@@ -31,7 +32,7 @@ HTML 做的事情一模一樣！只是寫法不同。在 Word 裡，你用滑鼠
 
 ### Word vs HTML 的對照表
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | Word 裡的操作        | HTML 標籤       | 說明                   |
 | -------------------- | --------------- | ---------------------- |
@@ -96,7 +97,7 @@ CSS 的全名是 **Cascading Style Sheets**（層疊樣式表）。它的工作�
 
 回想一下你在 Word 裡做格式設定的經驗：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | Word 裡的操作   | 對應的 CSS 寫法                                     |
 | --------------- | --------------------------------------------------- |

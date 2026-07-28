@@ -5,7 +5,12 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
-  Cache-Control: public, max-age=0, must-revalidate
+
+# 這裡刻意不設 Cache-Control。Cloudflare Pages 對同名標頭是「合併」而非「覆寫」，
+# 在 /* 設 must-revalidate 會一路洩漏到下面兩條規則：/images/* 的 stale-while-revalidate
+# 會因此永遠不生效（RFC 9111 禁止 must-revalidate 下送出 stale response），
+# /_astro/* 也會出現 immutable 與 must-revalidate 並存的矛盾。
+# HTML 不設值時，Cloudflare Pages 的預設本來就是 public, max-age=0, must-revalidate。
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

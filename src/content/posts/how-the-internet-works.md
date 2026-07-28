@@ -2,6 +2,7 @@
 title: 網路是怎麼運作的？— 從海底電纜到你的螢幕
 description: 全球 95% 的國際網路流量靠海底電纜傳輸！深入淺出介紹 ISP、伺服器、Request/Response 等網路基礎設施運作原理。
 date: 2026-02-11
+updated: 2026-07-28
 tags: [網路, 新手入門]
 category: web-basics
 ---
@@ -49,7 +50,7 @@ ISP 的全名是 **Internet Service Provider**（網際網路服務提供商）�
 
 你可以把 ISP 想成高速公路的**收費站兼交流道**：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 高速公路           | 網路世界                         |
 | ------------------ | -------------------------------- |
@@ -87,7 +88,7 @@ ISP 就是那個讓你的家庭網路「接上」全球網路的中間人。
 
 當然，專業的伺服器跟你的筆電還是有一些差異：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 你的電腦         | 專業伺服器                   |
 | ---------------- | ---------------------------- |
@@ -111,7 +112,7 @@ Google、Amazon、Microsoft 這些大公司在全球各地都有**資料中心�
 
 ### 網路的溝通方式就像寄信
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 寄信流程         | 網路流程                        |
 | ---------------- | ------------------------------- |

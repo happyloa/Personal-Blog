@@ -111,7 +111,7 @@ Content-Type: text/html
 
 回應的開頭有一個數字 `200`，這就是 **HTTP 狀態碼**，用來告訴你這次「取貨」的結果：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | 狀態碼 | 意思       | 生活化比喻                         |
 | ------ | ---------- | ---------------------------------- |

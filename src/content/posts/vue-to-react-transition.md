@@ -2,6 +2,7 @@
 title: 從 Vue 跳到 React 的開發心得 — 兩個框架的差異與轉換經驗
 description: 從 Vue 轉戰 React 的心路歷程。本文深入比較兩大框架在思維與語法上的核心差異，幫助你在轉換過程中少走彎路。
 date: 2024-08-20
+updated: 2026-07-28
 tags: [React, Vue]
 category: learning
 ---
@@ -92,7 +93,7 @@ const increment = () => {
 
 Vue 和 React 的生命週期可以這樣對應：
 
-<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">
+<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">
 
 | Vue 3         | React                             | 常見陷阱／心智模型落差                                                                                                              |
 | ------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
