@@ -148,7 +148,7 @@ const siteJsonLd = {
               <a
                 href={link.href}
                 aria-current={isCurrentNav(link.href) ? "page" : undefined}
-                class="rounded-md px-3 py-2 text-sm font-medium text-slate-400 no-underline hover:bg-surface hover:text-slate-50 aria-[current=page]:bg-surface aria-[current=page]:text-slate-50"
+                class="rounded-md px-3 py-2 text-sm font-medium text-slate-400 no-underline hover:bg-surface hover:text-slate-50 aria-current:bg-surface aria-current:text-slate-50"
               >
                 {link.label}
               </a>
@@ -168,7 +168,7 @@ const siteJsonLd = {
 
     <footer class="mt-16 border-t border-border-soft bg-base">
       <div
-        class="mx-auto grid w-full max-w-5xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]"
+        class="mx-auto grid w-full max-w-5xl gap-10 px-4 py-10 sm:px-6 md:footer-columns"
       >
         <section>
           <div class="mb-3 flex items-center gap-3">

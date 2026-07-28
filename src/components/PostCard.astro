@@ -24,9 +24,7 @@ const summary = toPlainTextExcerpt(getPostDescription(post));
     {
       post.data.tags
         .slice(0, 3)
-        .map((tag) => (
-          <span class="tag-pill px-2 py-0.5 text-[11px]">#{tag}</span>
-        ))
+        .map((tag) => <span class="tag-pill px-2 py-0.5 text-2xs">#{tag}</span>)
     }
   </div>
 

@@ -20,7 +20,7 @@ const filteredHeadings = headings.filter(
     <>
       <aside
         id="toc-desktop"
-        class="fixed right-6 top-24 z-30 hidden max-h-[calc(100vh-7rem)] w-64 overflow-y-auto 2xl:block"
+        class="fixed right-6 top-24 z-30 hidden max-h-toc-desktop w-64 overflow-y-auto 2xl:block"
       >
         <nav class="surface p-4 text-sm" aria-label="文章目錄">
           <p class="mb-3 font-semibold text-slate-200">目錄</p>
@@ -61,7 +61,7 @@ const filteredHeadings = headings.filter(
 
         <nav
           id="toc-mobile"
-          class="fixed bottom-20 right-4 z-50 max-h-[60vh] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-lg border border-border-soft bg-surface p-4 opacity-0 pointer-events-none transition-opacity"
+          class="fixed bottom-20 right-4 z-50 max-h-toc-mobile w-toc-panel overflow-y-auto rounded-lg border border-border-soft bg-surface p-4 opacity-0 pointer-events-none transition-opacity"
           aria-label="文章目錄"
           aria-hidden="true"
           inert
