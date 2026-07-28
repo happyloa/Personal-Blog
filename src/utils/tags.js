@@ -28,9 +28,19 @@ export function getPostsByTag(posts) {
   posts.forEach((post) => {
     post.data.tags.forEach((tag) => {
       const slug = slugifyTag(tag);
-      if (!tagMap.has(slug)) {
+      const existing = tagMap.get(slug);
+
+      if (!existing) {
         tagMap.set(slug, { slug, display: tag, posts: [] });
+      } else if (existing.display !== tag) {
+        // slug 化會抹掉大小寫、空白與符號，因此「Vue.js」與「VueJS」會撞成同一個 slug，
+        // 兩組標籤的文章會被靜默合併進同一頁。與其讓它悄悄發生，不如讓 build 直接失敗。
+        throw new Error(
+          `標籤 slug 衝突：「${existing.display}」與「${tag}」都會產生 /tags/${slug}/。` +
+            `請統一用其中一種寫法（出現於 ${post.id}）。`,
+        );
       }
+
       tagMap.get(slug).posts.push(post);
     });
   });

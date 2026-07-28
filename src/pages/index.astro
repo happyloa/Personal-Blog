@@ -9,13 +9,17 @@ import { getAllTags } from "../utils/tags";
 
 const posts = await getPublishedPostsSorted();
 const categoryCounts = getCategoryCounts(posts);
+// 首頁只列出真的有文章的分類，避免新增分類後、還沒寫文章前就出現「◯◯ · 0 篇」的空卡片。
+const visibleCategories = categories.filter(
+  (category) => (categoryCounts.get(category.slug) || 0) > 0,
+);
 const topTags = getAllTags(posts).slice(0, 8);
 ---
 
 <BaseLayout title={site.title} description={site.description}>
   <div class="grid gap-16">
     <section class="max-w-3xl">
-      <p class="eyebrow mb-5">Frontend / Web / Notes</p>
+      <p class="eyebrow mb-5" lang="en">Frontend / Web / Notes</p>
       <h1 class="mb-6 text-4xl leading-tight md:text-6xl">
         寫下前端開發、網站架構與學習路上的實作筆記。
       </h1>
@@ -28,7 +32,7 @@ const topTags = getAllTags(posts).slice(0, 8);
     <section>
       <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="eyebrow mb-2">Categories</p>
+          <p class="eyebrow mb-2" lang="en">Categories</p>
           <h2 class="text-2xl">文章分類</h2>
         </div>
         <a href="/categories/" class="text-sm font-medium no-underline">
@@ -38,7 +42,7 @@ const topTags = getAllTags(posts).slice(0, 8);
 
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
-          categories.map((category) => (
+          visibleCategories.map((category) => (
             <CategoryCard
               category={category}
               count={categoryCounts.get(category.slug) || 0}
@@ -52,7 +56,7 @@ const topTags = getAllTags(posts).slice(0, 8);
     <section>
       <div class="mb-5 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p class="eyebrow mb-2">Tags</p>
+          <p class="eyebrow mb-2" lang="en">Tags</p>
           <h2 class="text-2xl">熱門標籤</h2>
         </div>
         <a href="/tags/" class="text-sm font-medium no-underline">
@@ -79,7 +83,7 @@ const topTags = getAllTags(posts).slice(0, 8);
     <section>
       <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p class="eyebrow mb-2">Latest</p>
+          <p class="eyebrow mb-2" lang="en">Latest</p>
           <h2 class="text-2xl">最新文章</h2>
         </div>
         <a href="/rss.xml" class="text-sm font-medium no-underline">
@@ -88,7 +92,7 @@ const topTags = getAllTags(posts).slice(0, 8);
       </div>
 
       <div class="grid gap-4">
-        {posts.map((post) => <PostCard post={post} />)}
+        {posts.map((post) => <PostCard post={post} headingLevel="h3" />)}
       </div>
     </section>
   </div>

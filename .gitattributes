@@ -1,0 +1,12 @@
+# 工作目錄一律使用 LF。
+#
+# 本 repo 的 core.autocrlf=true 會在 checkout 時把檔案轉成 CRLF，但 Prettier 預設
+# endOfLine: "lf"，導致 `npm run format:check` 在 Windows 本機必定失敗（CI 的 Linux
+# 環境則會通過）。.gitattributes 的優先權高於 core.autocrlf，設定後兩邊行為一致。
+* text=auto eol=lf
+
+# 二進位檔不做任何行尾轉換。
+*.png binary
+*.webp binary
+*.woff2 binary
+*.svg text eol=lf

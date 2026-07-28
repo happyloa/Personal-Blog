@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+# 這個工作流只需要讀取原始碼，明確收斂權限作為縱深防禦。
+permissions:
+  contents: read
+
+# 同一分支連續推送時取消尚未跑完的舊建置，避免佇列堆積。
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest

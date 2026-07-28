@@ -1,4 +1,4 @@
-﻿---
+---
 title: 用 AI 開發全端天氣 App？六角 Vibe Coding 體驗營心得分享
 description: 參加六角 Vibe Coding 體驗營心得：運用 AI 工具加速開發，串接中央氣象署 API 打造全端天氣預報 App 的實戰經驗。
 date: 2025-11-27

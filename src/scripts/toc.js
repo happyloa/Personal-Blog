@@ -1,7 +1,14 @@
 // 在模組層保存鍵盤監聽器，避免每次 astro:page-load 重新初始化時於 document 上層層疊加。
 let tocKeydownHandler;
+// 同理保存 IntersectionObserver：ClientRouter 換頁時若不中斷，舊 observer 會連同整份舊 DOM
+// 一起被留住，逐頁累積成記憶體洩漏。
+let headingObserver;
 
 export function initTOC() {
+  // 先中斷上一頁的 observer，再判斷本頁有沒有目錄——early return 也必須先清乾淨。
+  headingObserver?.disconnect();
+  headingObserver = undefined;
+
   const tocMobile = document.getElementById("toc-mobile");
   const tocOverlay = document.getElementById("toc-overlay");
   const tocFab = document.getElementById("toc-fab");
@@ -22,6 +29,8 @@ export function initTOC() {
     tocMobile?.classList.toggle("pointer-events-auto", isOpen);
     tocMobile?.classList.toggle("opacity-0", !isOpen);
     tocMobile?.classList.toggle("pointer-events-none", !isOpen);
+    tocOverlay?.setAttribute("aria-hidden", String(!isOpen));
+    tocOverlay?.toggleAttribute("inert", !isOpen);
     tocOverlay?.classList.toggle("opacity-100", isOpen);
     tocOverlay?.classList.toggle("pointer-events-auto", isOpen);
     tocOverlay?.classList.toggle("opacity-0", !isOpen);
@@ -38,7 +47,7 @@ export function initTOC() {
 
   function setActiveLink(slug) {
     links.forEach((link) => {
-      const isActive = link.getAttribute("data-slug") === slug;
+      const isActive = link.dataset.slug === slug;
       link.classList.toggle("bg-surface-soft", isActive);
       link.classList.toggle("text-slate-100", isActive);
       link.classList.toggle("text-slate-400", !isActive);
@@ -88,7 +97,7 @@ export function initTOC() {
   };
   document.addEventListener("keydown", tocKeydownHandler);
 
-  const headingObserver = new IntersectionObserver(
+  headingObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -100,4 +109,7 @@ export function initTOC() {
   );
 
   headings.forEach((heading) => headingObserver.observe(heading));
+
+  // 讓 DOM 與 isOpen 從一開始就同步（SSR 已輸出 inert / aria-hidden，這裡不搶焦點）。
+  setMobileOpen(false, { returnFocus: false });
 }

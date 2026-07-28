@@ -8,11 +8,43 @@ const {
   title = site.title,
   description = site.description,
   image = site.defaultOgImage,
+  imageWidth = 1200,
+  imageHeight = 630,
   ogType = "website",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  noindex = false,
 } = Astro.props;
 
 const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
+
+// 主導覽的 active 判定：首頁只在完全相符時算命中，其餘用前綴比對，
+// 讓 /tags/vue/ 這類子頁也能正確標示所屬區塊。
+const isCurrentNav = (href) =>
+  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+
+// 全站身分識別。文章頁另有各自的 BlogPosting（見 posts/[slug].astro），兩者並存是合法的。
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": new URL("/#website", Astro.site).href,
+      url: new URL("/", Astro.site).href,
+      name: site.title,
+      description: site.description,
+      inLanguage: "zh-Hant-TW",
+      publisher: { "@id": new URL("/#person", Astro.site).href },
+    },
+    {
+      "@type": "Person",
+      "@id": new URL("/#person", Astro.site).href,
+      name: site.author,
+      url: new URL("/", Astro.site).href,
+      sameAs: [site.githubUrl, site.cakeUrl],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -24,19 +56,28 @@ const currentYear = new Date().getFullYear();
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
 
-    <Font cssVariable="--font-inter" />
+    {
+      /* Inter 是內文字型，值得 preload；astro.config.mjs 已限定 styles: ["normal"]，
+        因此不會連帶把用不到的斜體檔案拉到最高優先級。 */
+    }
+    <Font cssVariable="--font-inter" preload />
     <Font cssVariable="--font-outfit" />
     <Font cssVariable="--font-jetbrains" />
 
+    {
+      /* 只取 400／700 兩個字重：500 僅用於導覽列與小字級 UI，14px 下與 400 幾乎無差異，
+        但整份 CSS 的傳輸量可因此減少約三分之一。 */
+    }
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
     />
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#09090b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
@@ -54,8 +95,8 @@ const currentYear = new Date().getFullYear();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
     <meta property="og:image:alt" content={title} />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -64,6 +105,12 @@ const currentYear = new Date().getFullYear();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.url)} />
     <meta name="twitter:image:alt" content={title} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(siteJsonLd)}
+      is:inline
+    />
 
     <slot name="head" />
 
@@ -100,7 +147,8 @@ const currentYear = new Date().getFullYear();
             navLinks.map((link) => (
               <a
                 href={link.href}
-                class="rounded-md px-3 py-2 text-sm font-medium text-slate-400 no-underline hover:bg-surface hover:text-slate-50"
+                aria-current={isCurrentNav(link.href) ? "page" : undefined}
+                class="rounded-md px-3 py-2 text-sm font-medium text-slate-400 no-underline hover:bg-surface hover:text-slate-50 aria-[current=page]:bg-surface aria-[current=page]:text-slate-50"
               >
                 {link.label}
               </a>
@@ -186,7 +234,7 @@ const currentYear = new Date().getFullYear();
         class="border-t border-border-soft px-4 py-5 text-center text-xs text-slate-400"
       >
         © {currentYear}
-        {site.name}. Built with Astro and Tailwind CSS.
+        {site.name}. <span lang="en">Built with Astro and Tailwind CSS.</span>
       </div>
     </footer>
 

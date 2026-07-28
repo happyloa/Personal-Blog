@@ -24,6 +24,9 @@
   --color-secondary: #cbd5e1;
 }
 
+/* 元素層級的預設樣式一律放進 @layer base。
+   未分層（unlayered）的宣告依 CSS Cascade Layers 規範會勝過「所有」已分層宣告（與 specificity 無關），
+   若把 a / h1-h6 裸寫在外面，模板上的 text-slate-400 之類 utility 會全部靜默失效。 */
 @layer base {
   *,
   ::after,
@@ -32,61 +35,97 @@
   ::file-selector-button {
     border-color: var(--color-border-soft, currentcolor);
   }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      var(--color-base);
+    background-size: 48px 48px;
+    @apply text-slate-300 antialiased selection:bg-primary/25 selection:text-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    @apply text-balance font-semibold text-slate-50;
+  }
+
+  a {
+    @apply text-primary underline-offset-4 transition-colors hover:text-primary-muted;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3f3f46 transparent;
+  }
 }
 
-:root {
-  color-scheme: dark;
+/* 元件類別放進 @layer components，讓模板上的 utility（px-2、text-[11px]…）能正常覆寫。 */
+@layer components {
+  .surface {
+    @apply rounded-lg border border-border-soft bg-surface;
+  }
+
+  .surface-hover {
+    @apply transition-colors hover:border-slate-600 hover:bg-surface-soft;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.18em] text-slate-400;
+  }
+
+  .tag-pill {
+    font-family: var(--font-mono);
+    @apply inline-flex items-center rounded-full border border-border-soft bg-surface px-3 py-1 text-xs text-slate-400 no-underline transition-colors hover:border-slate-500 hover:bg-surface-soft hover:text-slate-100;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-slate-950;
+  }
+
+  /* 目前閱讀中的章節：用 inset box-shadow 而非 border，避免捲動時目錄項目左右位移。
+     文字顏色交給 toc.js 切換的 text-slate-100 utility，兩者不互相干擾。 */
+  .toc-link[aria-current],
+  .toc-link-mobile[aria-current] {
+    box-shadow: inset 2px 0 0 var(--color-primary);
+  }
+
+  .table-wrapper {
+    @apply my-8 overflow-hidden rounded-lg border border-border-soft bg-surface;
+  }
+
+  .mermaid-shell {
+    @apply my-8 overflow-x-auto rounded-lg border border-border-soft bg-surface p-4;
+  }
+
+  .mermaid {
+    @apply min-w-fit;
+  }
+
+  /* 可水平捲動的容器帶 tabindex="0"（見 mermaid.js 與文章內的 .table-wrapper），
+     必須給鍵盤使用者看得見的焦點框。 */
+  .mermaid-shell:focus-visible,
+  .table-wrapper:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
 }
 
-html {
-  scroll-padding-top: 6rem;
-}
-
-body {
-  font-family: var(--font-sans);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    var(--color-base);
-  background-size: 48px 48px;
-  @apply text-slate-300 antialiased selection:bg-primary/25 selection:text-white;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  @apply text-balance font-semibold text-slate-50;
-}
-
-a {
-  @apply text-primary underline-offset-4 transition-colors hover:text-primary-muted;
-}
-
-.surface {
-  @apply rounded-lg border border-border-soft bg-surface;
-}
-
-.surface-hover {
-  @apply transition-colors hover:border-slate-600 hover:bg-surface-soft;
-}
-
-.eyebrow {
-  @apply font-mono text-xs font-medium uppercase tracking-[0.18em] text-slate-400;
-}
-
-.tag-pill {
-  font-family: var(--font-mono);
-  @apply inline-flex items-center rounded-full border border-border-soft bg-surface px-3 py-1 text-xs text-slate-400 no-underline transition-colors hover:border-slate-500 hover:bg-surface-soft hover:text-slate-100;
-}
-
-.skip-link {
-  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-slate-950;
-}
-
+/* 以下 .prose 規則刻意「不分層」：@tailwindcss/typography 的 prose 樣式落在 utilities layer，
+   未分層宣告才壓得過它。移進 @layer components 反而會被 plugin 蓋掉。 */
 .prose {
   @apply prose-invert prose-slate max-w-none;
   --tw-prose-body: #cbd5e1;
@@ -111,7 +150,7 @@ a {
 }
 
 .prose a {
-  @apply break-words decoration-primary/35 hover:decoration-primary-muted;
+  @apply break-words decoration-primary/70 decoration-2 hover:decoration-primary-muted;
 }
 
 .prose code {
@@ -119,20 +158,24 @@ a {
   @apply rounded-md border border-border-soft bg-surface-soft px-1.5 py-0.5 text-[0.9em] font-medium text-slate-100;
 }
 
+/* Shiki 以 CSS 變數輸出顏色（astro.config.mjs 的 defaultColor: false），
+   因此這裡的背景與文字色才有機會生效，不會被 inline style 蓋掉。 */
 .prose pre {
   @apply my-8 overflow-x-auto rounded-lg border border-border-soft bg-[#0c0c10] p-4;
 }
 
+.prose pre,
+.prose pre span {
+  color: var(--shiki-dark, #e2e8f0);
+  background-color: transparent;
+}
+
 .prose pre code {
-  @apply border-0 bg-transparent p-0 text-slate-200;
+  @apply border-0 bg-transparent p-0;
 }
 
 .prose blockquote {
   @apply rounded-r-lg border-l-primary bg-surface px-5 py-2 not-italic;
-}
-
-.table-wrapper {
-  @apply my-8 overflow-hidden rounded-lg border border-border-soft bg-surface;
 }
 
 .prose table {
@@ -155,14 +198,6 @@ a {
   @apply border-b-0;
 }
 
-.mermaid-shell {
-  @apply my-8 overflow-x-auto rounded-lg border border-border-soft bg-surface p-4;
-}
-
-.mermaid {
-  @apply min-w-fit;
-}
-
 figure img {
   @apply border border-border-soft;
 }
@@ -178,14 +213,26 @@ figure img {
   }
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #3f3f46 transparent;
-}
-
+/* 尊重「減少動態效果」偏好。ClientRouter（View Transitions）本身不會偵測這個設定，
+   必須自行把 ::view-transition-* 的動畫關掉，否則整頁 cross-fade 依然會播放。 */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

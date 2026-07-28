@@ -1,4 +1,4 @@
-﻿---
+---
 title: Tailwind CSS v4 來了！速度更快、體積更小、寫法更自由
 description: Tailwind v4 正式發布，帶來了效能的飛躍與更靈活的配置方式。預設設定改用 CSS 變數，直接在 CSS 裡定義你的 Design System，舊的 tailwind.config.js 也還能透過 @config 沿用。
 date: 2026-02-19

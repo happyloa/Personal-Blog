@@ -27,6 +27,7 @@ const { displayTag, posts } = Astro.props;
 <BaseLayout
   title={`#${displayTag} 標籤文章｜${site.title}`}
   description={`包含 #${displayTag} 標籤的文章彙整`}
+  noindex={posts.length < 2}
 >
   <section class="mb-10 max-w-3xl">
     <a href="/tags/" class="mb-5 inline-flex text-sm no-underline">
