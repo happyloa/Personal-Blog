@@ -130,8 +130,8 @@ draft: false # （選填）設為 true 則不會發布
   - frontmatter 的 `cover` 欄位走 Astro 內建的 `image()` 優化管線，圖片必須放在 `src/` 底下（例如自行建立 `src/assets/`），路徑相對於**文章檔案本身**解析，因此從 `src/content/posts/foo.md` 指到 `src/assets/` 要寫 `../../assets/cover.png`。
 - **標籤**：系統會自動將標籤轉為小寫並移除特殊符號（slugify），自動生成對應的 `/tags/<tag>/` 頁面。若兩個不同標籤 slugify 後撞在一起（例如 `Vue.js` 與 `VueJS`），build 會直接失敗並指出衝突。
 - **目錄**：文章內頁會自動解析 `h2` 與 `h3` 標題生成目錄。正文請從 `h2` 開始，`h1` 已由文章標題佔用。
-- **Mermaid 圖表**：用 ` ```mermaid ` 圍欄即可，客戶端會自動轉譯，且只有含圖表的頁面才會下載 Mermaid（約 488KB）。
-- **表格**：寬表格請包在 `<div class="table-wrapper" tabindex="0" role="region" aria-label="表格">` 裡，讓它在窄螢幕能水平捲動、且鍵盤使用者可以聚焦捲動。
+- **Mermaid 圖表**：用 ` ```mermaid ` 圍欄即可，客戶端會自動轉譯。只有含圖表的頁面才會下載 Mermaid，且各圖表類型的 chunk 各自懶載入（`katex`、`cytoscape` 只在用到數學式與 mindmap／architecture 時才拉）。以最常見的 flowchart 為例約 23 個 chunk、1.2MB 未壓縮／**292KB gzip**，在 `astro:page-load` 之後才開始下載，不阻擋首屏。
+- **表格**：表格一律包在 `<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">` 裡。這不只是為了窄螢幕捲動——`.prose table` 的垂直間距刻意設為 `my-0`，由外層的 `.table-wrapper` 提供 `my-8` 與邊框、底色；沒包的話表格會緊貼上一段文字、也失去圓角邊框，而且 `≤768px` 的 `white-space: nowrap` 加上 `body` 的 `overflow-x: hidden` 會讓右側欄位在手機上被裁掉且無法捲到。`role` 用 `group` 而非 `region`：`region` 會讓每張表格都變成一個地標，一篇多表格的文章會塞爆螢幕閱讀器的地標清單。
 
 ## 部署
 

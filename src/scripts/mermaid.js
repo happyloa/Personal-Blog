@@ -61,7 +61,9 @@ function prepareMermaidBlocks() {
   return shells;
 }
 
-// 只在頁面確實有圖時才動態載入 mermaid（約 488KB），並只初始化一次。
+// 只在頁面確實有圖時才動態載入 mermaid，並只初始化一次。
+// 實測（2026-07 量測建置產物）：一頁有 flowchart 會拉 23 個 chunk、1.2MB 未壓縮／292KB gzip。
+// mermaid 內部各圖表類型與 katex／cytoscape 都是動態 import，用不到的類型不會下載。
 // 套件為專案自架（package.json 的 mermaid），Vite 會切成帶 hash 的獨立 chunk：
 // 「有圖才下載」的行為不變，但不再依賴第三方 CDN，CSP 也才能收回 script-src 'self'。
 let mermaidReady;
