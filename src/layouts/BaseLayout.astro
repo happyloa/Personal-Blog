@@ -117,6 +117,12 @@ const siteJsonLd = {
     <ClientRouter />
   </head>
   <body class="min-h-screen overflow-x-hidden">
+    <canvas
+      id="grid-glow-canvas"
+      class="pointer-events-none fixed inset-0 z-0 h-full w-full"
+      aria-hidden="true"
+    ></canvas>
+
     <a class="skip-link" href="#main-content">跳到主要內容</a>
 
     <header
@@ -160,13 +166,13 @@ const siteJsonLd = {
 
     <main
       id="main-content"
-      class="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:py-16"
+      class="relative z-10 mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 lg:py-16"
       tabindex="-1"
     >
       <slot />
     </main>
 
-    <footer class="mt-16 border-t border-border-soft bg-base">
+    <footer class="relative z-10 mt-16 border-t border-border-soft bg-base">
       <div
         class="mx-auto grid w-full max-w-5xl gap-10 px-4 py-10 sm:px-6 md:footer-columns"
       >
@@ -240,8 +246,14 @@ const siteJsonLd = {
 
     <script>
       import { initMermaid } from "../scripts/mermaid";
+      import { initGridGlow, cleanupGridGlow } from "../scripts/grid-glow";
 
-      document.addEventListener("astro:page-load", initMermaid);
+      document.addEventListener("astro:page-load", () => {
+        initMermaid();
+        initGridGlow();
+      });
+
+      document.addEventListener("astro:before-swap", cleanupGridGlow);
     </script>
   </body>
 </html>
