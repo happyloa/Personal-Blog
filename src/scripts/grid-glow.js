@@ -3,6 +3,7 @@
  *
  * 當滑鼠滑過網頁背景的 48px 方格時，方格會平滑淡入（Fade-in）呈現淺色高亮，
  * 當滑鼠離開時則以自然的時間曲線平滑淡出（Fade-out），營造沉浸式的科技感視覺回饋。
+ * 僅在具備精準指標（滑鼠/觸控板）的裝置上啟用，排除手機與平板觸控裝置。
  */
 
 // 必須與 global.css 中的 background-size: 48px 48px 保持一致
@@ -31,9 +32,22 @@ function getKey(col, row) {
 }
 
 /**
+ * 檢查當前裝置是否支援滑鼠懸停操作
+ * @returns {boolean}
+ */
+function isMouseDevice() {
+  return (
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/**
  * 處理游標移動事件：計算游標所在的方格座標並啟動淡入
  */
 function handlePointerMove(e) {
+  // 僅限滑鼠指標操作，忽略觸控（touch）或觸控筆（pen）
+  if (e.pointerType && e.pointerType !== "mouse") return;
   if (!canvas || !ctx) return;
 
   // 納入全域滾動偏移量，確保與 body 背景的 CSS 方格精準對齊
@@ -227,8 +241,9 @@ function handleScroll() {
  * 初始化背景方格發光效果
  */
 export function initGridGlow() {
-  // 尊重使用者的「減少動態效果」系統偏好設定
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  // 手機、平板等觸控裝置（無精準滑鼠指標）或偏好減少動態效果者不啟用
+  if (!isMouseDevice()) {
+    cleanupGridGlow();
     return;
   }
 
@@ -246,7 +261,9 @@ export function initGridGlow() {
   window.removeEventListener("scroll", handleScroll);
 
   window.addEventListener("pointermove", handlePointerMove, { passive: true });
-  window.addEventListener("pointerleave", handlePointerLeave, { passive: true });
+  window.addEventListener("pointerleave", handlePointerLeave, {
+    passive: true,
+  });
   window.addEventListener("resize", resizeCanvas, { passive: true });
   window.addEventListener("scroll", handleScroll, { passive: true });
 }
