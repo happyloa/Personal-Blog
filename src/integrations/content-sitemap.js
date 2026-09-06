@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import { parse } from "node-html-parser";
 
 /** @param {string} html 已建置的頁面 */
-export function getSitemapMetadata(html) {
+function getSitemapMetadata(html) {
   const head = parse(html).querySelector("head");
   const canonical = head
     ?.querySelector('link[rel="canonical"]')

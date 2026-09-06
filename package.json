@@ -14,8 +14,7 @@
     "preview": "astro preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "astro check --tsconfig jsconfig.json",
-    "test": "node --test"
+    "check": "astro check --tsconfig jsconfig.json"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

@@ -64,15 +64,14 @@
 
    ```bash
    npm run check # Astro 型別與 JavaScript JSDoc 檢查
-   npm test      # Node.js 內建測試：sitemap metadata 與光暈動畫生命週期
    npm run build # 正式靜態建置；此指令本身不執行型別檢查
    ```
 
-   GitHub Actions 在 Node 22 與 24 執行 `npm ci`、格式檢查、型別檢查、測試與 build。互動測試目前使用模擬環境，不能取代實際瀏覽器的視覺與操作驗證。
+   GitHub Actions 使用 Node 24，執行 `npm ci`、格式檢查、型別檢查與 build。專案保持簡單，不另維護自動化測試套件；頁面互動與視覺效果以瀏覽器手動確認。
 
 ### 套件配置與更新
 
-Tailwind CSS 4 使用 `@tailwindcss/vite`，Typography 透過 CSS 的 `@plugin` 載入。字型使用 Astro 內建 Fonts API，Zod 從 `astro/zod` 匯入。HTML 解析器 `node-html-parser` 僅供 sitemap 建置與驗證使用，不會送到瀏覽器。
+Tailwind CSS 4 使用 `@tailwindcss/vite`，Typography 透過 CSS 的 `@plugin` 載入。字型使用 Astro 內建 Fonts API，Zod 從 `astro/zod` 匯入。HTML 解析器 `node-html-parser` 僅供 sitemap 建置使用，不會送到瀏覽器。
 
 開發工具使用精確版本，安裝結果由 `package-lock.json` 鎖定。`@astrojs/check` 0.9.10 的 peer dependency 支援 TypeScript 5／6，因此目前固定使用 TypeScript 6.0.3；不要直接升至 TypeScript 7 或使用 `--force` 忽略相容性。
 
@@ -100,7 +99,6 @@ public/
 ├── favicon.svg
 └── og-default.png
 
-tests/           # Node.js 回歸測試
 ```
 
 ## 新增文章指南
