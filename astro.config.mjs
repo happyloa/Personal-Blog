@@ -1,85 +1,10 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import { defineConfig, fontProviders } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 import tailwindvite from "@tailwindcss/vite";
-import { slugifyTag } from "./src/utils/tags.js";
-
-// astro.config 無法使用 astro:content 的 getCollection，因此直接讀 frontmatter，
-// 取得 sitemap 需要的 lastmod，以及「只有一篇文章」的標籤（這些頁面掛了 noindex，
-// 不應該再出現在 sitemap 裡，否則等於同時送出兩個互相矛盾的訊號）。
-const POSTS_DIR = fileURLToPath(
-  new URL("./src/content/posts", import.meta.url),
-);
-
-const postLastmod = new Map();
-const tagCounts = new Map();
-const categoryCounts = new Map();
-
-for (const file of readdirSync(POSTS_DIR)) {
-  if (!file.endsWith(".md")) continue;
-
-  const raw = readFileSync(`${POSTS_DIR}/${file}`, "utf8").replace(
-    /^\uFEFF/,
-    "",
-  );
-  const frontmatter = raw.split(/^---\s*$/m)[1] ?? "";
-  /** @param {string} key */
-  const field = (key) =>
-    new RegExp(String.raw`^${key}:[ \t]*(.+)$`, "m")
-      .exec(frontmatter)?.[1]
-      ?.trim();
-
-  if (field("draft") === "true") continue;
-
-  const dateValue = field("updated") ?? field("date");
-  const parsed = dateValue ? new Date(dateValue) : null;
-  if (parsed && !Number.isNaN(parsed.getTime())) {
-    postLastmod.set(`/posts/${file.replace(/\.md$/, "")}/`, parsed);
-  }
-
-  const tagList = field("tags")?.replace(/^\[|\]$/g, "") ?? "";
-  for (const tag of tagList.split(",")) {
-    const trimmed = tag.trim().replace(/^["']|["']$/g, "");
-    if (!trimmed) continue;
-    const slug = slugifyTag(trimmed);
-    tagCounts.set(slug, (tagCounts.get(slug) ?? 0) + 1);
-  }
-
-  const category = field("category");
-  if (category) {
-    categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
-  }
-}
-
-// 少於兩篇的列表頁會輸出 noindex（見 tags/[tag].astro 與 categories/[category].astro），
-// 同時也要排除在 sitemap 之外，否則等於同時送出兩個互相矛盾的索引訊號。
-const thinListingPaths = new Set([
-  ...Array.from(tagCounts.entries())
-    .filter(([, count]) => count < 2)
-    .map(([slug]) => `/tags/${slug}/`),
-  ...Array.from(categoryCounts.entries())
-    .filter(([, count]) => count < 2)
-    .map(([slug]) => `/categories/${slug}/`),
-]);
+import contentSitemap from "./src/integrations/content-sitemap.js";
 
 export default defineConfig({
   site: "https://blog.worksbyaaron.com",
-  integrations: [
-    sitemap({
-      // sitemap 給的是百分比編碼過的網址（中文標籤會變成 /tags/%E8%B3%87%E5%AE%89/），
-      // 必須先解碼才能和 thinListingPaths 裡的原始 slug 比對。
-      filter: (page) =>
-        !thinListingPaths.has(decodeURIComponent(new URL(page).pathname)),
-      serialize(item) {
-        const lastmod = postLastmod.get(new URL(item.url).pathname);
-        if (lastmod) {
-          item.lastmod = lastmod.toISOString();
-        }
-        return item;
-      },
-    }),
-  ],
+  integrations: [contentSitemap()],
   markdown: {
     shikiConfig: {
       // 單一深色主題。github-dark 的註解色 #6a737d 在本站程式碼底色（#0c0c10）上只有 4.05:1，

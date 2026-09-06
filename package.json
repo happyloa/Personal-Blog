@@ -14,7 +14,8 @@
     "preview": "astro preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "astro check --tsconfig jsconfig.json"
+    "check": "astro check --tsconfig jsconfig.json",
+    "test": "node --test"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "node-html-parser": "9.0.3",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "typescript": "6.0.3"
