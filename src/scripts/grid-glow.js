@@ -63,6 +63,7 @@ function handlePointerMove(e) {
   const col = Math.floor(docX / GRID_SIZE);
   const row = Math.floor(docY / GRID_SIZE);
   const key = getKey(col, row);
+  if (currentHoveredKey === key) return;
 
   if (currentHoveredKey !== key) {
     // 游標移出先前的方格，將其目標透明度設為 0 開始淡出
@@ -97,6 +98,7 @@ function handlePointerLeave() {
   if (currentHoveredKey && cells.has(currentHoveredKey)) {
     const prev = cells.get(currentHoveredKey);
     prev.targetOpacity = 0;
+    startAnimation();
   }
   currentHoveredKey = null;
 }
@@ -166,7 +168,8 @@ function render(deltaTime) {
       continue;
     }
 
-    hasActiveCells = true;
+    // 完全亮起的方格保留在畫布上，只有透明度尚在變化時才需要下一幀。
+    hasActiveCells ||= cell.currentOpacity !== cell.targetOpacity;
 
     // 計算方格在當前視窗中的相對螢幕座標
     const screenX = cell.col * GRID_SIZE - scrollX;
@@ -214,7 +217,7 @@ function animate(currentTime) {
   if (hasActive) {
     animationFrameId = requestAnimationFrame(animate);
   } else {
-    // 當所有方格都完全淡出後，停止動畫迴圈以達成 0% 閒置 CPU 消耗
+    // 所有方格亮度穩定後停止重繪，直到游標移動、離開或捲動。
     isAnimating = false;
     lastTime = 0;
     if (animationFrameId) {
@@ -284,10 +287,14 @@ export function cleanupGridGlow() {
     animationFrameId = null;
   }
   isAnimating = false;
+  lastTime = 0;
   cells.clear();
   currentHoveredKey = null;
   window.removeEventListener("pointermove", handlePointerMove);
   window.removeEventListener("pointerleave", handlePointerLeave);
   window.removeEventListener("resize", resizeCanvas);
   window.removeEventListener("scroll", handleScroll);
+  ctx?.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  canvas = null;
+  ctx = null;
 }
