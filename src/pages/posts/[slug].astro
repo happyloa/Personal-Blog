@@ -139,8 +139,7 @@ const breadcrumbSchema = {
         {
           hasUpdate && (
             <span>
-              更新於{" "}
-              <time datetime={isoUpdated}>{formatDate(post.data.updated)}</time>
+              更新於 <time datetime={isoUpdated}>{formatDate(isoUpdated)}</time>
             </span>
           )
         }

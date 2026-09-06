@@ -1,7 +1,11 @@
 import { getCollection } from "astro:content";
 
+/** @typedef {import("astro:content").CollectionEntry<"posts">} Post */
+
+/** @param {Post} post */
 const defaultFilter = (post) => !post.data.draft;
 
+/** @param {Post} a @param {Post} b */
 const defaultSort = (a, b) => {
   const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
   const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
@@ -10,8 +14,8 @@ const defaultSort = (a, b) => {
 
 /**
  * 取得所有已發布（非 draft）的文章，並依指定規則排序。
- * @param {{filter?: (post: object) => boolean, sort?: (a: object, b: object) => number}} [options] 可選的額外篩選與排序條件
- * @returns {Promise<Array<object>>} 已發布並排序後的文章集合
+ * @param {{filter?: (post: Post) => boolean, sort?: (a: Post, b: Post) => number}} [options] 可選的額外篩選與排序條件
+ * @returns {Promise<Post[]>} 已發布並排序後的文章集合
  */
 export async function getPublishedPostsSorted(options = {}) {
   const { filter, sort } = options;

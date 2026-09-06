@@ -15,8 +15,11 @@ const FADE_OUT_DURATION = 1100;
 // 最高透明度（亮度）
 const MAX_OPACITY = 1.0;
 
+/** @type {HTMLCanvasElement | null} */
 let canvas = null;
+/** @type {CanvasRenderingContext2D | null} */
 let ctx = null;
+/** @type {number | null} */
 let animationFrameId = null;
 let isAnimating = false;
 let lastTime = 0;
@@ -25,8 +28,10 @@ let lastTime = 0;
 const cells = new Map();
 
 // 當前游標所在的方格 key
+/** @type {string | null} */
 let currentHoveredKey = null;
 
+/** @param {number} col @param {number} row */
 function getKey(col, row) {
   return `${col},${row}`;
 }
@@ -45,6 +50,7 @@ function isMouseDevice() {
 /**
  * 處理游標移動事件：計算游標所在的方格座標並啟動淡入
  */
+/** @param {PointerEvent} e */
 function handlePointerMove(e) {
   // 僅限滑鼠指標操作，忽略觸控（touch）或觸控筆（pen）
   if (e.pointerType && e.pointerType !== "mouse") return;
@@ -197,6 +203,7 @@ function render(deltaTime) {
 /**
  * requestAnimationFrame 動畫迴圈
  */
+/** @param {number} currentTime */
 function animate(currentTime) {
   if (!lastTime) lastTime = currentTime;
   const deltaTime = Math.min(currentTime - lastTime, 100);
@@ -247,7 +254,7 @@ export function initGridGlow() {
     return;
   }
 
-  canvas = document.getElementById("grid-glow-canvas");
+  canvas = document.querySelector("canvas#grid-glow-canvas");
   if (!canvas) return;
 
   ctx = canvas.getContext("2d", { alpha: true });

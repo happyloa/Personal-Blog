@@ -1,5 +1,6 @@
 // mermaid 圖表類型 → 中文名稱。用來給容器一個有意義的 aria-label，
 // 而不是不管畫什麼都朗讀成「流程圖」。
+/** @type {Record<string, string>} */
 const DIAGRAM_LABELS = {
   flowchart: "流程圖",
   graph: "流程圖",
@@ -16,6 +17,7 @@ const DIAGRAM_LABELS = {
   gitGraph: "Git 線圖",
 };
 
+/** @param {string} source */
 function labelFor(source) {
   const keyword = /^\s*([A-Za-z][\w-]*)/.exec(source)?.[1] ?? "";
   return DIAGRAM_LABELS[keyword] ?? "圖表";
@@ -25,6 +27,7 @@ function labelFor(source) {
 // 直接用 Shiki 標好的屬性選取，不必比對內容開頭關鍵字，因此不會誤判一般程式碼範例，
 // 也自動支援 journey / mindmap / timeline 等所有圖表類型。
 function prepareMermaidBlocks() {
+  /** @type {HTMLDivElement[]} */
   const shells = [];
 
   document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
@@ -66,6 +69,7 @@ function prepareMermaidBlocks() {
 // mermaid 內部各圖表類型與 katex／cytoscape 都是動態 import，用不到的類型不會下載。
 // 套件為專案自架（package.json 的 mermaid），Vite 會切成帶 hash 的獨立 chunk：
 // 「有圖才下載」的行為不變，但不再依賴第三方 CDN，CSP 也才能收回 script-src 'self'。
+/** @type {Promise<import("mermaid").Mermaid> | undefined} */
 let mermaidReady;
 function loadMermaid() {
   mermaidReady ??= import("mermaid").then(({ default: mermaid }) => {

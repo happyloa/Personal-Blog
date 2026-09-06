@@ -19,8 +19,8 @@ export function slugifyTag(tag) {
 /**
  * 將文章依標籤 slug 分組（標籤內頁 getStaticPaths 共用），保留原本的文章排序。
  * 同一個 slug 以「第一次出現」的顯示名稱為準。
- * @param {Array<{data: {tags: string[]}}>} posts 已發布文章集合
- * @returns {Map<string, {slug: string, display: string, posts: Array}>} 以 slug 為 key 的分組結果
+ * @param {Array<import("astro:content").CollectionEntry<"posts">>} posts 已發布文章集合
+ * @returns {Map<string, {slug: string, display: string, posts: Array<import("astro:content").CollectionEntry<"posts">>}>} 以 slug 為 key 的分組結果
  */
 export function getPostsByTag(posts) {
   const tagMap = new Map();
@@ -51,7 +51,7 @@ export function getPostsByTag(posts) {
 /**
  * 將文章集合彙整成依數量排序的標籤清單（首頁、標籤索引共用）。
  * 重用 getPostsByTag 的分組結果，避免兩份重複的走訪邏輯。
- * @param {Array<{data: {tags: string[]}}>} posts 已發布文章集合
+ * @param {Array<import("astro:content").CollectionEntry<"posts">>} posts 已發布文章集合
  * @returns {Array<{slug: string, display: string, count: number}>} 依文章數量由多到少排序的標籤清單
  */
 export function getAllTags(posts) {

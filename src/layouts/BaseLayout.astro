@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
 
 // 主導覽的 active 判定：首頁只在完全相符時算命中，其餘用前綴比對，
 // 讓 /tags/vue/ 這類子頁也能正確標示所屬區塊。
-const isCurrentNav = (href) =>
+const isCurrentNav = (href: string) =>
   href === "/" ? currentPath === "/" : currentPath.startsWith(href);
 
 // 全站身分識別。文章頁另有各自的 BlogPosting（見 posts/[slug].astro），兩者並存是合法的。

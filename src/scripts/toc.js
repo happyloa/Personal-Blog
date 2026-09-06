@@ -1,7 +1,10 @@
 // 這兩個都保存在模組層：ClientRouter 換頁時 initTOC 會重跑，若不先清掉舊的，
 // 監聽器會在 document 上層層疊加，observer 也會連同整份舊 DOM 一起被留住。
+/** @type {((event: KeyboardEvent) => void) | undefined} */
 let tocKeydownHandler;
+/** @type {((event: FocusEvent) => void) | undefined} */
 let tocFocusoutHandler;
+/** @type {IntersectionObserver | undefined} */
 let headingObserver;
 
 export function initTOC() {
@@ -29,6 +32,7 @@ export function initTOC() {
 
   let isOpen = false;
 
+  /** @param {boolean} nextOpen */
   function setMobileOpen(nextOpen, { returnFocus = true } = {}) {
     isOpen = nextOpen;
     tocFab?.setAttribute("aria-expanded", String(isOpen));
@@ -55,9 +59,10 @@ export function initTOC() {
     }
   }
 
+  /** @param {string} slug */
   function setActiveLink(slug) {
     links.forEach((link) => {
-      const isActive = link.dataset.slug === slug;
+      const isActive = link.getAttribute("data-slug") === slug;
       link.classList.toggle("bg-surface-soft", isActive);
       link.classList.toggle("text-slate-100", isActive);
       link.classList.toggle("text-slate-400", !isActive);
@@ -93,7 +98,8 @@ export function initTOC() {
   tocFocusoutHandler = (event) => {
     if (!isOpen || !tocMobile) return;
     const next = event.relatedTarget;
-    if (next && (tocMobile.contains(next) || next === tocFab)) return;
+    if (next instanceof Node && (tocMobile.contains(next) || next === tocFab))
+      return;
     setMobileOpen(false, { returnFocus: false });
   };
   document.addEventListener("focusout", tocFocusoutHandler);
@@ -109,7 +115,7 @@ export function initTOC() {
     { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
   );
 
-  headings.forEach((heading) => headingObserver.observe(heading));
+  headings.forEach((heading) => headingObserver?.observe(heading));
 
   // 讓 DOM 與 isOpen 從一開始就同步（SSR 已輸出 inert / aria-hidden，這裡不搶焦點）。
   setMobileOpen(false, { returnFocus: false });

@@ -24,6 +24,7 @@ for (const file of readdirSync(POSTS_DIR)) {
     "",
   );
   const frontmatter = raw.split(/^---\s*$/m)[1] ?? "";
+  /** @param {string} key */
   const field = (key) =>
     new RegExp(String.raw`^${key}:[ \t]*(.+)$`, "m")
       .exec(frontmatter)?.[1]

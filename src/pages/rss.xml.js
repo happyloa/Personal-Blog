@@ -3,7 +3,10 @@ import { getPostDescription, getPublishedPostsSorted } from "../utils/posts";
 import { toPlainTextExcerpt } from "../utils/summary";
 import { site } from "../utils/site";
 
+/** @param {import("astro").APIContext} context */
 export async function GET(context) {
+  if (!context.site)
+    throw new Error("RSS 需要設定 astro.config 的 site 網址。");
   const posts = await getPublishedPostsSorted();
   const feedURL = new URL("/rss.xml", context.site).href;
   // 取全站最新的異動時間。不能只看 posts[0]：排序只依 date，若替舊文補了 updated，
