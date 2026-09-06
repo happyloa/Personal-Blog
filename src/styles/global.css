@@ -21,7 +21,6 @@
   --color-border-soft: #27272f;
   --color-primary: #38bdf8;
   --color-primary-muted: #7dd3fc;
-  --color-secondary: #cbd5e1;
   /* 程式碼區塊底色，刻意介於 base 與 surface 之間，比兩者都更沉一點。 */
   --color-code-surface: #0c0c10;
 
