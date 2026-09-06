@@ -104,8 +104,16 @@ const breadcrumbSchema = {
     <meta property="article:author" content={site.author} />
     {category && <meta property="article:section" content={category.name} />}
     {post.data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
-    <script type="application/ld+json" set:html={toJsonLd(blogPostingSchema)} />
-    <script type="application/ld+json" set:html={toJsonLd(breadcrumbSchema)} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={toJsonLd(blogPostingSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={toJsonLd(breadcrumbSchema)}
+    />
   </Fragment>
 
   <nav
