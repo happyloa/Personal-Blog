@@ -7,23 +7,23 @@
 字型採混合策略：
 
 - **拉丁字型**（Inter / Outfit / JetBrains Mono）透過 Astro 內建的 Fonts API 於 build 時下載並自架，毋須安裝 `@fontsource` 套件。
-- **中文思源黑體**（Noto Sans TC）走外部 Google Fonts `<link>`。自架時每一頁都要內嵌一份完整的 CJK `unicode-range` CSS（約 100KB 且無法跨頁快取），改用外部連結可讓這段 CSS 成為單一、可被瀏覽器跨頁快取的資源。
+- **中文思源黑體**（Noto Sans TC）走外部 Google Fonts `<link>`，讓中文字型 CSS 可跨頁快取。首次建置拉丁字型需要連線 Google Fonts；讀者端載入中文字型也需要連線 Google，無法載入時會使用系統字型。
 
 ## 主要特色
 
-- **核心架構**：Astro 7 + Tailwind CSS 4 + JavaScript（無 TypeScript）
+- **核心架構**：Astro 7 + Tailwind CSS 4；工具與客戶端腳本使用 JavaScript + JSDoc，部分 `.astro` 元件使用 TypeScript 的 Props 型別宣告
 - **內容管理**：使用 Content Collections 管理 Markdown 文章，具備 Zod 資料驗證
 - **效能優化**：靜態生成（SSG）、字型自架、RSS 與 Sitemap 自動輸出
 - **閱讀體驗**：
   - 自動生成目錄（TOC），支援桌面版固定目錄與行動版彈出選單
-  - 閱讀時間估算與文章摘要自動生成
+  - 閱讀時間估算；未填 description 時，使用內文第一個非空行轉為純文字摘要
   - Mermaid 圖表支援
   - 簡潔深色介面，適合長時間閱讀與維護
 - **SEO 與分享**：
   - 完整的 Open Graph 與 Twitter Card 設定
   - JSON-LD 結構化資料（WebSite / Person / BlogPosting / BreadcrumbList）
-  - 自動生成 `sitemap-index.xml`（含 `lastmod`）與 `rss.xml`
-  - 文章數少於 2 篇的標籤頁自動掛 `noindex` 並排除於 sitemap 之外
+  - 自動生成 `sitemap-index.xml`、`sitemap-0.xml`（文章含 `lastmod`）與 `rss.xml`
+  - 文章數少於 2 篇的分類頁及標籤頁掛 `noindex`；sitemap 讀取正式 HTML 的 robots 與文章日期，確保輸出一致
 
 ## 環境需求
 
@@ -35,7 +35,7 @@
 1. **安裝相依套件**
 
    ```bash
-   npm install
+   npm ci
    ```
 
 2. **啟動開發伺服器**
@@ -60,6 +60,24 @@
    npm run format:check # 只檢查、不修改，CI 會跑這個
    ```
 
+5. **驗證**
+
+   ```bash
+   npm run check # Astro 型別與 JavaScript JSDoc 檢查
+   npm test      # Node.js 內建測試：sitemap metadata 與光暈動畫生命週期
+   npm run build # 正式靜態建置；此指令本身不執行型別檢查
+   ```
+
+   GitHub Actions 在 Node 22 與 24 執行 `npm ci`、格式檢查、型別檢查、測試與 build。互動測試目前使用模擬環境，不能取代實際瀏覽器的視覺與操作驗證。
+
+### 套件配置與更新
+
+Tailwind CSS 4 使用 `@tailwindcss/vite`，Typography 透過 CSS 的 `@plugin` 載入。字型使用 Astro 內建 Fonts API，Zod 從 `astro/zod` 匯入。HTML 解析器 `node-html-parser` 僅供 sitemap 建置與驗證使用，不會送到瀏覽器。
+
+開發工具使用精確版本，安裝結果由 `package-lock.json` 鎖定。`@astrojs/check` 0.9.10 的 peer dependency 支援 TypeScript 5／6，因此目前固定使用 TypeScript 6.0.3；不要直接升至 TypeScript 7 或使用 `--force` 忽略相容性。
+
+升級時同步更新 `package.json` 與 lockfile，再執行上述驗證，以及 `npm outdated`、`npm audit`。GitHub Actions 以完整 commit SHA 鎖定版本，更新時也需核對 release 與對應 SHA。
+
 ## 專案結構
 
 ```bash
@@ -67,35 +85,39 @@ src/
 ├── components/   # UI 元件 (PostCard, CategoryCard, TableOfContents)
 ├── content/      # 文章內容 (Content Collections)
 │   └── posts/    # Markdown 檔案
+├── integrations/ # sitemap 使用正式 HTML metadata 的建置整合
 ├── layouts/      # 頁面佈局 (BaseLayout)
 ├── pages/        # 頁面路由 (首頁, 文章內頁, 分類頁, 標籤頁, RSS, 404)
-├── scripts/      # 客戶端腳本 (TOC 與 Mermaid 邏輯)
+├── scripts/      # 客戶端腳本 (TOC、Mermaid、背景方格光暈)
 ├── styles/       # 全域樣式與字型設定
 └── utils/        # 工具函式與站台設定 (日期, 分類, 標籤, 摘要, metadata)
 
 public/
 ├── _headers      # Cloudflare Pages 的安全標頭與快取策略
+├── _redirects    # 舊標籤網址的永久轉址
 ├── images/posts/ # 文章內文圖片
 ├── robots.txt
 ├── favicon.svg
 └── og-default.png
+
+tests/           # Node.js 回歸測試
 ```
 
 ## 新增文章指南
 
-文章位於 `src/content/posts`，每個 Markdown 檔案對應一篇文章，檔名即為網址 slug（請用全小寫英數與連字號）。
+文章直接放在 `src/content/posts`，每個 `.md` 檔案對應一篇文章，檔名即為網址 slug（請用全小寫英數與連字號）。目前 loader 僅讀取這一層的 Markdown，不支援巢狀文章目錄或 MDX。
 
 ### Frontmatter 格式
 
 ```markdown
 ---
 title: 我的新文章標題
-description: （選填）未填則自動擷取內文第一段
+description: （選填）未填則擷取內文第一個非空行
 date: 2026-01-27
 updated: 2026-03-01 # （選填）內容有實質修訂時填寫，會反映在 sitemap 的 lastmod
 tags: [Astro, 前端] # （選填）
 category: learning # 必填，且只能是下表的六個值之一
-cover: ../../assets/my-post-cover.png # （選填）封面圖片
+cover: ../../assets/my-post-cover.png # （選填）社群分享圖片，填寫時必須有對應檔案
 draft: false # （選填）設為 true 則不會發布
 ---
 
@@ -106,7 +128,7 @@ draft: false # （選填）設為 true 則不會發布
 
 ### 分類一覽
 
-`category` 是唯一必填且值受限的欄位，只能填以下六個 slug：
+`title`、`date`、`category` 都是必填。`category` 只能填以下六個 slug：
 
 | slug             | 顯示名稱 | 說明                                       |
 | ---------------- | -------- | ------------------------------------------ |
@@ -117,20 +139,17 @@ draft: false # （選填）設為 true 則不會發布
 | `web-basics`     | 網頁基礎 | 用生活化比喻，帶你搞懂網頁與網路的核心觀念 |
 | `mindset`        | 心理     | 心理調適、軟實力與個人成長                 |
 
-**要新增分類的話，必須同時改兩個地方**，只改其中一個不會生效：
-
-1. [`src/content.config.js`](src/content.config.js) 的 `category` `z.enum([...])` —— 少了這裡，填新分類的文章會在 build 時被 Zod 擋下。
-2. [`src/utils/categories.js`](src/utils/categories.js) 的 `categories` 陣列 —— 少了這裡，`/categories/<slug>/` 頁面根本不會生成（`getStaticPaths` 是從這個陣列產生的）。
+新增分類只需更新 [`src/utils/categories.js`](src/utils/categories.js) 的 `categories` 陣列，填入唯一的 slug、名稱、說明與圖示。內容 schema 與分類路由共用此定義；變更分類後也請同步更新上表。
 
 ### 撰寫建議
 
 - **站內連結**：一律寫成帶尾斜線的 `/posts/<slug>/`。本站使用 Astro 的 `directory` 輸出格式，少了尾斜線會多一次 308 轉址。
 - **圖片**：
   - 文章內文圖片放在 `public/images/posts/<slug>/`，在 Markdown 中以絕對路徑引用（例如 `/images/posts/my-post/photo.webp`）。這個路徑**不會**經過 Astro 的圖片優化管線，請自行先壓縮／轉檔（建議 WebP）再上傳，並在 `<img>` 上明確標註 `width`／`height`／`loading="lazy"` 以避免版面位移。
-  - frontmatter 的 `cover` 欄位走 Astro 內建的 `image()` 優化管線，圖片必須放在 `src/` 底下（例如自行建立 `src/assets/`），路徑相對於**文章檔案本身**解析，因此從 `src/content/posts/foo.md` 指到 `src/assets/` 要寫 `../../assets/cover.png`。
+  - frontmatter 的 `cover` 欄位透過 Astro 的 `image()` schema 驗證並取得圖片 metadata，目前僅用於 Open Graph、Twitter Card 與 JSON-LD，不會顯示在文章頂端或卡片，也不會自動縮放／轉檔。請先壓縮圖片，再放在 `src/` 底下（例如自行建立 `src/assets/`）。路徑相對於**文章檔案本身**解析，因此從 `src/content/posts/foo.md` 指到 `src/assets/` 要寫 `../../assets/cover.png`。需要自動轉檔時，另行使用 Astro 的 `<Image />` 或 `getImage()`。
 - **標籤**：系統會自動將標籤轉為小寫並移除特殊符號（slugify），自動生成對應的 `/tags/<tag>/` 頁面。若兩個不同標籤 slugify 後撞在一起（例如 `Vue.js` 與 `VueJS`），build 會直接失敗並指出衝突。
 - **目錄**：文章內頁會自動解析 `h2` 與 `h3` 標題生成目錄。正文請從 `h2` 開始，`h1` 已由文章標題佔用。
-- **Mermaid 圖表**：用 ` ```mermaid ` 圍欄即可，客戶端會自動轉譯。只有含圖表的頁面才會下載 Mermaid，且各圖表類型的 chunk 各自懶載入（`katex`、`cytoscape` 只在用到數學式與 mindmap／architecture 時才拉）。以最常見的 flowchart 為例約 23 個 chunk、1.2MB 未壓縮／**292KB gzip**，在 `astro:page-load` 之後才開始下載，不阻擋首屏。
+- **Mermaid 圖表**：用 ` ```mermaid ` 圍欄即可，客戶端會自動轉譯。腳本在 `astro:page-load` 檢查頁面，只有存在圖表時才動態載入 Mermaid；套件內部也會按圖表類型載入額外模組。建置仍可能出現大型 chunk 警告，實際下載量與渲染成本取決於套件版本和圖表類型，需以瀏覽器 Network／Performance 實測。
 - **表格**：表格一律包在 `<div class="table-wrapper" tabindex="0" role="group" aria-label="表格（可水平捲動）">` 裡。這不只是為了窄螢幕捲動——`.prose table` 的垂直間距刻意設為 `my-0`，由外層的 `.table-wrapper` 提供 `my-8` 與邊框、底色；沒包的話表格會緊貼上一段文字、也失去圓角邊框，而且 `≤768px` 的 `white-space: nowrap` 加上 `body` 的 `overflow-x: hidden` 會讓右側欄位在手機上被裁掉且無法捲到。`role` 用 `group` 而非 `region`：`region` 會讓每張表格都變成一個地標，一篇多表格的文章會塞爆螢幕閱讀器的地標清單。
 
 ## 部署
